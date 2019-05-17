@@ -1,0 +1,47 @@
+*{ margin:0px;
+	padding:0px;
+	}
+	div#body{	
+	margin:auto;
+	margin-top: 20px;
+	width :960px;
+	height:800px;
+	}
+div#centro{
+	float :right;
+	margin-top: 40px;
+	margin-left:30px;
+	width :720px;
+	height:700px;
+}
+div#logo_div{
+	float : left;
+	width :100px;
+	height:100px;
+}
+#logo{ 
+	width :100px;
+	height:100px;
+}
+div#titulo{
+	margin-left:10px;
+	margin-top:20px;
+	float :right;
+	width :850px;
+	height:50px;
+}
+div#menu{
+	float :right;
+	width :760px;
+	height:40px;
+}
+div#img{
+	margin-top: 40px;
+	float :left;
+	width :200px;
+	height:300px;
+}
+#img{
+	width :200px;
+	height:200px;
+}

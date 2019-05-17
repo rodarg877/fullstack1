@@ -1,0 +1,85 @@
+*{
+	padding:0px;
+	margin:0px;
+}
+#encabezado{
+		background-image: url(img/image2.jpg);
+		background-size: cover;
+		background-position: 50% 0%;
+		background-repeat: no-repeat;
+		font: bold 14px arial;
+		width: 100%;
+		height: 40%;
+		margin-top: 20px;
+}
+#titulo{
+		font-size: 300%;
+		text-align: center;
+		width: 100%;
+		height: 100%;
+		color: lightgreen;
+		transform: perspective(1px) translateY(40%);
+}
+.button{
+
+	float: left;
+	display:inline-block;
+	padding:10px 20px;
+	font-size: 20px;
+	cursor:pointer;
+	text-align:center;
+	text-decoration: none;
+	color:#fff;
+	background-color:blue;
+	border-radius:10px;
+	box-shadow:0 7px #999;
+	transform: perspective(1px) translateY(30%);
+}
+.button:active {
+	background-color: green;
+	box-shadow: 0 5px #666;
+	transform: translateY(-6px);
+}
+#encabezado2{
+		background-color:black;
+		width: 100%;
+		height: 15%;
+}
+	
+#body{
+	float: left;
+	margin-top:100px;
+		font-family:Bradley hand, cursive;
+		width: 60%;
+		height: 50%;
+	
+	
+}
+#logo{
+		float: right;
+		width: 200px;
+		height: 200px;
+		top:50%;
+		transform: perspective(1px) translateY(-40%);
+}
+#foto{
+		float:left;
+		width: 300px;
+		height: 500px;
+		transform: perspective(1px) translateY(20%);
+}
+	
+#titulo2{
+		text-align: center;
+		width: 100%;
+		height: 100%;
+		color: white;
+		padding-top:0px;
+		margin-top:0px;
+		transform: perspective(1px) translateY(40%);
+}
+#navegador{
+	float:left;
+	width: 100%;
+		height:10%;
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="row">
+            <div class="col-md-8 col-sm-4 col-xs-2">
+                <img src="img/2.png" class="img-thumbnail rounded float-left" alt="logo">
+                <h1>TGIF</h1>
+            </div>
+            <div class="col-md-4 col-sm-4 d-none d-sm-block">
+                <img src="img/3.jpg" class="img-thumbnail rounded float-left" alt="logo">
+                <a class="align-baseline" href="mailito:info@tgif.net">info@tgif.net</a>
+                </a>
+            </div>
+        </header>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="col-md-12 ">
+            <ul class="nav nav-pills">
+                <li role="presentation"><a class="nav-link text-decoration-none " href="home.html">Home</a>
+                </li>
+                <li role="presentation" class="dropdown ml-3"><a class="nav-link text-decoration-none " href="#"
+                        class="dropdown-toggle" data-toggle="dropdown">Congress
+                        113<span class="caret">
+                        </span></a>
+                    <ul class="dropdown-menu">
+                        <li role="presentation"><a class="dropdown-item nav-link active" href="senate.html">Senate</a>
+                        </li>
+                        <li role="presentation"><a class="dropdown-item nav-link" href="house.html">House</a></li>
+                    </ul>
+                <li role="presentation" class="dropdown ml-3"><a class="nav-link text-decoration-none " href="#"
+                        class="dropdown-toggle" data-toggle="dropdown">Attendance<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li role="presentation"><a class="dropdown-item nav-link"
+                                href="senate-attendance.html">Senate</a>
+                        </li>
+                        <li role="presentation"><a class="dropdown-item nav-link" href="house-attendance.html">House</a>
+                        </li>
+                    </ul>
+                <li role="presentation" class="dropdown ml-3"><a class="nav-link text-decoration-none " href="#"
+                        class="dropdown-toggle" data-toggle="dropdown">Party Loyalty<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li role="presentation"><a class="dropdown-item nav-link"
+                                href="senate-party-loyalty.html">Senate</a>
+                        </li>
+                        <li role="presentation"><a class="dropdown-item nav-link"
+                                href="house-party-loyalty.html">House</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="app">
+        <div class="row">
+            <div class="col-lg-8 ">
+                <h2>Party Loyalty</h2>
+                <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda.</p>
+            </div>
+            <div class="col-lg-4">
+                <aside>
+                    <h2>Senate at a glance</h2>
+                    {{estadisticas}}
+                    <table class="table table-striped mt-4" id="Congress">
+                        <tr>
+                            <thead>
+                                <th>Party</th>
+                                <th>Number of Reps</th>
+                                <th>%Vote with Party</th>
+                            </thead>
+                        </tr>
+                        <tbody>
+                            <tr v-for="a in glace" >
+                                <td>{{a.Nombre}}</td>
+                                <td>{{a.Cantidad}}</td>
+                                <td v-if="a.Cantidad !== 0">{{(a.votes_with_party_pct/a.Cantidad).toFixed(2)}}%</td>
+                                <td v-else="a.Cantidad === 0">0</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>{{glace[0].Cantidad+glace[1].Cantidad +glace[2].Cantidad}}</td>
+                                <td>{{((glace[0].votes_with_party_pct+glace[1].votes_with_party_pct+glace[2].votes_with_party_pct)/(glace[0].Cantidad+glace[1].Cantidad +glace[2].Cantidad)).toFixed(2)}}%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </aside>
+            </div>
+        </div>
+        <div class="row container-fluid">
+            <div class="col-md-6">
+                <h2>Least Loyal (Bottom 10% of Party)</h2>
+                {{leastEngagedL}}
+                <table class="table table-striped mt-4">
+                    <tr>
+                        <thead>
+                            <th>Fullname</th>
+                            <th>Votes</th>
+                            <th>% Votes with party</th>
+                        </thead>
+                    </tr>
+                    <tbody>
+                        <tr v-for="B in LeastEngagedL">
+                                <td><a :href='B.url'>{{B.fullname}}</a></td>
+                                <td>{{Math.trunc(B.votes*B.votes_with_party_pct/100)}}</td>
+                                <td>{{B.votes_with_party_pct}}%</td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h2>Most Loyal (Top 10% of Party)</h2>
+                {{mostEngagedL}}
+            
+                <table class="table table-striped mt-4">
+                    <tr>
+                        <thead>
+                            <th>Fullname</th>
+                            <th>Votes</th>
+                            <th>% Votes with party</th>
+                        </thead>
+                    </tr>
+                    <tbody>
+                        <tr v-for="B in MostEngagedL">
+                            <td><a :href='B.url'>{{B.fullname}}</a></td>
+                            <td>{{Math.trunc(B.votes*B.votes_with_party_pct/100)}}</td>
+                            <td>{{B.votes_with_party_pct}}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-light">
+        <footer class="text-center">
+            <h2><small> © 2016 TGIF | All Rights Reserved</small></h2>
+        </footer>
+    </div>
+    <script src="vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

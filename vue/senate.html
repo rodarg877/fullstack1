@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<header class="row">
+			<div class="col-md-8 col-sm-4 col-xs-2">
+				<img src="img/2.png" class="img-thumbnail rounded float-left" alt="logo">
+				<h1>TGIF</h1>
+			</div>
+			<div class="col-md-4 col-sm-4 d-none d-sm-block">
+				<img src="img/3.jpg" class="img-thumbnail rounded float-left" alt="logo">
+				<a class="align-baseline" href="mailito:info@tgif.net">info@tgif.net</a>
+				</a>
+			</div>
+		</header>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="col-md-12 ">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a class="nav-link text-decoration-none " href="home.html">Home</a>
+				</li>
+				<li role="presentation" class="dropdown ml-3"><a class="nav-link text-decoration-none " href="#"
+						class="dropdown-toggle" data-toggle="dropdown">Congress
+						113<span class="caret">
+						</span></a>
+					<ul class="dropdown-menu">
+						<li role="presentation"><a class="dropdown-item nav-link active" href="senate.html">Senate</a>
+						</li>
+						<li role="presentation"><a class="dropdown-item nav-link" href="house.html">House</a></li>
+					</ul>
+				<li role="presentation" class="dropdown ml-3"><a class="nav-link text-decoration-none " href="#"
+						class="dropdown-toggle" data-toggle="dropdown">Attendance<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li role="presentation"><a class="dropdown-item nav-link"
+								href="senate-attendance.html">Senate</a>
+						</li>
+						<li role="presentation"><a class="dropdown-item nav-link" href="house-attendance.html">House</a>
+						</li>
+					</ul>
+				<li role="presentation" class="dropdown ml-3"><a class="nav-link text-decoration-none " href="#"
+						class="dropdown-toggle" data-toggle="dropdown">Party Loyalty<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li role="presentation"><a class="dropdown-item nav-link"
+								href="senate-party-loyalty.html">Senate</a>
+						</li>
+						<li role="presentation"><a class="dropdown-item nav-link"
+								href="house-party-loyalty.html">House</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="row">
+		<div class="col-md-12 col-lg-8 mt-4">
+			<h2>Senators</h2>
+			<p>First convened in 1789, the composition and powers of the Senate are established in Article One of the
+				U.S.
+				Constitution. Each state is represented by two senators, regardless of population, who serve staggered
+				six-year
+				terms. The Senate has several exclusive powers not granted to the House, including consenting to
+				treaties as
+				a
+				precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries,
+				federal
+				judges, other federal executive officials, military officers, regulatory officials, ambassadors, and
+				other
+				federal
+				uniformed officers, as well as trial of federal officials impeached by the House.</p>
+		</div>
+		<div class="col-lg-4 d-none d-lg-block">
+			<aside>
+				<img src="img/4.png" alt="logo">
+			</aside>
+		</div>
+	</div>
+	<div id="app">
+		<div class="row container-fluid">
+			<div class="col-md-6">
+				Filter by Party:
+				Republicant:<input id="R" type="checkbox" v-model="filtros" value="R" @click='datosFiltrados'  name="Republicant" >
+				Democrat:<input id="D" type="checkbox" v-model="filtros" @click='datosFiltrados' value="D" name="Democrat" >
+				Independent:<input id="I" type="checkbox" v-model="filtros" @click='datosFiltrados'  value="I" name="Independent" >
+			</div>
+			<div class="col-md-6">
+				<select id="mySelect" v-model="select" @click="datosFiltrados">
+					<option value="ALL">All </option>
+					<option value="AL">Alabama </option>
+					<option value="AK">Alaska </option>
+					<option value="AZ">Arizona </option>
+					<option value="AR">Arkansas </option>
+					<option value="CA">California </option>
+					<option value="CO">Colorado </option>
+					<option value="CT">Connecticut </option>
+					<option value="DE">Delaware </option>
+					<option value="DC">Distrito de Columbia</option>
+					<option value="FL">Florida </option>
+					<option value="GA">Georgia </option>
+					<option value="HI">Hawaii </option>
+					<option value="ID">Idaho </option>
+					<option value="IL">Illinois </option>
+					<option value="IN">Indiana </option>
+					<option value="IA">Iowa </option>
+					<option value="KS">Kansas </option>
+					<option value="KY">Kentucky </option>
+					<option value="LA">Louisiana </option>
+					<option value="ME">Maine </option>
+					<option value="MD">Maryland </option>
+					<option value="MA">Massachusetts </option>
+					<option value="MI">Michigan </option>
+					<option value="MN">Minnesota </option>
+					<option value="MS">Mississippi </option>
+					<option value="MO">Missouri </option>
+					<option value="MT">Montana </option>
+					<option value="NE">Nebraska </option>
+					<option value="NV">Nevada </option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NM">New Mexico</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="ND">North Dakota</option>
+					<option value="OH">Ohio </option>
+					<option value="OK">Oklahoma </option>
+					<option value="OR">Oregon </option>
+					<option value="PA">Pennsylvania </option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="SD">South Dakota</option>
+					<option value="TN">Tennessee</option>
+					<option value="TX">Texas </option>
+					<option value="UT">Utah</option>
+					<option value="VT">Vermont </option>
+					<option value="VA">Virginia </option>
+					<option value="WA">Washington </option>
+					<option value="WV">West Virginia</option>
+					<option value="WI">Wisconsin </option>
+					<option value="WY">Wyoming</option>
+				</select>
+			</div>
+		</div>
+		<div  class="container-fluid">
+			<table class="table table-striped mt-4" id="data">
+				<tr>
+					<thead>
+						<th>Full Name</th>
+						<th>party</th>
+						<th>State</th>
+						<th>seniority</th>
+						<th>Votes with party</th>
+					</thead>
+				</tr>
+				<tbody>
+					<tr v-for="senate in DatosFiltrados">
+						<td><a :href='senate.url'>{{senate.first_name}}{{senate.middle_name}}{{senate.last_name}}</a>
+						</td>
+						<td>{{senate.party}}</td>
+						<td>{{senate.state}}</td>
+						<td>{{senate.seniority}}</td>
+						<td>{{senate.votes_with_party_pct}}%</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="container-fluid bg-light">
+		<footer class="text-center">
+			<h2><small> © 2016 TGIF | All Rights Reserved</small></h2>
+		</footer>
+	</div>
+	<script src="vue.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

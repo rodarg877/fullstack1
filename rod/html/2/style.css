@@ -1,0 +1,142 @@
+
+#img{
+width:100%;
+height:40%;
+
+}
+#navegador{
+	position:relative;
+	top:15px;
+	margin:0px;
+padding:0px;
+	
+}
+#titulo{
+width:100%;
+height:10%;
+font-size:100%;
+text-align:center;
+color: lightgreen;
+margin:0px;
+padding:0px;
+}
+aside#logo{
+	float:left;
+width:15%;
+height:100%;
+background-color:#1E2D3E;
+margin:0px;
+padding:0px;
+position:relative;
+top:-30px;
+}
+p{
+	margin:20px;
+}
+img#logo{
+	padding-top:50px;
+	width:200px;
+height:200px;
+}
+main#todo{
+	width:100%;
+	height:150%;
+	background-image:url(img/6.jpg);
+	font-family:ITC Bradley Hand;
+	font-size:25px;
+	background-size:100% 100%;
+	background-repeat:repeat;
+	position:relative;
+	top:-29px;
+}
+main#centro{
+	float:right;
+	width:85%;
+	height:100%;
+	background-image:url(img/6.jpg);
+	font-family:"comic sans ms";
+	font-size:20px;
+	background-size:cover;
+	margin:0px;
+padding:0px;
+position:relative;
+top:-30px;
+}
+#titulo2{
+	width:100%;
+	height:15%;
+	font-size:30px;
+	text-align:center;
+	font-family:ITC Bradley Hand;
+	color: white;
+	background:black;
+	margin:0px;
+padding:0px;
+position:relative;
+top:-35px;
+}
+#nav{
+	background-image: url(img/3.jpg);
+	background-size: cover;
+	background-position: 70% 50%;
+	background-repeat: no-repeat;
+	width:100%;
+	height:25%;
+}
+table, th, td {
+  border: 2px solid black;
+  font-size:20px;
+}
+th{
+	color:white;
+	background-color:blue;
+}
+
+.tabla{
+	width: 100%;
+	text-align:center;
+	font-family:Bradley Hand ;
+	border-collapse: collapse;
+	margin: 15px 30px 15px 30px;
+}
+.button{
+	float: right;
+	display:inline-block;
+	padding:10px 20px;
+	font-size: 15px;
+	cursor:pointer;
+	text-align:center;
+	text-decoration: none;
+	color:#fff;
+	background-color:darkblue;
+	border-radius:10px;
+	box-shadow:0 9px #999;
+}
+.button:active {
+	background-color: green;
+	box-shadow: 0 5px #666;
+	transform: translateY(-6px);
+}
+ul.cuadrado{
+	list-style-type:square;
+}
+ul.circulo{
+	list-style-type:circle;
+}
+ol.letras{
+	list-style-type:lower-latin;
+}
+ol.numeros{
+	list-style-type:decimal;
+}
+
+#titulos{
+text-align: center;
+margin:0px;
+padding:0px;
+}
+iframe{
+	 width:200px; 
+	 height:150px;  
+	 border:0;
+}

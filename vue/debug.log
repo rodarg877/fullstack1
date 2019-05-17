@@ -1,0 +1,1 @@
+[0510/230428.083:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: La longitud del registro de información especificado no coincide con la longitud que se requiere para la clase de información especificada. (0xc0000004)

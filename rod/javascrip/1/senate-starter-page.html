@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container-fluid">
+		<header class="row">
+			<div class="col-md-8 col-sm-4 col-xs-2">
+			<img src="img/2.png" class="img-thumbnail rounded float-left" alt="logo">
+			<h1>TGIF</h1>
+		</div>
+		<div class="col-md-4 col-sm-4 d-none d-sm-block">
+				<img src="img/3.jpg" class="img-thumbnail rounded float-left" alt="logo">
+				<a class="align-middle"	href="mailito:info@tgif.net">info@tgif.net</a>
+				</a>
+		</div>
+		</header>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="col-md-12 ">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a class="nav-link text-decoration-none " href="home-starter-page.html">Home</a>
+				</li>
+				<li role="presentation" class="dropdown ml-3"><a class="nav-link text-decoration-none " href="#"
+						class="dropdown-toggle" data-toggle="dropdown">Congress
+						113<span class="caret">
+						</span></a>
+					<ul class="dropdown-menu">
+						<li role="presentation"><a class="dropdown-item nav-link active"
+								href="senate-starter-page.html">Senate</a>
+						</li>
+						<li role="presentation"><a class="dropdown-item" href="house-starter-page.html">House</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+<div class="row">
+	<div class="col-md-12 col-lg-8 mt-4">
+		<h2>Senators</h2>
+		<p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S.
+			Constitution. Each state is represented by two senators, regardless of population, who serve staggered
+			six-year
+			terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as
+			a
+			precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries,
+			federal
+			judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other
+			federal
+			uniformed officers, as well as trial of federal officials impeached by the House.</p>
+	</div>
+	<div class="col-lg-4 d-none d-lg-block">
+		<aside>
+			<img src="" alt="logo">
+		</aside>
+	</div>
+</div>
+	<div class="container">
+		<table class= "table table-striped" id="senate-data">
+		</table>
+		<button type="button" onclick="Datos()">Visualizar
+	</div>
+	<div class="container-fluid bg-light">
+		<footer class="text-center">
+			<h2><small> © 2016 TGIF | All Rights Reserved</small></h2>
+		</footer>
+	</div>
+	<script src="-congress-113-senate.js">
+	</script>
+	<script>
+		function Datos() {
+			var DatosJson = JSON.parse(JSON.stringify(data));
+			console.log(DatosJson.length);
+			$("#senate-data").append('<tr ><th>Nombre Completo</th>' +
+				'<th>fiesta</th>' +
+				'<th>estado</th>' +
+				'<th>antiguedad</th>' + '<th>Porcentaje de votos con partido</th>');
+			for (i = 0; i < DatosJson.length; i++) {
+				var nombre = "";
+				if (DatosJson[i].middle_name != null) {
+					nombre = DatosJson[i].first_name + " " + DatosJson[i].middle_name + " " + DatosJson[i].last_name;
+				} else {
+					nombre = DatosJson[i].first_name + " " + DatosJson[i].last_name;
+				}
+				$("#senate-data").append('<tr>' +
+					'<td align="center" ><a href=' + DatosJson[i].url + '>' + nombre + '</a>' + '</td>' +
+					'<td align="center" >' + DatosJson[i].party + '</td>' +
+					'<td align="center" >' + DatosJson[i].state + '</td>' +
+					'<td align="center" >' + DatosJson[i].seniority + '</td>' +
+					'<td align="center" >' + DatosJson[i].votes_with_party_pct + "%" + '</td>' + '</tr>');
+
+			}
+		}
+		
+	</script>
+	
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+
+#titulo{
+		text-align: center;
+		color: lightgreen;
+		background-image: url(img/image2.jpg);
+		background-size: cover;
+		background-position: 75% 20%;
+		background-repeat: no-repeat;
+		font: bold 200% arial;
+		width: 100%;
+		height: 40%;
+		margin-top: 20px;
+		display:inline-block;
+}
+
+
+	
+#body{
+		float: right;
+		width: 70%;
+		height: 100%;
+		position:relative;
+		top: -200px;
+
+}
+#logo{
+		float: right;
+		width: 200px;
+		height: 200px;
+		position: relative;
+		top: -90px;
+}
+#titulo2{
+		background-color:black;
+		text-align: center;
+		width: 100%;
+		height: 15%;
+		color: white;
+		padding-top:0px;
+		margin-top:0px;
+		position:relative;
+		top:-20px;
+}
+
+aside{
+	width:30%;
+	height:100%;
+	float:left;
+}
+ul li{
+	
+	list-style-type:none;
+}
