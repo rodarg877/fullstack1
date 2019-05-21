@@ -78,22 +78,37 @@ function VoteWPartyI() {
     return aux/cantidadI;
     }
 }
-function LeastEngaged() {
-    var LeastEngaged = [];
+var LeastEngaged = [];
+function leastEngaged() {
     var DatosJsonPorcentaje = estadisticas2.length - (Math.round(estadisticas2.length * 0.1) + 1);
     for (let i = (estadisticas2.length - 1); i > DatosJsonPorcentaje; i--) {
         LeastEngaged.push(estadisticas2[i]);
     }
-    return LeastEngaged;
 }
-
-function MostEngaged() {
-    var MostEngaged = [];
+leastEngaged();
+var cond = true;
+while(cond){
+   if (LeastEngaged[LeastEngaged.length-1].missed_vote == estadisticas2[estadisticas2.length - LeastEngaged.length -1].missed_vote){
+    LeastEngaged.push(estadisticas2[estadisticas2.length - LeastEngaged.length -1]);
+   }else{
+       cond=false;
+   }
+}
+var MostEngaged = [];
+function mostEngaged() {
     var DatosJsonPorcentaje = Math.round(estadisticas2.length * 0.1);
     for (let i = 0; i < DatosJsonPorcentaje; i++) {
         MostEngaged.push(estadisticas2[i]);
     }
-    return MostEngaged;
+}
+mostEngaged();
+var condi = true;
+while(condi){
+   if (MostEngaged[MostEngaged.length-1].missed_vote == estadisticas2[MostEngaged.length].missed_vote){
+    MostEngaged.push(estadisticas2[MostEngaged.length]);
+   }else{
+       condi=false;
+   }
 }
 function Datos() {
   var divisor=0;
@@ -122,7 +137,7 @@ var TotalVotesWParty=aux / divisor;
 }
 
 function LeastEngagedTable() {
-    var DatosJson = LeastEngaged();
+    var DatosJson = LeastEngaged;
     $("#LeastEngaged").append('<tr ><th>Full Name</th>' +
         '<th>Number of Missed Votes	</th>' +
         '<th>% Missed</th></tr>');
@@ -134,7 +149,7 @@ function LeastEngagedTable() {
     }
 }
 function MostEngagedTable() {
-    var DatosJson = MostEngaged();
+    var DatosJson = MostEngaged;
     $("#MostEngaged").append('<tr ><th>Full Name</th>' +
         '<th>Number of Missed Votes	</th>' +
         '<th>% Missed</th></tr>');

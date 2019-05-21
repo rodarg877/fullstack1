@@ -3,18 +3,19 @@ var DatosJson = JSON.parse(JSON.stringify(data));
 for (let i = 0; i < DatosJson.length; i++) {
     var obj = {};
     var nombre = "";
+    if (DatosJson[i].total_votes!=0){
     if (DatosJson[i].middle_name != null) {
         nombre = DatosJson[i].first_name + " " + DatosJson[i].middle_name + " " + DatosJson[i].last_name;
     } else {
         nombre = DatosJson[i].first_name + " " + DatosJson[i].last_name;
     }
-
     obj["fullname"] = nombre;
     obj["party"] = DatosJson[i].party;
     obj["votes_with_party_pct"] = DatosJson[i].votes_with_party_pct;
     obj["votes"] = DatosJson[i].total_votes;
     obj["url"] = DatosJson[i].url;
     estadisticas2.push(obj);
+}
 }
 estadisticas2.sort(function (a, b) {
     return a.votes_with_party_pct - b.votes_with_party_pct;
@@ -77,22 +78,37 @@ function VoteWPartyI() {
         return aux / cantidadI;
     }
 }
-function LeastEngaged() {
-    var LeastEngaged = [];
+var LeastEngaged = [];
+function leastEngaged() {
     var DatosJsonPorcentaje = estadisticas2.length - (Math.round(estadisticas2.length * 0.1) + 1);
     for (let i = (estadisticas2.length - 1); i > DatosJsonPorcentaje; i--) {
         LeastEngaged.push(estadisticas2[i]);
     }
-    return LeastEngaged;
 }
-
-function MostEngaged() {
-    var MostEngaged = [];
+leastEngaged();
+var cond = true;
+while(cond){
+   if (LeastEngaged[LeastEngaged.length-1].votes_with_party_pct == estadisticas2[estadisticas2.length - LeastEngaged.length -1].votes_with_party_pct){
+    LeastEngaged.push(estadisticas2[estadisticas2.length - LeastEngaged.length -1]);
+   }else{
+       cond=false;
+   }
+}
+var MostEngaged = [];
+function mostEngaged() { 
     var DatosJsonPorcentaje = Math.round(estadisticas2.length * 0.1);
     for (let i = 0; i < DatosJsonPorcentaje; i++) {
         MostEngaged.push(estadisticas2[i]);
     }
-    return MostEngaged;
+}
+mostEngaged();
+var condi = true;
+while(condi){
+   if (MostEngaged[MostEngaged.length-1].votes_with_party_pct == estadisticas2[MostEngaged.length].votes_with_party_pct){
+    MostEngaged.push(estadisticas2[MostEngaged.length]);
+   }else{
+       condi=false;
+   }
 }
 function Datos() {
     var divisor=0;
@@ -121,7 +137,7 @@ function Datos() {
   }
 
 function LeastEngagedTable() {
-    var DatosJson = LeastEngaged();
+    var DatosJson = LeastEngaged;
     $("#LeastLoyal").append('<tr ><th>Full Name</th>' +
         '<th>Votes</th>' +
         '<th>% Votes with party</th></tr>');
@@ -133,7 +149,7 @@ function LeastEngagedTable() {
     }
 }
 function MostEngagedTable() {
-    var DatosJson = MostEngaged();
+    var DatosJson = MostEngaged;
     $("#MostLoyal").append('<tr ><th>Full Name</th>' +
         '<th>Votes</th>' +
         '<th>% Votes with party</th></tr>');
