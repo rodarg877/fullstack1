@@ -45,9 +45,9 @@ var app = new Vue({
     },
     cargaDePag: function () {
       if (this.pathname.includes('/senate')) {
-        return this.url = "https://api.propublica.org/congress/v1/115/senate/members.json"
+        return this.url = "https://api.propublica.org/congress/v1/113/senate/members.json"
       } else if (this.pathname.includes('/house')) {
-        return this.url = "https://api.propublica.org/congress/v1/115/house/members.json"
+        return this.url = "https://api.propublica.org/congress/v1/113/house/members.json"
       }
     }
   },
@@ -99,25 +99,56 @@ var app = new Vue({
       for (let i = 0; i < DatosJsonPorcentaje; i++) {
           this.MostEngaged.push(this.estadisticas2[i]);
       }
+      var condi = true;
+while(condi){
+   if (this.MostEngaged[this.MostEngaged.length-1].missed_vote == this.estadisticas2[this.MostEngaged.length].missed_vote){
+    this.MostEngaged.push(this.estadisticas2[this.MostEngaged.length]);
+   }else{
+       condi=false;
+   }
+}
   },
   leastEngaged:function() {
     var DatosJsonPorcentaje = Math.round(this.estadisticas2.length * 0.1);
     for (let i =this.estadisticas2.length-1; i >= this.estadisticas2.length-DatosJsonPorcentaje; i--) {
         this.LeastEngaged.push(this.estadisticas2[i]);
     }
+    var cond = true;
+while(cond){
+   if (this.LeastEngaged[this.LeastEngaged.length-1].missed_vote == this.estadisticas2[this.estadisticas2.length - this.LeastEngaged.length -1].missed_vote){
+    this.LeastEngaged.push(this.estadisticas2[this.estadisticas2.length - this.LeastEngaged.length -1]);
+   }else{
+       cond=false;
+   }
+}
 },
 mostEngagedL:function() {
   var DatosJsonPorcentaje = Math.round(this.senate.length * 0.1);
   for (let i = 0; i < DatosJsonPorcentaje; i++) {
       this.MostEngagedL.push(this.estadisticasL[i]);
   }
-
+  var condi=true;
+  while(condi){
+    if (this.MostEngagedL[this.MostEngagedL.length-1].votes_with_party_pct == this.estadisticasL[this.MostEngagedL.length].votes_with_party_pct){
+      this.MostEngagedL.push(this.estadisticasL[this.MostEngagedL.length]);
+    }else{
+        condi=false;
+    }
+  }
 },
 leastEngagedL:function() {
   var DatosJsonPorcentaje = Math.round(this.senate.length * 0.1);
   for (let i =this.estadisticasL.length-1; i >= this.estadisticasL.length-DatosJsonPorcentaje; i--) {
       this.LeastEngagedL.push(this.estadisticasL[i]);
   }
+  var cond = true;
+while(cond){
+   if (this.LeastEngagedL[this.LeastEngagedL.length-1].votes_with_party_pct == this.estadisticasL[this.estadisticasL.length - this.LeastEngagedL.length -1].votes_with_party_pct){
+    this.LeastEngagedL.push(this.estadisticasL[this.estadisticasL.length - this.LeastEngagedL.length -1]);
+   }else{
+       cond=false;
+   }
+}
 },
   },
   created() {
