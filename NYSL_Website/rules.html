@@ -15,6 +15,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link href="simple-sidebar.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+       <script type="text/javascript">
+        jQuery.fn.extend({
+            resaltar: function(busqueda, claseCSSbusqueda){
+                var regex = new RegExp("(<[^>]*>)|("+ busqueda.replace(/([-.*+?^${}()|[\]\/\\])/g,"\\$1") +')', 'ig');
+                var nuevoHtml=this.html(this.html().replace(regex, function(a, b, c){
+                    return (a.charAt(0) == "<") ? a : "<span class=\""+ claseCSSbusqueda +"\">" + c + "</span>";
+                }));
+                return nuevoHtml;
+            }
+        });
+        
+        </script>
   </head>
 
   <body>
@@ -127,16 +144,22 @@
           class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
         >
           <button class="btn btn-primary" id="menu-toggle">Menu</button>
+          <div>
+              <label style="margin-left: 50px ;font-family:sans-serif"><b>Search</b></label>
+              <input type="text" name="buscador" id="cajaTexto">
+              <input class="btn btn-primary" type="button" value="Resaltar" onClick="BorrarYresaltar();"/>
+            </div>
         </nav>
         <div class="container">
+          
             <div id="bodycontent">
-                <div id="titlecenter">
+                <div class="text-center" id="titlecenter">
                   <h1>Northside Youth Soccer League</h1>
                   <h2>Rules of Play &amp; Policies</h2>
                   <p>FIFA rules shall govern NYSL play except as modified herein.</p>
                 </div>
                 
-                <div id="rules">
+                <div id="texto"class="border border-dark rounded">
                   <h2>Sportsmanship</h2>
                   <ul>
                    <li>The common interest that members of the Association share is to inspire youth to practice the ideals of sportsmanship and fair play. Any player, coach, team, parent, spectator, administrator or referee whose behavior detracts from this purpose is subject to disciplinary action regardless of technical soccer background, expertise, accomplishments or standing.</li>
@@ -277,7 +300,21 @@
         <h2><small> © 2019 All Rights Reserved</small></h2>
       </footer>
     </div>
-
+<script>
+ function borrar(){ $("#texto").find("span").each(function () {
+$(this).replaceWith(function () {
+return $(this).text();
+});
+});
+ }
+function resaltarTexto(){
+    $("#texto").resaltar(cajaTexto.value, "resaltarTexto");
+}
+function BorrarYresaltar(){
+  borrar();
+  resaltarTexto();
+}
+</script>
     <script>
       $("#wrapper").toggleClass("toggled");
       $("#menu-toggle").click(function(e) {
@@ -285,11 +322,7 @@
         $("#wrapper").toggleClass("toggled");
       });
     </script>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
+    
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
