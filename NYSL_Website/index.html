@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide  d-none d-md-block" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -59,21 +59,21 @@
         <!-- /#sidebar-wrapper -->
         <div style="background-image: url('css/images/soccer.png');background-size: cover" id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-primary" id="menu-toggle">Menu</button>
+                <button class="btn border" id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
             </nav>
-            <div  class="container">
-                <h2>August 4</h2>
-                <p class="indent">NYSL Fundraiser</p>
-        
-                <h2>August 16</h2>
-                <p class="indent">Season Kick-off: Meet the Teams</p>
-                
-                <h2>September 1</h2>
-                <p class="indent"> First Game of the Season (Check Game Schedule for details)</p>    
-        </div>
+            <div id="app"  class="container">
+                <h1>Partidos Septiembre</h1>
+                <table class="table table-striped mt-4">
+                                <tbody>
+                                        <tr v-for="a in PartidosSep" >
+                                            <td><b>Fecha:</b>   {{a.fecha}} <b>Partido:</b>{{a.equipo1}} vs {{a.equipo2}} <b>Hora:</b>{{a.hora}} <iframe v-bind:src="a.location"></iframe></td> 
+       </tr>
+       </tbody>
+       </table>
+                                        </div>
         <!-- Page Content -->
     </div>
-</div>
+    </div>
     <div class="container-fluid bg-light">
         <footer class="text-center">
             <h2><small> © 2019 All Rights Reserved</small></h2>
@@ -87,6 +87,7 @@
             $("#wrapper").toggleClass("toggled");
         });
     </script>
+    <script src="vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

@@ -1,67 +1,74 @@
-var app = new Vue({
+
+  var AJKatzenmaier= "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.6542461109875!2d-87.6312390849613!3d41.9002923792204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34e07f6bac3%3A0x68a82e5d59952c86!2s24+W+Walton+St%2C+Chicago%2C+IL+60610%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552688344713" ;
+  var Greenbay="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.025884368856!2d-87.64002798496078!3d41.91380227921939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd34073f306a3%3A0x9e1726bbf8f23f0e!2s1734+N+Orleans+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552688949574";
+  var HowardAYeager= "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.5856830856205!2d-87.6651145849604!3d41.923264579218596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd2e37f9b8d2d%3A0x62ad8b907dd755d6!2s2245+N+Southport+Ave%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552689027865";
+  var MarjoriePHart="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.291914658435!2d-87.64808628496017!3d41.92957827921807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd30f2630e551%3A0x3e719e44a5cef714!2s2625+N+Orchard+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552689101102";
+  var North="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.336488231586!2d-87.64835588496103!3d41.90712467921989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd33af13a8945%3A0xb6ad1ec2b6f379ba!2s1409+N+Ogden+Ave%2C+Chicago%2C+IL+60610%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552689192628";
+  var South="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.747950525067!2d-87.65355538496057!3d41.91977677921891!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd3196fb41dc7%3A0x970be7f7d6336df5!2s2101+N+Fremont+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552689227410";
+ var app = new Vue({
   el: '#app',
   data: {
-    PartidosSep : [{
+   PartidosSep : [{
       fecha: '9/01',
       equipo1:'U1',
       equipo2:'U4',
-      location: "AJ Katzenmaier",
+      location: this.AJKatzenmaier,
       hora:'9:30 a.m.'
     },
     {
       fecha: '9/01',
       equipo1:'U3',
       equipo2:'U2',
-      location: "Greenbay",
+      location: this.Greenbay,
       hora:'1:00 p.m.'
     },
     {
       fecha: '9/08',
       equipo1:'U5',
       equipo2:'U6',
-      location: "Howard A Yeager",
+      location: this.HowardAYeager,
       hora:'9:30 a.m.'
     },
     {
       fecha: '9/08',
       equipo1:'U6',
       equipo2:'U1',
-      location: "Marjorie P Hart",
+      location: this.MarjoriePHart,
       hora:'1:00 p.m.'
     },
     {
       fecha: '9/15',
       equipo1:'U2',
       equipo2:'U4',
-      location: "North",
+      location: this.North,
       hora:'9:30 a.m.'
     },
     {
       fecha: '9/15',
       equipo1:'U3',
       equipo2:'U5',
-      location: "AJ Katzenmaier",
+      location: this.AJKatzenmaier,
       hora:'1:00 p.m.'
     },
     {
       fecha: '9/22',
       equipo1:'U1',
       equipo2:'U3',
-      location: "South",
+      location: this.South,
       hora:'9:30 a.m.'
     },
     {
       fecha: '9/22',
       equipo1:'U2',
       equipo2:'U6',
-      location: "Howard A Yeager",
+      location: this.HowardAYeager,
       hora:'1:00 p.m.'
     },
     {
       fecha: '9/29',
       equipo1:'U4',
       equipo2:'U5',
-      location: "South",
+      location: this.South,
       hora:'9:30 a.m.'
     },
   ],
@@ -69,56 +76,56 @@ var app = new Vue({
     fecha: '10/06',
     equipo1:'U2',
     equipo2:'U5',
-    location: "Marjorie P Hart",
+    location: this.MarjoriePHart,
     hora:'9:30 a.m.'
   },
   {
     fecha: '10/06',
     equipo1:'U1',
     equipo2:'U6',
-    location: "South",
+    location: this.South,
     hora:'1:00 p.m.'
   },
   {
     fecha: '10/08',
     equipo1:'U3',
     equipo2:'U4',
-    location: "Howard A Yeager",
+    location: this.HowardAYeager,
     hora:'9:30 a.m.'
   },
   {
     fecha: '10/08',
     equipo1:'U5',
     equipo2:'U1',
-    location: "Greenbay",
+    location: this.Greenbay,
     hora:'1:00 p.m.'
   },
   {
     fecha: '10/20',
     equipo1:'U6',
     equipo2:'U3',
-    location: "North",
+    location: this.North,
     hora:'9:30 a.m.'
   },
   {
     fecha: '10/20',
     equipo1:'U2',
     equipo2:'U4',
-    location: "Marjorie P Hart",
+    location: this.MarjoriePHart,
     hora:'1:00 p.m.'
   },
   {
     fecha: '10/27',
     equipo1:'U3',
     equipo2:'U1',
-    location: "AJ Katzenmaier",
+    location: this.AJKatzenmaier,
     hora:'9:30 a.m.'
   },
   {
     fecha: '10/27',
     equipo1:'U6',
     equipo2:'U4',
-    location: "Howard A Yeager",
+    location: this.HowardAYeager,
     hora:'1:00 p.m.'
   },
 ],
