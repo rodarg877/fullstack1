@@ -8,7 +8,51 @@
  var app = new Vue({
   el: '#app',
   data: {
-   PartidosSep : [{
+    select:'all',
+    DatosFiltrados:[],
+    Teams:[{
+      equipo: "U1",
+      puntos:0,
+      pj:0,
+      gf:0,
+      gc:0,
+    },
+    {
+    equipo: "U2",
+      puntos:0,
+      pj:0,
+      gf:0,
+      gc:0,
+    },
+    {
+    equipo: "U3",
+      puntos:0,
+      pj:0,
+      gf:0,
+      gc:0,
+    },
+    {
+    equipo: "U4",
+      puntos:0,
+      pj:0,
+      gf:0,
+      gc:0,
+    },
+    {
+    equipo: "U5",
+      puntos:0,
+      pj:0,
+      gf:0,
+      gc:0,
+    },
+    {
+    equipo: "U6",
+      puntos:0,
+      pj:0,
+      gf:0,
+      gc:0,
+    }],
+   Partidos : [{
       fecha: '9/01',
       equipo1:'U1',
       equipo2:'U4',
@@ -71,8 +115,7 @@
       location: this.South,
       hora:'9:30 a.m.'
     },
-  ],
-  PartidosOct : [{
+ {
     fecha: '10/06',
     equipo1:'U2',
     equipo2:'U5',
@@ -129,5 +172,14 @@
     hora:'1:00 p.m.'
   },
 ],
-  }
+  },
+  computed: {
+    datosFiltrados: function () {
+      if (this.select != "all") {
+       return this.DatosFiltrados = this.Partidos.filter((dato) => (dato.equipo1 == this.select || dato.equipo2 == this.select))
+      } else {
+      return this.DatosFiltrados = this.Partidos
+      }
+    },
+  },
 })
