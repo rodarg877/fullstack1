@@ -53,3 +53,8 @@ body {
   color: #F3AA04;
   background-color: #FFFF96;
 }
+
+.fixed{
+  position: fixed; 
+  width: 100%;
+}

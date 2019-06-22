@@ -43,7 +43,7 @@
                 </a>
             </div>
         </header>
-        <div class="d-flex" id="wrapper">
+        <div class="d-flex toggled" id="wrapper">
 
             <!-- Sidebar -->
             <div class="bg-dark border-right" id="sidebar-wrapper">
@@ -65,11 +65,11 @@
 
             <div style="background-image: url('css/images/soccer.png');background-size: cover"
                 id="page-content-wrapper">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <button class="btn border mr-4" id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
                     <button id="botonOn" class="btn btn-primary rounded  m-1 p-1">table</button>
                     <button id="boton2" class="btn btn-primary rounded  m-1 p-1">NextMatches</button>
-                    <div id="Select" class=" container col-sm-6">
+                    <div id="Select" class=" container col-sm-4">
                     <label for="mySelect" >Your Team</label>
                     <select class="form-control" id="mySelect" v-model="select" @click="datosFiltrados">
                         <option value="all">All</option>
@@ -113,7 +113,7 @@
                                 </thead>
                             <tbody>
                                 <tr v-for="a in Teams">
-                                    <td>{{a.equipo}}</td>
+                                    <td><a :href="a.url" >{{a.equipo}}</a></td>
                                     <td>{{a.puntos}}</td>
                                     <td>{{a.pj}}</td>
                                     <td>{{a.gf}}</td>
@@ -137,32 +137,22 @@
 
     <script src="vue.js"></script>
     <script>
-        $("#wrapper").toggleClass("toggled")
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-        </script>
-        <script>
-$(document).ready(function() { 
-    $('#tabla').hide(); 
-    $("#botonOn").click(function() {
-        $('#tabla').show(); 
-        $('#myImage').hide(); 
-        $('#Select').hide();
-    });
+  $("#menu-toggle").click(function (e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });
+  function porTamaño() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth < 767) {
+            $("#nav").addClass("fixed");
+    }else{
+        $("#nav").removeClass("fixed");
+    }
+}
 
-    $("#boton2").click(function() {
-        $('#myImage').show(); 
-        $('#tabla').hide(); 
-        $('#Select').show();
-    });
-});
+    $(window).on('load , resize', porTamaño);
 
-  </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

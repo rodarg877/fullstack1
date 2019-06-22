@@ -5,13 +5,44 @@
   var MarjoriePHart="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.291914658435!2d-87.64808628496017!3d41.92957827921807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd30f2630e551%3A0x3e719e44a5cef714!2s2625+N+Orchard+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552689101102";
   var North="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.336488231586!2d-87.64835588496103!3d41.90712467921989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd33af13a8945%3A0xb6ad1ec2b6f379ba!2s1409+N+Ogden+Ave%2C+Chicago%2C+IL+60610%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552689192628";
   var South="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2968.747950525067!2d-87.65355538496057!3d41.91977677921891!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fd3196fb41dc7%3A0x970be7f7d6336df5!2s2101+N+Fremont+St%2C+Chicago%2C+IL+60614%2C+EE.+UU.!5e0!3m2!1ses-419!2sar!4v1552689227410";
- var app = new Vue({
+
+  function porTamaño() {
+    var viewportWidth = $(window).width();
+    if (viewportWidth < 767) {
+            $("#nav").addClass("fixed");
+    }else{
+        $("#nav").removeClass("fixed");
+    }
+}
+
+    $(window).on('load , resize', porTamaño);
+
+
+  $(document).ready(function() { 
+$('#tabla').hide(); 
+$("#botonOn").click(function() {
+  $('#tabla').show(); 
+  $('#myImage').hide(); 
+  $('#Select').hide();
+});
+
+$("#boton2").click(function() {
+  $('#myImage').show(); 
+  $('#tabla').hide(); 
+  $('#Select').show();
+});
+});
+
+
+  var app = new Vue({
   el: '#app',
   data: {
+    window:"",
     select:'all',
     DatosFiltrados:[],
     Teams:[{
       equipo: "U1",
+      url:"U1.html",
       puntos:0,
       pj:0,
       gf:0,
@@ -19,6 +50,7 @@
     },
     {
     equipo: "U2",
+    url:"U2.html",
       puntos:0,
       pj:0,
       gf:0,
@@ -26,6 +58,7 @@
     },
     {
     equipo: "U3",
+    url:"U3.html",
       puntos:0,
       pj:0,
       gf:0,
@@ -33,6 +66,7 @@
     },
     {
     equipo: "U4",
+    url:"U4.html",
       puntos:0,
       pj:0,
       gf:0,
@@ -40,13 +74,15 @@
     },
     {
     equipo: "U5",
-      puntos:0,
+    url:"U5.html",
+    puntos:0,
       pj:0,
       gf:0,
       gc:0,
     },
     {
     equipo: "U6",
+    url:"U6.html",
       puntos:0,
       pj:0,
       gf:0,
@@ -181,5 +217,6 @@
       return this.DatosFiltrados = this.Partidos
       }
     },
+
   },
 })
