@@ -82,14 +82,15 @@
                     </select>
                 </div>
                 </nav>
-                <div class="container">
+                <div class="container-fluid">
                     <div id="myImage">
                             <h1>Next matches</h1>
-                        <table id="partidos" class="table table-striped mt-4">
+                        <table id="partidos" class="table table-striped table-primary">
                             <tbody>
-                                <tr v-for="a in DatosFiltrados">
-                                    <td class="display-5"> <iframe class="float-right"
-                                            v-bind:src="a.location"></iframe><b>Date:</b> {{a.fecha}}<br>
+                                <tr v-for="(a, index) in DatosFiltrados">
+                                    <td class="fadeInLeftBig"> 
+                                        <button class=" btn float-right"type="button" data-toggle="collapse" data-target="#{{index}}" aria-expanded="false" aria-controls="iframe"><span class=" primary carousel-control-next-icon" ></span></button>    
+                                        <iframe id= "{{index}}" class="collapse multi-collapse float-right" v-bind:src="a.location"></iframe><b>Date:</b> {{a.fecha}}<br>
                                         <b>Match:</b>{{a.equipo1}} vs
                                         {{a.equipo2}}
                                         <br><b>hour:</b>{{a.hora}}
