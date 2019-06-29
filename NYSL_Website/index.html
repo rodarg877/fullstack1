@@ -21,15 +21,13 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <div class="carousel-item active"
-                        style=" height:65vh;background: no-repeat; background-image: url('css/images/pasto.jpg');background-position: bottom">
-                        <img class="d-block w-60" style="margin: auto; height:65vh" src="css/images/nysl_logo.png"
-                            alt="First slide">
+                    <div id="carousel1" class="carousel-item active">
+                        <img id="nysl" class="d-block w-60" src="css/images/nysl_logo.png" alt="First slide">
                     </div>
-                    <div class="carousel-item" style=" height:65vh">
+                    <div id="carousel" class="carousel-item">
                         <img class="d-block w-100" src="css/images/design1_image1.jpg" alt="Second slide">
                     </div>
-                    <div class="carousel-item" style=" height:65vh">
+                    <div id="carousel" class="carousel-item">
                         <img class="d-block w-100" src="css/images/design2_image1.jpg" alt="Third slide">
                     </div>
                 </div>
@@ -44,8 +42,6 @@
             </div>
         </header>
         <div class="d-flex toggled" id="wrapper">
-
-            <!-- Sidebar -->
             <div class="bg-dark border-right" id="sidebar-wrapper">
                 <div class="sidebar-heading text-white">Liga NYSL </div>
                 <div class="list-group list-group-flush">
@@ -60,58 +56,58 @@
 
                 </div>
             </div>
-
-            <!-- /#sidebar-wrapper -->
-
             <div id="page-content-wrapper">
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <button class="btn border mr-4" id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
                     <button id="botonOn" class="btn btn-primary rounded  m-1 p-1">table</button>
                     <button id="boton2" class="btn btn-primary rounded  m-1 p-1">NextMatches</button>
                     <div id="Select" class=" container col-sm-4">
-                    <label for="mySelect" >Your Team</label>
-                    <select class="form-control" id="mySelect" v-model="select" @click="datosFiltrados">
-                        <option value="all">All</option>
-                        <option value="U1">U1</option>
-                        <option value="U2">U2</option>
-                        <option value="U3">U3</option>
-                        <option value="U4">U4</option>
-                        <option value="U5">U5</option>
-                        <option value="U6">U6</option>
-                    </select>
-                </div>
+                        <label for="mySelect">Your Team</label>
+                        <select class="form-control" id="mySelect" v-model="select" @click="datosFiltrados">
+                            <option value="all">All</option>
+                            <option value="U1">U1</option>
+                            <option value="U2">U2</option>
+                            <option value="U3">U3</option>
+                            <option value="U4">U4</option>
+                            <option value="U5">U5</option>
+                            <option value="U6">U6</option>
+                        </select>
+                    </div>
                 </nav>
                 <div class="container-fluid">
                     <div id="myImage">
-                            <h1 id="espacio">Next matches</h1>
+                        <h1 id="espacio">Next matches</h1>
                         <table id="partidos" class="container-fluid table table-striped ">
                             <tbody>
-                                <tr class="estilos" v-for="(a, index) in DatosFiltrados"> 
-                                        <td>
-                                            <div class="conteiner row">
+                                <tr class="estilos" v-for="(a, index) in DatosFiltrados">
+                                    <td>
+                                        <div class="conteiner row">
                                             <div class="text-center col-8">
                                                 <div class="text-center col-10  ">
                                                     <b>Date:</b> {{ a.fecha }}<br>
                                                     <b>hour:</b>{{ a.hora }}<br>
                                                     <b>Match:</b><br>
                                                 </div>
-                                                    <div class="row text-center">
-                                                            <div class="col-5 text-center">
-                                                              {{ a.equipo1 }}<br/><img id="logos" :src="'css/images/' + a.equipo1 + '.jpg'"/>
-                                                            </div>
-                                                           <br> <br> VS
-                                                            <div id="estilos" class="col-4 text-center">
-                                                              {{ a.equipo2 }}<br/><img id="logos" :src="'css/images/' + a.equipo2 + '.jpg'"/>
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <button class="btn float-right" data-toggle="collapse" :data-target="'#demo' + index"><img id="img" src="css/images/Google-Maps.jpg"></button>
-                                                    <iframe style="width: 100%;height: 100%;" :id= "'demo' + index" class="collapse float-right" v-bind:src="a.location"></iframe>
+                                                <div class="row text-center">
+                                                    <div class="col-5 text-center">
+                                                        {{ a.equipo1 }}<br /><img id="logos"
+                                                            :src="'css/images/' + a.equipo1 + '.jpg'" />
+                                                    </div>
+                                                    <br> <br> VS
+                                                    <div id="estilos" class="col-4 text-center">
+                                                        {{ a.equipo2 }}<br /><img id="logos"
+                                                            :src="'css/images/' + a.equipo2 + '.jpg'" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                      
-                                   
+                                            <div class="col-4">
+                                                <button class="btn float-right" data-toggle="collapse"
+                                                    :data-target="'#demo' + index"><img id="img"
+                                                        src="css/images/Google-Maps.jpg"></button>
+                                                <iframe :id="'demo' + index" class="collapse float-right"
+                                                    v-bind:src="a.location"></iframe>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -119,9 +115,9 @@
                     </div>
                     <div id="tabla">
                         <table id="partidos" class="table table-striped mt-4">
-                                <h1>Position</h1>
-                                <thead>
-                                    <tr>
+                            <h1>Position</h1>
+                            <thead>
+                                <tr>
                                     <th>Team</th>
                                     <th>Points</th>
                                     <th>Played</th>
@@ -129,10 +125,10 @@
                                     <th>GA</th>
                                     <th>GD</th>
                                 </tr>
-                                </thead>
+                            </thead>
                             <tbody>
                                 <tr v-for="a in Teams">
-                                    <td><a :href="a.url" >{{a.equipo}}</a></td>
+                                    <td><a :href="a.url">{{a.equipo}}</a></td>
                                     <td>{{a.puntos}}</td>
                                     <td>{{a.pj}}</td>
                                     <td>{{a.gf}}</td>
@@ -143,7 +139,6 @@
                         </table>
                     </div>
                 </div>
-                <!-- Page Content -->
             </div>
         </div>
     </div>
@@ -152,14 +147,12 @@
             <h2><small> © 2019 All Rights Reserved</small></h2>
         </footer>
     </div>
-
-
     <script src="vue.js"></script>
     <script>
-  $("#menu-toggle").click(function (e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-  });
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -167,14 +160,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/6.2.2/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#reserved-urls -->
-
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
 </body>
 
 </html>
