@@ -10,8 +10,10 @@
     var viewportWidth = $(window).width();
     if (viewportWidth < 767) {
             $("#nav").addClass("fixed");
+            $("#espacio").addClass("espacio");
     }else{
         $("#nav").removeClass("fixed");
+        $("#espacio").removeClass("espacio");
     }
 }
 

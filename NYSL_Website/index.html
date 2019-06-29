@@ -63,8 +63,7 @@
 
             <!-- /#sidebar-wrapper -->
 
-            <div style="background-image: url('css/images/soccer.png');background-size: cover"
-                id="page-content-wrapper">
+            <div id="page-content-wrapper">
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <button class="btn border mr-4" id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
                     <button id="botonOn" class="btn btn-primary rounded  m-1 p-1">table</button>
@@ -84,16 +83,35 @@
                 </nav>
                 <div class="container-fluid">
                     <div id="myImage">
-                            <h1>Next matches</h1>
-                        <table id="partidos" class="table table-striped table-primary">
+                            <h1 id="espacio">Next matches</h1>
+                        <table id="partidos" class="container-fluid table table-striped ">
                             <tbody>
-                                <tr v-for="(a, index) in DatosFiltrados">
-                                    <td class="fadeInLeftBig"> 
-                                        <button class=" btn float-right"type="button" data-toggle="collapse" data-target="#{{index}}" aria-expanded="false" aria-controls="iframe"><span class=" primary carousel-control-next-icon" ></span></button>    
-                                        <iframe id= "{{index}}" class="collapse multi-collapse float-right" v-bind:src="a.location"></iframe><b>Date:</b> {{a.fecha}}<br>
-                                        <b>Match:</b>{{a.equipo1}} vs
-                                        {{a.equipo2}}
-                                        <br><b>hour:</b>{{a.hora}}
+                                <tr class="estilos" v-for="(a, index) in DatosFiltrados"> 
+                                        <td>
+                                            <div class="conteiner row">
+                                            <div class="text-center col-8">
+                                                <div class="text-center col-10  ">
+                                                    <b>Date:</b> {{ a.fecha }}<br>
+                                                    <b>hour:</b>{{ a.hora }}<br>
+                                                    <b>Match:</b><br>
+                                                </div>
+                                                    <div class="row text-center">
+                                                            <div class="col-5 text-center">
+                                                              {{ a.equipo1 }}<br/><img id="logos" :src="'css/images/' + a.equipo1 + '.jpg'"/>
+                                                            </div>
+                                                           <br> <br> VS
+                                                            <div id="estilos" class="col-4 text-center">
+                                                              {{ a.equipo2 }}<br/><img id="logos" :src="'css/images/' + a.equipo2 + '.jpg'"/>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <button class="btn float-right" data-toggle="collapse" :data-target="'#demo' + index"><img id="img" src="css/images/Google-Maps.jpg"></button>
+                                                    <iframe style="width: 100%;height: 100%;" :id= "'demo' + index" class="collapse float-right" v-bind:src="a.location"></iframe>
+                                                </div>
+                                            </div>
+                                      
+                                   
                                     </td>
                                 </tr>
                             </tbody>
@@ -106,10 +124,10 @@
                                     <tr>
                                     <th>Team</th>
                                     <th>Points</th>
-                                    <th>MP</th>
-                                    <th>gf</th>
-                                    <th>gc</th>
-                                    <th>difgol</th>
+                                    <th>Played</th>
+                                    <th>GF</th>
+                                    <th>GA</th>
+                                    <th>GD</th>
                                 </tr>
                                 </thead>
                             <tbody>

@@ -41,6 +41,8 @@ body {
   #page-content-wrapper {
     min-width: 0;
     width: 100%;
+    background-image: url('css/images/24.jpg');
+    background-size: cover;
   }
 
   #wrapper.toggled #sidebar-wrapper {
@@ -57,9 +59,24 @@ body {
 .fixed{
   position: fixed; 
   width: 100%;
+  z-index: 9999;
 }
 .estilos{
-font-family: 'Tahoma, cursive';
+font-family:'Lucida Grande', cursive;  
 font-size: 100%;
 
+}
+h1.espacio{
+  margin-top:140px;
+}
+ #img{
+   height: 50px;
+   width: 70px;
+  border-radius: 25px;
+ }
+ #logos{
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  border: 1px solid black;
 }
