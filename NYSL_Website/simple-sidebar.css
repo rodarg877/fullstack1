@@ -43,6 +43,7 @@ body {
   #page-content-wrapper {
     min-width: 0;
     width: 100%;
+    background: fixed;
     background-image: url('css/images/24.jpg');
     background-size: cover;
   }
