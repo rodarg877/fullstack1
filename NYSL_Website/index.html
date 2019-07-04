@@ -58,7 +58,8 @@
             </div>
             <div id="page-content-wrapper">
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <button class="btn btn-outline-dark mr-4" id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
+                    <button class="btn btn-outline-dark mr-4" id="menu-toggle"> <span
+                            class="navbar-toggler-icon"></span></button>
                     <button id="botonOn" class="btn btn-outline-dark m-1 p-1">table</button>
                     <button id="boton2" class="btn btn-outline-dark m-1 p-1">NextMatches</button>
                     <div id="Select" class=" container col-sm-4">
@@ -77,70 +78,84 @@
                 <div class="container-fluid">
                     <div id="myImage">
                         <h1 id="espacio">Next matches</h1>
-                        <table id="partidos" class="container-fluid table table-striped ">
+                        <table id="partidos" class=" table table-striped ">
                             <tbody>
                                 <tr class="estilos" v-for="(a, index) in DatosFiltrados">
                                     <td>
                                         <div class="conteiner row">
-                                            <div class="text-center col-8">
-                                                <div class="text-center col-10  ">
+                                            <div class="text-center col-5">
+                                                <a :href="'#datos'+ index" data-toggle="collapse">
                                                     <b>Date:</b> {{ a.fecha }}<br>
                                                     <b>hour:</b>{{ a.hora }}<br>
-                                                    <b>Match:</b><br>
-                                                </div>
-                                                <div class="row text-center">
-                                                    <div class="col-5 text-center">
-                                                        {{ a.equipo1 }}<br /><img id="logos"
-                                                            :src="'css/images/' + a.equipo1 + '.jpg'" />
-                                                    </div>
-                                                    <br> <br> VS
-                                                    <div id="estilos" class="col-4 text-center">
-                                                        {{ a.equipo2 }}<br /><img id="logos"
-                                                            :src="'css/images/' + a.equipo2 + '.jpg'" />
-                                                    </div>
-                                                </div>
+                                                </a>
                                             </div>
-                                            <div class="col-4">
+                                            <div :id="'datos' + index" class="collapse col-7">
                                                 <button class="btn float-right" data-toggle="collapse"
                                                     :data-target="'#demo' + index"><img id="img"
                                                         src="css/images/Google-Maps.jpg"></button>
-                                                <iframe :id="'demo' + index" class="collapse float-right"
+                                            </div>
+                                        </div>
+                                        <div :id="'datos' + index" class="collapse text-center row">
+                                            <div class="row col-8"><br>
+                                                <div class="col-4">
+                                                    {{ a.equipo1 }}<br /><img id="logos"
+                                                        :src="'css/images/' + a.equipo1 + '.jpg'" />
+                                                </div>
+                                                <br> <br> VS
+                                                <div class="col-4">
+                                                        {{ a.equipo2 }}<br /><img id="logos"
+                                                            :src="'css/images/' + a.equipo2 + '.jpg'" />
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <iframe :id="'demo' + index" class="float-right collapse"
                                                     v-bind:src="a.location"></iframe>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
-                    <div id="tabla">
-                        <table id="partidos" class="table table-striped mt-4">
-                            <h1>Position</h1>
-                            <thead>
-                                <tr>
-                                    <th>Team</th>
-                                    <th>Points</th>
-                                    <th>Played</th>
-                                    <th>GF</th>
-                                    <th>GA</th>
-                                    <th>GD</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="a in Teams">
-                                    <td><a :href="a.url">{{a.equipo}}</a></td>
-                                    <td>{{a.puntos}}</td>
-                                    <td>{{a.pj}}</td>
-                                    <td>{{a.gf}}</td>
-                                    <td>{{a.gc}}</td>
-                                    <td>{{a.gf-a.gc}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
                 </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+            </div>
+            <div id="tabla">
+                <table id="partidos" class="table table-striped mt-4">
+                    <h1>Position</h1>
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>Points</th>
+                            <th>Won</th>
+                            <th>Draw</th>
+                            <th>Lose</th>
+                            <th>Played</th>
+                            <th>GF</th>
+                            <th>GA</th>
+                            <th>GD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="a in Teams">
+                            <td><img id="logos"
+                                :src="'css/images/' + a.equipo + '.jpg'" /><a :href="a.url">{{a.equipo}}</a></td>
+                            <td>{{a.won*3 + a.draw*1}}</td>
+                            <td>{{a.won}}</td>
+                            <td>{{a.draw}}</td>
+                            <td>{{a.lose}}</td>
+                            <td>{{a.pj}}</td>
+                            <td>{{a.gf}}</td>
+                            <td>{{a.gc}}</td>
+                            <td>{{a.gf-a.gc}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <div class="container-fluid bg-light">
         <footer class="text-center">
