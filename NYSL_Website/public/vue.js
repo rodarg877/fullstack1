@@ -22,16 +22,58 @@
 
   $(document).ready(function() { 
 $('#tabla').hide(); 
+$('#contact').hide(); 
+$('#rules').hide();
+$('#about').hide();
 $("#botonOn").click(function() {
   $('#tabla').show(); 
   $('#myImage').hide(); 
   $('#Select').hide();
+  $('#contact').hide(); 
+$('#rules').hide();
+$('#about').hide();
 });
 
 $("#boton2").click(function() {
   $('#myImage').show(); 
   $('#tabla').hide(); 
   $('#Select').show();
+  $('#contact').hide(); 
+$('#rules').hide();
+$('#about').hide();
+});
+
+$("#index1").click(function() {
+  $('#myImage').show(); 
+  $('#tabla').hide(); 
+$('#contact').hide(); 
+$('#rules').hide();
+$('#about').hide(); 
+  $('#Select').show();
+});
+$("#contact1").click(function() {
+  $('#myImage').hide(); 
+  $('#tabla').hide(); 
+$('#contact').show(); 
+$('#rules').hide();
+$('#about').hide(); 
+  $('#Select').hide();
+});
+$("#rules1").click(function() {
+  $('#myImage').hide(); 
+  $('#tabla').hide(); 
+$('#contact').hide(); 
+$('#rules').show();
+$('#about').hide(); 
+  $('#Select').hide();
+});
+$("#about1").click(function() {
+  $('#myImage').hide(); 
+  $('#tabla').hide(); 
+$('#contact').hide(); 
+$('#rules').hide();
+$('#about').show(); 
+  $('#Select').hide();
 });
 });
 
