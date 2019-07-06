@@ -86,7 +86,8 @@ h3{
   text-decoration: underline;
 }
 #page-content-wrapper{
-  background-image: url('css/images/24.jpg');
-  background:no-repeat fixed;
-  background-size: 100%;
+  background-image: url(css/images/24.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
