@@ -27,32 +27,11 @@ body {
 
 #page-content-wrapper {
   min-width: 100vw;
-  background-image: url('css/images/24.jpg');
-    background-size: cover;
 }
 
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
-
-@media (min-width: 500px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-    background: fixed;
-    background-image: url('css/images/24.jpg');
-    background-size: cover;
-  }
-
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
-  }
-}
-
 
 .resaltarTexto{
   color: #F3AA04;
@@ -105,4 +84,9 @@ iframe{
 }
 h3{
   text-decoration: underline;
+}
+#page-content-wrapper{
+  background-image: url('css/images/24.jpg');
+  background:no-repeat fixed;
+  background-size: 100%;
 }

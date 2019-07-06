@@ -50,8 +50,12 @@ $('#contact').hide();
 $('#rules').hide();
 $('#about').hide(); 
   $('#Select').show();
+  $("#botonOn").show();
+  $("#boton2").show();
 });
 $("#contact1").click(function() {
+  $("#botonOn").hide();
+  $("#boton2").hide();
   $('#myImage').hide(); 
   $('#tabla').hide(); 
 $('#contact').show(); 
@@ -60,6 +64,8 @@ $('#about').hide();
   $('#Select').hide();
 });
 $("#rules1").click(function() {
+  $("#botonOn").hide();
+  $("#boton2").hide();
   $('#myImage').hide(); 
   $('#tabla').hide(); 
 $('#contact').hide(); 
@@ -68,6 +74,8 @@ $('#about').hide();
   $('#Select').hide();
 });
 $("#about1").click(function() {
+  $("#botonOn").hide();
+  $("#boton2").hide();
   $('#myImage').hide(); 
   $('#tabla').hide(); 
 $('#contact').hide(); 
