@@ -44,11 +44,11 @@ body {
   z-index: 9999;
 }
 .estilos{
-font-family:'Lucida Grande', cursive;  
+font-family:'Comic Sans MS', arial;  
 font-size: 100%;
 
 }
-h1.espacio{
+.espacio{
   margin-top:140px;
 }
  #img{
@@ -91,3 +91,4 @@ h3{
   background-size: cover;
   background-repeat: no-repeat;
 }
+
