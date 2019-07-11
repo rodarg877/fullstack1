@@ -21,7 +21,7 @@
 <body>
   <div id="app">
     <header>
-      <div id="carouselExampleIndicators" class="carousel slide  d-none d-md-block" data-ride="carousel">
+      <div id="carouselExampleIndicators" class=" carousel slide  d-none d-md-block" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -29,7 +29,7 @@
         </ol>
         <div class="carousel-inner">
           <div id="carousel1" class="carousel-item active">
-            <img id="nysl" class="d-block w-60" src="css/images/nysl_logo.png" alt="First slide">
+            <img id="nysl" class="d-block w-60 " src="css/images/nysl_logo.png" alt="First slide">
           </div>
           <div id="carousel" class="carousel-item">
             <img class="d-block w-100" src="css/images/design1_image1.jpg" alt="Second slide">
@@ -62,17 +62,15 @@
         </div>
       </div>
       <div id="page-content-wrapper">
-        <nav id="nav" class=" navbar navbar-expand-lg navbar-light bg-light border-bottom animated bounceInDown">
-          <div class="row col-10">
-          <button class="btn btn-outline-dark mr-2 " id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
-          <button id="botonOn" class="btn btn-outline-dark col-2 mr-1">table</button>
-          <button id="boton2" class="btn btn-outline-dark col-4">NextMatches</button>
+        <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light border-bottom animated bounceInDown">
+          <div class="row col-9">
+          <button class="btn btn-outline-dark mr-1 " id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
+          <button id="botonOn" class="btn btn-outline-dark col-3 mr-1">Table</button>
+          <button id="boton2" class="btn btn-outline-dark col-6 ">NextMatches</button>
           </div>
-          <div class="row container-fluid">
-          <div id="Select" class=" col-6 float-right ">
-            
+          <div id="Select" class=" col-5 mr-4">
             <label for="mySelect">Your Team</label>
-            <select class="form-control" id="mySelect" v-model="select" @click="datosFiltrados">
+            <select class="form-control col-8" id="mySelect" v-model="select" @click="datosFiltrados">
               <option value="all">All</option>
               <option value="U1">U1</option>
               <option value="U2">U2</option>
@@ -81,7 +79,6 @@
               <option value="U5">U5</option>
               <option value="U6">U6</option>
             </select>
-          </div>
           </div>
         </nav>
         <div class="container-fluid">
