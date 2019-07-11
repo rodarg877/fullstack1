@@ -9,7 +9,7 @@ body {
 
 #sidebar-wrapper {
   min-height: 100vh;
-  margin-left: -15rem;
+  margin-left: -13rem;
   -webkit-transition: margin .25s ease-out;
   -moz-transition: margin .25s ease-out;
   -o-transition: margin .25s ease-out;
@@ -22,7 +22,7 @@ body {
 }
 
 #sidebar-wrapper .list-group {
-  width: 15rem;
+  width: 13rem;
 }
 
 #page-content-wrapper {
@@ -85,10 +85,10 @@ iframe{
 h3{
   text-decoration: underline;
 }
-#page-content-wrapper{
+body{
   background-image: url(css/images/24.jpg);
   background-attachment: fixed;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; 
 }
 
