@@ -325,3 +325,9 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   var credential = error.credential;
   // ...
 });
+
+    $("#menu-toggle").click(function (e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  
