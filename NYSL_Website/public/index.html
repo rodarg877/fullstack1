@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name= "mobile-web-app-captable" content="yes">
-  <meta name= "apple-web-app-captable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -408,7 +408,7 @@
       <h2><small> © 2019 All Rights Reserved</small></h2>
     </footer>
   </div>
-  <script src="vue.js"></script>
+  
   <script>
     $("#menu-toggle").click(function (e) {
       e.preventDefault();
@@ -421,6 +421,30 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
+    authDomain: "nysl-1072c.firebaseapp.com",
+    databaseURL: "https://nysl-1072c.firebaseio.com",
+    projectId: "nysl-1072c",
+    storageBucket: "nysl-1072c.appspot.com",
+    messagingSenderId: "50195159331",
+    appId: "1:50195159331:web:b47a46a61b1ac244"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="vue.js"></script>
 </body>
 
 </html>
