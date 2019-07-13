@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -91,8 +91,7 @@
                     <div class="conteiner row">
                       <div class="text-center col-5">
                         <a :href="'#datos'+ index" data-toggle="collapse">
-                          <b>Date:</b> {{ a.fecha }}<br>
-                          <b>hour:</b>{{ a.hora }}<br>
+                          <b>Date:</b> {{a.fecha}}
                         </a>
                       </div>
                       <div :id="'datos' + index" class="collapse col-7">
@@ -123,6 +122,8 @@
         </table>
       </div>
       <div id="tabla">
+        {{Partidos}}
+        {{Teams}}
         <table id="partidos" class="table table-striped mt-4">
           <h1 class="animated bounceInDown" id="espacio1">Position</h1>
           <thead>
@@ -419,6 +420,8 @@
     <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 
 
@@ -438,6 +441,8 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  
 </script>
 <script src="vue.js"></script>
 </body>
