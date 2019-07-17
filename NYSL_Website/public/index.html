@@ -89,29 +89,26 @@
                 <tr class="estilos"  v-for="(a, index) in DatosFiltrados">
                   <td class="animated bounceInLeft delay-2s">
                     <div class="conteiner row">
-                      <div class="text-center col-5">
-                        <a :href="'#datos'+ index" data-toggle="collapse">
-                          <b>Date:</b> {{a.fecha}}
-                        </a>
-                      </div>
-                      <div :id="'datos' + index" class="collapse col-7">
-                        <button class="btn float-right" data-toggle="collapse" :data-target="'#demo' + index"><img
-                            id="img" src="css/images/Google-Maps.jpg"></button>
+                      <div class="text-center col-12">
+                        <a :href="'#datos'+ index" data-toggle="collapse"><b>Date:</b> {{a.fecha}}</a>
                       </div>
                     </div>
-                    <div :id="'datos' + index" class="collapse text-center row">
-                      <div class="row col-8"><br>
-                        <div class="col-4">
-                          {{ a.equipo1 }}<br /><img id="logos" :src="'css/images/' + a.equipo1 + '.jpg'" />
+                    <div :id="'datos' + index" class="collapse row">
+                      <div class="row col-12">
+                        <div class="col-4 ">
+                         <p class="nombres text-right">Equipo:{{a.equipo1}}</p><img class="float-right"id="logos"  :src="'css/images/' + a.equipo1 + '.jpg'" />
                         </div>
-                        <br> <br> VS
                         <div class="col-4">
-                          {{ a.equipo2 }}<br /><img id="logos" :src="'css/images/' + a.equipo2 + '.jpg'" />
+                          <p class="text-right">Equipo:{{ a.equipo2 }}</p><img class="float-right" id="logos" :src="'css/images/' + a.equipo2 + '.jpg'" />
+                          <p class="text-center">VS</p>
                         </div>
-
+                        <div :id="'datos' + index" class="col-3">
+                          <button class="btn float-right" data-toggle="collapse" :data-target="'#demo' + index"><img
+                              id="img" src="css/images/Google-Maps.jpg"></button>
+                        </div>
                       </div>
-                      <div class="col-4">
-                        <iframe :id="'demo' + index" class="float-right collapse" v-bind:src="a.location"></iframe>
+                      <div class="col-12">
+                        <iframe :id="'demo' + index" class="collapse" v-bind:src="a.location"></iframe>
                       </div>
                     </div>
           </div>
@@ -120,10 +117,40 @@
         </tr>
         </tbody>
         </table>
+        <table id="partidoslandscape" class=" table table-striped ">
+            <tbody>
+              <tr class="estilos"  v-for="(a, index) in DatosFiltrados">
+                <td class="animated bounceInLeft delay-2s">
+                  <div class="conteiner row">
+                    <div class="text-center col-4">
+                      <a href='#datos' v-model="index" data-toggle="collapse"><b>Date:</b> {{a.fecha}}</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+              </table>
+              <div id='datos' class="collapse row">
+                  <div class="row col-12">
+                    <div class="col-4 ">
+                     <p class="nombres text-right">Equipo:{{datosFiltrados[index].equipo1}}</p><img class="float-right"id="logos"  :src="'css/images/' + 'datosFiltrados[index].equipo1' + '.jpg'" />
+                    </div>
+                    <div class="col-4">
+                      <p class="text-right">Equipo:{{ datosFiltrados[index].equipo2 }}</p><img class="float-right" id="logos" :src="'css/images/' + 'datosFiltrados[index].equipo2' + '.jpg'" />
+                      <p class="text-center">VS</p>
+                    </div>
+                    <div id="datos" class="col-3">
+                      <button class="btn float-right" data-toggle="collapse" :data-target='#demo'><img
+                          id="img" src="css/images/Google-Maps.jpg"></button>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <iframe id='demo' class="collapse" v-bind:src="DatosFiltrados[index].location"></iframe>
+                  </div>
+                </div>
+
       </div>
       <div id="tabla">
-        {{Partidos}}
-        {{Teams}}
         <table id="partidos" class="table table-striped mt-4">
           <h1 class="animated bounceInDown" id="espacio1">Position</h1>
           <thead>

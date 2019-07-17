@@ -67,8 +67,10 @@ font-size: 100%;
 }
 
 iframe{
-  position: relative;
+  display: block;
+  width: 80%;
   height: auto;
+  margin:auto;
 }
 
 #carousel{
