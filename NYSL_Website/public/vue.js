@@ -103,7 +103,7 @@ $('#about').show();
   var app = new Vue({
   el: '#app',
   data: {
-    index:0,
+    index:5,
     window:"",
     select:'all',
     DatosFiltrados:[],
@@ -112,6 +112,9 @@ $('#about').show();
    db:db,
   },
   methods: {
+    mostrarIndex: function(index1){
+this.index=index1;
+    },
     cargarDatosTeams: function(){
       this.db.collection('Teams').get().then(( snapshot ) => {
         snapshot.docs.forEach(doc =>{
@@ -135,6 +138,10 @@ $('#about').show();
           });
         },
     },
+    created(){
+      this.cargarDatosPartido();
+      this.cargarDatosTeams();
+    },
   computed: {
     datosFiltrados: function () {
       if (this.select != "all") {
@@ -142,13 +149,7 @@ $('#about').show();
       } else {
       return this.DatosFiltrados = this.Partidos
       }
-    },
-    ajustaFecha: function(){this.Partidos.map(partido => partido.fecha=partido.fecha.parse(cadenaFecha))}
-
-  },
-  created(){
-    this.cargarDatosPartido();
-    this.cargarDatosTeams();
+    }
   }
 })
 var provider = new firebase.auth.GoogleAuthProvider();

@@ -11,8 +11,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <link href="simple-sidebar.css" rel="stylesheet">
-  <link rel="shortcut icon" href="/css/images/logo.ico">
-  <link rel="apple-touch-icon" href="/css/images/logo.png">
+  <link rel="shortcut icon" href="css/images/logo.ico">
+  <link rel="apple-touch-icon" href="css/images/logo.png">
   <link href="simple-sidebar.css" rel="stylesheet">
   <link rel="stylesheet" href="animate.css">
   <title>Nyslapp</title>
@@ -64,9 +64,10 @@
       <div id="page-content-wrapper">
         <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light border-bottom animated bounceInDown">
           <div class="row col-9">
-          <button class="btn btn-outline-dark mr-1 " id="menu-toggle"> <span class="navbar-toggler-icon"></span></button>
-          <button id="botonOn" class="btn btn-outline-dark col-3 mr-1">Table</button>
-          <button id="boton2" class="btn btn-outline-dark col-6 ">NextMatches</button>
+            <button class="btn btn-outline-dark mr-1 " id="menu-toggle"> <span
+                class="navbar-toggler-icon"></span></button>
+            <button id="botonOn" class="btn btn-outline-dark col-3 mr-1">Table</button>
+            <button id="boton2" class="btn btn-outline-dark col-6 ">NextMatches</button>
           </div>
           <div id="Select" class=" col-5 mr-4">
             <label for="mySelect">Your Team</label>
@@ -86,7 +87,7 @@
             <h1 class="animated bounceInDown delay-1s" id="espacio">Next matches</h1>
             <table id="partidos" class=" table table-striped ">
               <tbody>
-                <tr class="estilos"  v-for="(a, index) in DatosFiltrados">
+                <tr class="estilos" v-for="(a, index) in DatosFiltrados">
                   <td class="animated bounceInLeft delay-2s">
                     <div class="conteiner row">
                       <div class="text-center col-12">
@@ -96,10 +97,12 @@
                     <div :id="'datos' + index" class="collapse row">
                       <div class="row col-12">
                         <div class="col-4 ">
-                         <p class="nombres text-right">Equipo:{{a.equipo1}}</p><img class="float-right"id="logos"  :src="'css/images/' + a.equipo1 + '.jpg'" />
+                          <p class="nombres text-right">Equipo:{{a.equipo1}}</p><img class="float-right" id="logos"
+                            :src="'css/images/' + a.equipo1 + '.jpg'" />
                         </div>
                         <div class="col-4">
-                          <p class="text-right">Equipo:{{ a.equipo2 }}</p><img class="float-right" id="logos" :src="'css/images/' + a.equipo2 + '.jpg'" />
+                          <p class="text-right">Equipo:{{ a.equipo2 }}</p><img class="float-right" id="logos"
+                            :src="'css/images/' + a.equipo2 + '.jpg'" />
                           <p class="text-center">VS</p>
                         </div>
                         <div :id="'datos' + index" class="col-3">
@@ -117,38 +120,43 @@
         </tr>
         </tbody>
         </table>
-        <table id="partidoslandscape" class=" table table-striped ">
-            <tbody>
-              <tr class="estilos"  v-for="(a, index) in DatosFiltrados">
-                <td class="animated bounceInLeft delay-2s">
-                  <div class="conteiner row">
-                    <div class="text-center col-4">
-                      <a href='#datos' v-model="index" data-toggle="collapse"><b>Date:</b> {{a.fecha}}</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-              </table>
-              <div id='datos' class="collapse row">
-                  <div class="row col-12">
-                    <div class="col-4 ">
-                     <p class="nombres text-right">Equipo:{{datosFiltrados[index].equipo1}}</p><img class="float-right"id="logos"  :src="'css/images/' + 'datosFiltrados[index].equipo1' + '.jpg'" />
-                    </div>
-                    <div class="col-4">
-                      <p class="text-right">Equipo:{{ datosFiltrados[index].equipo2 }}</p><img class="float-right" id="logos" :src="'css/images/' + 'datosFiltrados[index].equipo2' + '.jpg'" />
-                      <p class="text-center">VS</p>
-                    </div>
-                    <div id="datos" class="col-3">
-                      <button class="btn float-right" data-toggle="collapse" :data-target='#demo'><img
-                          id="img" src="css/images/Google-Maps.jpg"></button>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <iframe id='demo' class="collapse" v-bind:src="DatosFiltrados[index].location"></iframe>
+        <div class="row">
+        <table id="partidoslandscape" class=" table table-striped col-3 ">
+          <tbody>
+            <tr class="estilos" v-for="(a, index) in DatosFiltrados">
+              <td class="animated bounceInLeft delay-2s">
+                <div class="conteiner row">
+                  <div class="text-center col-4">
+                    <a href='#' @click="mostrarIndex(index)"><b>Date:</b> {{a.fecha}}</a>
                   </div>
                 </div>
-
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      
+        <div id='datos' class=" col-8 ">
+          <div class="row">
+            <div class="col-4 ">
+              <p class="nombres">Equipo:{{DatosFiltrados[index].equipo1}}</p><img class=""
+                id="logos" :src="'css/images/' + DatosFiltrados[index].equipo1 + '.jpg'" />
+            </div>
+            <br><br>
+            <p class="col-1 text-left">VS</p>
+            <div class="col-4">
+              <p class="">Equipo:{{ DatosFiltrados[index].equipo2}}</p><img class="" id="logos"
+                :src="'css/images/' + DatosFiltrados[index].equipo2 + '.jpg'" />
+            </div>
+            <div id="datos" class="col-3">
+              <button class="btn float-right" data-toggle="collapse" data-target='#demo'><img id="img"
+                  src="css/images/Google-Maps.jpg"></button>
+            </div>
+          </div>
+          <div class="col-12">
+            <iframe id='demo' class="collapse" v-bind:src="DatosFiltrados[index].location"></iframe>
+          </div>
+        </div>
+      </div>
       </div>
       <div id="tabla">
         <table id="partidos" class="table table-striped mt-4">
@@ -436,42 +444,42 @@
       <h2><small> © 2019 All Rights Reserved</small></h2>
     </footer>
   </div>
-  
-  
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
 
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+  <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
-    authDomain: "nysl-1072c.firebaseapp.com",
-    databaseURL: "https://nysl-1072c.firebaseio.com",
-    projectId: "nysl-1072c",
-    storageBucket: "nysl-1072c.appspot.com",
-    messagingSenderId: "50195159331",
-    appId: "1:50195159331:web:b47a46a61b1ac244"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  
-</script>
-<script src="vue.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
+      authDomain: "nysl-1072c.firebaseapp.com",
+      databaseURL: "https://nysl-1072c.firebaseio.com",
+      projectId: "nysl-1072c",
+      storageBucket: "nysl-1072c.appspot.com",
+      messagingSenderId: "50195159331",
+      appId: "1:50195159331:web:b47a46a61b1ac244"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+  </script>
+  <script src="vue.js"></script>
 </body>
 
 </html>
