@@ -152,11 +152,11 @@
                   <img class="" id="logos" :src="'css/images/' + DatosFiltrados[index].equipo2 + '.jpg'"/>
                 </div>
                 <div id="datos" class="col-2">
-                  <button class="btn float-right mt-2" data-toggle="collapse" data-target='#demo'><img id="img"
+                  <button class="btn float-right mt-4" data-toggle="collapse" data-target='#demo'><img id="img"
                       src="css/images/Google-Maps.jpg"></button>
                 </div>
               </div>
-              <div id='demo' class="collapse" v-if="DatosFiltrados.length" class="row">
+              <div id='demo' class="collapse mt-4" v-if="DatosFiltrados.length" class="row">
                   <p class="text-center">{{DatosFiltrados[index].estadio}}</p>
                 <iframe   v-bind:src="DatosFiltrados[index].location"></iframe>
               </div>
