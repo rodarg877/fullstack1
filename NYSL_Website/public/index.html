@@ -10,7 +10,6 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <link href="simple-sidebar.css" rel="stylesheet" />
   <link rel="shortcut icon" href="css/images/logo.ico" />
   <link rel="apple-touch-icon" href="css/images/logo.png" />
   <link href="simple-sidebar.css" rel="stylesheet" />
@@ -134,7 +133,7 @@
                 <tr class="estilos" v-for="(a, index) in DatosFiltrados">
                   <td class="animated bounceInLeft delay-2s">
                     <div class="conteiner row">
-                      <div class="text-center col-4">
+                      <div class="text-center">
                         <a href='#' @click="mostrarIndex(index)"><b>Date:</b> {{a.fecha}}</a>
                       </div>
                     </div>
@@ -143,25 +142,24 @@
               </tbody>
             </table>
 
-            <div  class=" col-8 ">
+            <div id="landscapemode"  class=" col-8 ">
               <div class="row">
-                <div class="col-4 ">
-                  <p :class="DatoFiltrados[index]" class="nombres">Equipo:{{DatoFiltrados.equipo1}}</p>
-                  <img :class="DatoFiltrados[index]" id="logos" :src="'css/images/' + DatoFiltrados.equipo1 + '.jpg'" />
+                <div v-if="DatosFiltrados.length" class="col-4 ">
+                  <p class="texto1">Equipo:{{DatosFiltrados[index].equipo1}}</p>
+                  <img :class="" id="logos" :src="'css/images/' + DatosFiltrados[index].equipo1 + '.jpg'" />
                 </div>
-                <br><br>
-                <p class="col-1 text-left">VS</p>
-                <div class="col-4">
-                  <p :class="DatoFiltrados[index]">Equipo:{{DatoFiltrados.equipo2}}</p>
-                  <img :class="DatoFiltrados[index]" id="logos" :src="'css/images/' + DatoFiltrados.equipo2 + '.jpg'"/>
+                <p class="col-1 texto2">VS</p>
+                <div v-if="DatosFiltrados.length" class="col-4">
+                  <p class="texto1">Equipo:{{DatosFiltrados[index].equipo2}}</p>
+                  <img class="" id="logos" :src="'css/images/' + DatosFiltrados[index].equipo2 + '.jpg'"/>
                 </div>
                 <div id="datos" class="col-3">
                   <button class="btn float-right" data-toggle="collapse" data-target='#demo'><img id="img"
                       src="css/images/Google-Maps.jpg"></button>
                 </div>
               </div>
-              <div class="row">
-                <iframe id='demo' :class="DatoFiltrados[index]" class="collapse" v-bind:src="DatosFiltrados.location"></iframe>
+              <div v-if="DatosFiltrados.length" class="row">
+                <iframe id='demo' class="collapse" v-bind:src="DatosFiltrados[index].location"></iframe>
               </div>
             </div>
           </div>
