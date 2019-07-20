@@ -72,7 +72,7 @@
               NextMatches
             </button>
           </div>
-          <div id="Select" class=" mr-4">
+          <div id="Select" class=" col-5 ml-4">
             <label for="mySelect">Your Team</label>
             <select class="form-control col-8" id="mySelect" v-model="select" @click="datosFiltrados">
               <option value="all">All</option>
@@ -118,8 +118,9 @@
                         </button>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <iframe :id="'demo' + index" class="collapse" v-bind:src="a.location"></iframe>
+                    <div :id="'demo' + index" class="collapse" >
+                        <p class="text-center">{{a.estadio}}</p>
+                      <iframe  v-bind:src="a.location"></iframe>
                     </div>
                   </div>
                 </td>
@@ -128,38 +129,36 @@
           </table>
           <!-- TABLA EN LANDSCAPE -->
           <div id="landscapemode" class="row">
-            <table  class=" table table-striped col-3 ">
+            <div id="tablel"class="overflow-auto col-3 ml-3 p-2 ">
+            <table  class="table table-striped">
               <tbody>
                 <tr class="estilos" v-for="(a, index) in DatosFiltrados">
-                  <td class="animated bounceInLeft delay-2s">
-                    <div class="conteiner row">
-                      <div class="text-center">
+                  <td class="text-center animated bounceInLeft delay-2s">
                         <a href='#' @click="mostrarIndex(index)"><b>Date:</b> {{a.fecha}}</a>
-                      </div>
-                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
-
-            <div  class="col-8 ">
+          </div>
+            <div  class=" estilos col-8 border  rounded border-dark">
               <div class="row">
-                <div v-if="DatosFiltrados.length" class="col-4 ">
+                <div v-if="DatosFiltrados.length" class="col-3 mt-2 ">
                   <p class="texto1">Equipo:{{DatosFiltrados[index].equipo1}}</p>
                   <img :class="" id="logos" :src="'css/images/' + DatosFiltrados[index].equipo1 + '.jpg'" />
                 </div>
                 <p class="col-1 texto2">VS</p>
-                <div v-if="DatosFiltrados.length" class="col-4">
+                <div v-if="DatosFiltrados.length" class="col-3 mt-2">
                   <p class="texto1">Equipo:{{DatosFiltrados[index].equipo2}}</p>
                   <img class="" id="logos" :src="'css/images/' + DatosFiltrados[index].equipo2 + '.jpg'"/>
                 </div>
-                <div id="datos" class="col-3">
-                  <button class="btn float-right" data-toggle="collapse" data-target='#demo'><img id="img"
+                <div id="datos" class="col-2">
+                  <button class="btn float-right mt-2" data-toggle="collapse" data-target='#demo'><img id="img"
                       src="css/images/Google-Maps.jpg"></button>
                 </div>
               </div>
-              <div v-if="DatosFiltrados.length" class="row">
-                <iframe id='demo' class="collapse" v-bind:src="DatosFiltrados[index].location"></iframe>
+              <div id='demo' class="collapse" v-if="DatosFiltrados.length" class="row">
+                  <p class="text-center">{{DatosFiltrados[index].estadio}}</p>
+                <iframe   v-bind:src="DatosFiltrados[index].location"></iframe>
               </div>
             </div>
           </div>
