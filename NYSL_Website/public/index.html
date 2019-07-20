@@ -61,7 +61,7 @@
       </div>
       <div id="page-content-wrapper">
         <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light border-bottom animated bounceInDown">
-          <div class="row col-9">
+          <div class="row">
             <button class="btn btn-outline-dark mr-1 " id="menu-toggle">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -72,7 +72,7 @@
               NextMatches
             </button>
           </div>
-          <div id="Select" class=" col-5 mr-4">
+          <div id="Select" class=" mr-4">
             <label for="mySelect">Your Team</label>
             <select class="form-control col-8" id="mySelect" v-model="select" @click="datosFiltrados">
               <option value="all">All</option>
@@ -127,7 +127,7 @@
             </tbody>
           </table>
           <!-- TABLA EN LANDSCAPE -->
-          <div class="row">
+          <div id="landscapemode" class="row">
             <table  class=" table table-striped col-3 ">
               <tbody>
                 <tr class="estilos" v-for="(a, index) in DatosFiltrados">
@@ -142,7 +142,7 @@
               </tbody>
             </table>
 
-            <div id="landscapemode"  class=" col-8 ">
+            <div  class="col-8 ">
               <div class="row">
                 <div v-if="DatosFiltrados.length" class="col-4 ">
                   <p class="texto1">Equipo:{{DatosFiltrados[index].equipo1}}</p>
@@ -168,7 +168,7 @@
 
 
         <div id="tabla">
-          <table id="partidos" class="table table-striped mt-4">
+          <table class="table table-striped mt-4">
             <h1 class="animated bounceInDown" id="espacio1">Position</h1>
             <thead>
               <tr>
@@ -185,10 +185,9 @@
             </thead>
             <tbody>
               <tr :class="'animated bounceInLeft delay-'+(index+1)+'s'" v-for="(a, index) in Teams">
-                <td>
-                  <img id="logos" :src="'css/images/' + a.equipo + '.jpg'" />{{
-                    a.equipo
-                  }}
+                <td class="text-center">
+                    {{a.equipo}}
+                  <img id="logos1" :src="'css/images/' + a.equipo + '.jpg'" />
                 </td>
                 <td>{{ a.won * 3 + a.draw * 1 }}</td>
                 <td>{{ a.won }}</td>

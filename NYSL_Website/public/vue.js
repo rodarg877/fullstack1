@@ -141,10 +141,6 @@ var app = new Vue({
       this.index = index1;
     }
   },
-  created() {
-    this.cargarDatosPartido();
-    this.cargarDatosTeams();
-  },
   computed: {
     datosFiltrados: function() {
       if (this.select != "all") {
@@ -154,8 +150,12 @@ var app = new Vue({
       } else {
         return (this.DatosFiltrados = this.Partidos);
       }
-    }
-  }
+    },
+  },
+  created() {
+    this.cargarDatosPartido();
+    this.cargarDatosTeams();
+  },
 });
 var provider = new firebase.auth.GoogleAuthProvider();
 firebase
