@@ -113,7 +113,7 @@
                         <p class="text-center">VS</p>
                       </div>
                       <div :id="'datos' + index" class="col-3">
-                        <button class="btn float-right" data-toggle="collapse" :data-target="'#demo' + index">
+                        <button class="btn ml-4" data-toggle="collapse" :data-target="'#demo' + index">
                           <img id="img" src="css/images/Google-Maps.jpg" />
                         </button>
                       </div>
@@ -142,17 +142,17 @@
           </div>
             <div  class=" estilos col-8 border  rounded border-dark">
               <div class="row">
-                <div v-if="DatosFiltrados.length" class="col-3 mt-2 ">
+                <div v-if="DatosFiltrados.length" class="col-4 mt-2 ">
                   <p class="texto1">Equipo:{{DatosFiltrados[index].equipo1}}</p>
                   <img :class="" id="logos" :src="'css/images/' + DatosFiltrados[index].equipo1 + '.jpg'" />
                 </div>
                 <p class="col-1 texto2">VS</p>
-                <div v-if="DatosFiltrados.length" class="col-3 mt-2">
+                <div v-if="DatosFiltrados.length" class="col-4 mt-2">
                   <p class="texto1">Equipo:{{DatosFiltrados[index].equipo2}}</p>
                   <img class="" id="logos" :src="'css/images/' + DatosFiltrados[index].equipo2 + '.jpg'"/>
                 </div>
                 <div id="datos" class="col-2">
-                  <button class="btn float-right mt-4" data-toggle="collapse" data-target='#demo'><img id="img"
+                  <button class="btn ml-4 mt-3" data-toggle="collapse" data-target='#demo'><img id="img"
                       src="css/images/Google-Maps.jpg"></button>
                 </div>
               </div>
