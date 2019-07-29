@@ -48,6 +48,11 @@ font-family:'Comic Sans MS', arial;
 font-size: 100%;
 
 }
+.estilos1{
+  font-family:'Comic Sans MS', arial;  
+  font-size: 40px;
+  
+  }
 .espacio{
   margin-top:60px;
 }
@@ -103,8 +108,8 @@ body{
   }
   #logos{
     display:block;
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
     border-radius: 100%;
     margin: auto;
   }

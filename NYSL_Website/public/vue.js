@@ -20,6 +20,15 @@ function porTamaño() {
 $(window).on("load , resize", porTamaño);
 
 $(document).ready(function() {
+  $("#register").hide();
+  $("#coments").hide();
+  $("#btnreg").click(function() {
+    $("#register").show();
+    $("#login").hide();
+  });
+});
+
+$(document).ready(function() {
   $("#tabla").hide();
   $("#contact").hide();
   $("#rules").hide();
@@ -102,6 +111,8 @@ $(document).ready(function() {
 var app = new Vue({
   el: "#app",
   data: {
+    Pass:"",
+    Email:"",
     index: 0,
     window: "",
     select: "all",
@@ -111,6 +122,48 @@ var app = new Vue({
     db: db
   },
   methods: {
+    registro: function(){
+      firebase.auth().createUserWithEmailAndPassword(this.Email, this.Pass).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    })
+    },
+    log:function(){
+      firebase.auth().signInWithEmailAndPassword(this.Email, this.Pass).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+    },
+   registroGoogle:function(){
+      var provider = new firebase.auth.GoogleAuthProvider();
+firebase
+  .auth()
+  .signInWithPopup(provider)
+  .then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+  })
+  .then(function(){
+    $("#coments").show();
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+},
     cargarDatosTeams: function() {
       this.db
         .collection("Teams")
@@ -157,27 +210,8 @@ var app = new Vue({
     this.cargarDatosTeams();
   },
 });
-var provider = new firebase.auth.GoogleAuthProvider();
-firebase
-  .auth()
-  .signInWithPopup(provider)
-  .then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  })
-  .catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+
+
 
 $("#menu-toggle").click(function(e) {
   e.preventDefault();
