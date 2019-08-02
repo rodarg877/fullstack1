@@ -12,6 +12,31 @@
     <link rel="apple-touch-icon" href="css/images/logo.png" />
     <link href="simple-sidebar.css" rel="stylesheet" />
     <link rel="stylesheet" href="animate.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+<script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+.
+
+    <script>
+        var firebaseConfig = {
+    apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
+    authDomain: "nysl-1072c.firebaseapp.com",
+    databaseURL: "https://nysl-1072c.firebaseio.com",
+    projectId: "nysl-1072c",
+    storageBucket: "nysl-1072c.appspot.com",
+    messagingSenderId: "50195159331",
+    appId: "1:50195159331:web:b47a46a61b1ac244"
+};
+firebase.initializeApp(firebaseConfig);
+    </script>
 </head>
 
 <body>
@@ -28,7 +53,7 @@
                     <label for="Pass">Password</label>
                     <input type="password" class="form-control"  id="Pass" placeholder="Password">
                 </div>
-                <button type="login" @click="log()" class="btn btn-primary">Login</button>
+                <button type="login" onclick="log()" class="btn btn-primary">Login</button>
                 <button type="reggoogle" id="google" class="btn btn-primary">registro google</button>
             </form>
             <button id="btnreg" class="mt-4 btn btn-primary">Register</button>
@@ -45,7 +70,7 @@
                     <label for="Pass">Password</label>
                     <input type="password" class="form-control"  id="Pass2" placeholder="Password">
                 </div>
-                <button type="terminar" @click="registro()" class="btn btn-primary">terminar registro</button>
+                <button type="terminar" onclick="registro()" class="btn btn-primary">terminar registro</button>
             </form>
         </div>
         <div id="coments">
@@ -100,30 +125,7 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
-    <script>
-        var firebaseConfig = {
-    apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
-    authDomain: "nysl-1072c.firebaseapp.com",
-    databaseURL: "https://nysl-1072c.firebaseio.com",
-    projectId: "nysl-1072c",
-    storageBucket: "nysl-1072c.appspot.com",
-    messagingSenderId: "50195159331",
-    appId: "1:50195159331:web:b47a46a61b1ac244"
-};
-firebase.initializeApp(firebaseConfig);
-    </script>
+   
     <script src="vue2.js"></script>
 </body>
 

@@ -25,11 +25,10 @@ function registro() {
 function log(){
   var Email= document.getElementById("Email").value;
   var Pass= document.getElementById("Pass").value;
-  firebase.auth().signInWithEmailAndPassword(Email,Pass).then(user => {
-    location = 'index.html' //Url aqui
-}).catch(err=> {
+  firebase.auth().signInWithEmailAndPassword(Email,Pass).catch(function(error) {
     // Handle Errors here.
-    this.error= error.message;
+    var errorCode= error.code;
+    var errorMenssage= error.message;
     // ...
   });
 };
