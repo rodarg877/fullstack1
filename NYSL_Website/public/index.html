@@ -166,12 +166,13 @@
             </div>
           </div>
 
-        </div>
+        
 
 
         <div id="tabla">
-          <table class="table table-striped mt-4">
             <h1 class="animated bounceInDown" id="espacio1">Position</h1>
+          <table class="table table-striped mt-4">
+              <tbody>
             <thead>
               <tr>
                 <th>Team</th>
@@ -185,7 +186,6 @@
                 <th>GD</th>
               </tr>
             </thead>
-            <tbody>
               <tr :class="'animated bounceInLeft delay-'+(index+1)+'s'" v-for="(a, index) in Teams">
                 <td class="text-center">
                     {{a.equipo}}
@@ -203,6 +203,7 @@
             </tbody>
           </table>
         </div>
+      </div>
         <div id="contact" class="container">
           <p id="espacio2">
             Please email us at
