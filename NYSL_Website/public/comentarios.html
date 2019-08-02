@@ -13,89 +13,82 @@
     <link href="simple-sidebar.css" rel="stylesheet" />
     <link rel="stylesheet" href="animate.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-
-<script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-.
-
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"></script>
     <script>
         var firebaseConfig = {
-    apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
-    authDomain: "nysl-1072c.firebaseapp.com",
-    databaseURL: "https://nysl-1072c.firebaseio.com",
-    projectId: "nysl-1072c",
-    storageBucket: "nysl-1072c.appspot.com",
-    messagingSenderId: "50195159331",
-    appId: "1:50195159331:web:b47a46a61b1ac244"
-};
-firebase.initializeApp(firebaseConfig);
+            apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
+            authDomain: "nysl-1072c.firebaseapp.com",
+            databaseURL: "https://nysl-1072c.firebaseio.com",
+            projectId: "nysl-1072c",
+            storageBucket: "nysl-1072c.appspot.com",
+            messagingSenderId: "50195159331",
+            appId: "1:50195159331:web:b47a46a61b1ac244"
+        };
+        firebase.initializeApp(firebaseConfig);
     </script>
 </head>
 
 <body>
+
+    <div id="login" class="form-group">
+        <h1>Login</h1>
+        <form>
+            <label for="Email">Email address</label>
+            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enteremail">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                else.</small>
+            <div class="form-group">
+                <label for="Pass">Password</label>
+                <input type="password" class="form-control" id="Pass" placeholder="Password">
+            </div>
+            <button type="login" onclick="log()" class="btn btn-primary">Login</button>
+            <button type="reggoogle" id="google" class="btn btn-primary">registro google</button>
+        </form>
+        <button id="btnreg" class="mt-4 btn btn-primary">Register</button>
+    </div>
+    <div id="register" class="form-group">
+        <h1>Register</h1>
+        <form>
+            <label for="Email">Email address</label>
+            <input type="email" class="form-control" id="Email2" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                else.</small>
+            <div class="form-group">
+                <label for="Pass">Password</label>
+                <input type="password" class="form-control" id="Pass2" placeholder="Password">
+            </div>
+            <button type="terminar" onclick="registro()" class="btn btn-primary">terminar registro</button>
+        </form>
+    </div>
     <div id="app">
-        <div id="login" class="form-group">
-            <h1>Login</h1>
-            <form>
-                <label for="Email">Email address</label>
-                <input type="email"  class="form-control" id="Email" aria-describedby="emailHelp"
-                    placeholder="Enteremail">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
-                <div class="form-group">
-                    <label for="Pass">Password</label>
-                    <input type="password" class="form-control"  id="Pass" placeholder="Password">
-                </div>
-                <button type="login" onclick="log()" class="btn btn-primary">Login</button>
-                <button type="reggoogle" id="google" class="btn btn-primary">registro google</button>
-            </form>
-            <button id="btnreg" class="mt-4 btn btn-primary">Register</button>
-        </div>
-        <div id="register" class="form-group">
-            <h1>Register</h1>
-            <form>
-                <label for="Email">Email address</label>
-                <input type="email" class="form-control" id="Email2" aria-describedby="emailHelp"
-                    placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
-                <div class="form-group">
-                    <label for="Pass">Password</label>
-                    <input type="password" class="form-control"  id="Pass2" placeholder="Password">
-                </div>
-                <button type="terminar" onclick="registro()" class="btn btn-primary">terminar registro</button>
-            </form>
-        </div>
         <div id="coments">
             <h1>Coments</h1>
             <div class="row">
                 <div class="col-5">
-                        <label for="mySelect">Match Chat</label>
-                        <select class="form-control col-8" id="mySelect" v-model="index" @click="conf()">
-                          <option value="1">U3 vs U4</option>
-                          <option value="2">U2 vs U4</option>
-                          <option value="3">U1 vs U6</option>
-                          <option value="4">U6 vs U4</option>
-                          <option value="5">U1 vs U4</option>
-                          <option value="6">U2 vs U5</option>
-                          <option value="7">U2 vs U6</option>
-                          <option value="8">U6 vs U1</option>
-                          <option value="9">U5 vs U6</option>
-                          <option value="10">U4 vs U5</option>
-                          <option value="11">U5 vs U1</option>
-                          <option value="12">U1 vs U3</option>
-                          <option value="13">U6 vs U3</option>
-                          <option value="14">U3 vs U1</option>
-                          <option value="15">U3 vs U5</option>
+                    <label for="mySelect">Match Chat</label>
+                    <select class="form-control col-8" id="mySelect" v-model="index" @click="conf()">
+                        <option value="1">U3 vs U4</option>
+                        <option value="2">U2 vs U4</option>
+                        <option value="3">U1 vs U6</option>
+                        <option value="4">U6 vs U4</option>
+                        <option value="5">U1 vs U4</option>
+                        <option value="6">U2 vs U5</option>
+                        <option value="7">U2 vs U6</option>
+                        <option value="8">U6 vs U1</option>
+                        <option value="9">U5 vs U6</option>
+                        <option value="10">U4 vs U5</option>
+                        <option value="11">U5 vs U1</option>
+                        <option value="12">U1 vs U3</option>
+                        <option value="13">U6 vs U3</option>
+                        <option value="14">U3 vs U1</option>
+                        <option value="15">U3 vs U5</option>
 
-                        </select>
+                    </select>
                     <form>
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -110,7 +103,7 @@ firebase.initializeApp(firebaseConfig);
                             type="button">Enviar</button>
                     </form>
                 </div>
-                <div  class="col-6">
+                <div class="col-6">
                     <table>
                         <tbody>
                             <tr v-for="b in Mensajes">
@@ -125,7 +118,7 @@ firebase.initializeApp(firebaseConfig);
         </div>
     </div>
 
-   
+
     <script src="vue2.js"></script>
 </body>
 
