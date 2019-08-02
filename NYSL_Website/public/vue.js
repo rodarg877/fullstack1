@@ -19,21 +19,12 @@ function porTamaño() {
 
 $(window).on("load , resize", porTamaño);
 
-$(document).ready(function() {
-  $("#register").hide();
-  $("#coments").hide();
-  $("#btnreg").click(function() {
-    $("#register").show();
-    $("#login").hide();
-  });
-});
-
-$(document).ready(function() {
+$(document).ready(function () {
   $("#tabla").hide();
   $("#contact").hide();
   $("#rules").hide();
   $("#about").hide();
-  $("#botonOn").click(function() {
+  $("#botonOn").click(function () {
     $("#tabla").show();
     $("#myImage").hide();
     $("#Select").hide();
@@ -42,7 +33,7 @@ $(document).ready(function() {
     $("#about").hide();
   });
 
-  $("#boton2").click(function() {
+  $("#boton2").click(function () {
     $("#myImage").show();
     $("#tabla").hide();
     $("#Select").show();
@@ -51,7 +42,7 @@ $(document).ready(function() {
     $("#about").hide();
   });
 
-  $("#index1").click(function() {
+  $("#index1").click(function () {
     $("#index1").addClass("active");
     $("#contact1").removeClass("active");
     $("#rules1").removeClass("active");
@@ -65,7 +56,7 @@ $(document).ready(function() {
     $("#botonOn").show();
     $("#boton2").show();
   });
-  $("#contact1").click(function() {
+  $("#contact1").click(function () {
     $("#contact1").addClass("active");
     $("#index1").removeClass("active");
     $("#rules1").removeClass("active");
@@ -79,7 +70,7 @@ $(document).ready(function() {
     $("#about").hide();
     $("#Select").hide();
   });
-  $("#rules1").click(function() {
+  $("#rules1").click(function () {
     $("#rules1").addClass("active");
     $("#index1").removeClass("active");
     $("#contact1").removeClass("active");
@@ -93,7 +84,7 @@ $(document).ready(function() {
     $("#about").hide();
     $("#Select").hide();
   });
-  $("#about1").click(function() {
+  $("#about1").click(function () {
     $("#about1").addClass("active");
     $("#index1").removeClass("active");
     $("#rules1").removeClass("active");
@@ -111,8 +102,6 @@ $(document).ready(function() {
 var app = new Vue({
   el: "#app",
   data: {
-    Pass:"",
-    Email:"",
     index: 0,
     window: "",
     select: "all",
@@ -122,49 +111,7 @@ var app = new Vue({
     db: db
   },
   methods: {
-    registro: function(){
-      firebase.auth().createUserWithEmailAndPassword(this.Email, this.Pass).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    })
-    },
-    log:function(){
-      firebase.auth().signInWithEmailAndPassword(this.Email, this.Pass).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
-    },
-   registroGoogle:function(){
-      var provider = new firebase.auth.GoogleAuthProvider();
-firebase
-  .auth()
-  .signInWithPopup(provider)
-  .then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  })
-  .then(function(){
-    $("#coments").show();
-  })
-  .catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
-},
-    cargarDatosTeams: function() {
+    cargarDatosTeams: function () {
       this.db
         .collection("Teams")
         .get()
@@ -177,7 +124,7 @@ firebase
           });
         });
     },
-    cargarDatosPartido: function() {
+    cargarDatosPartido: function () {
       this.db
         .collection("Partidos")
         .get()
@@ -190,12 +137,12 @@ firebase
           });
         });
     },
-    mostrarIndex: function(index1) {
+    mostrarIndex: function (index1) {
       this.index = index1;
     }
   },
   computed: {
-    datosFiltrados: function() {
+    datosFiltrados: function () {
       if (this.select != "all") {
         return (this.DatosFiltrados = this.Partidos.filter(
           dato => dato.equipo1 == this.select || dato.equipo2 == this.select
@@ -213,7 +160,7 @@ firebase
 
 
 
-$("#menu-toggle").click(function(e) {
+$("#menu-toggle").click(function (e) {
   e.preventDefault();
   $("#wrapper").toggleClass("toggled");
 });
