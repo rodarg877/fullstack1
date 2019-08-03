@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#register").hide();
-    $("#coments").hide();
+  
     $("#btnreg").click(function () {
       $("#register").show();
       $("#login").hide();
@@ -91,35 +91,41 @@ function registroGoogle() {
   provider.addScope('email');
   firebase.auth().signInWithRedirect(provider);
 };
+var e = "";
+var index = "";
+function select(){
+  e = document.getElementById("mySelect");
+  index = e.options[e.selectedIndex].value;
+
+  firebase.database().ref('Mensajes').child(index).on('value',function (snapshot){
+  var html = '';
+  snapshot.forEach(function(e) {
+       element= e.val(); 
+       var name = element.name;
+       var mensaje= element.mensaje;
+        html += "<tr><td><b>"+ name  +": </b>"+ mensaje +"</td></tr>";
+    });
+    chat.innerHTML = html;
+  });
+}
+select();
 var app = new Vue({
     el: "#app",
     data: {
-      index:"1",
         mensaje:"",
         name:"",
         Mensajes:[],
     },
 methods: {
-  conf(){ firebase.database().ref('Mensajes').child('Partido'+ this.index).on('value',function (snapshot){
-    var Me = [];
-    snapshot.forEach(function(e) {
-         element= e.val(); 
-         Me.push(element);
-      });
-      this.Mensajes=Me;
-    });
-},
+  
     subirMensajes(){
-        firebase.database().ref('Mensajes').child('Partido'+ this.index).push({
+     var e = document.getElementById("mySelect");
+ var index = e.options[e.selectedIndex].value;
+        firebase.database().ref('Mensajes').child(index).push({
             name: this.name,
             mensaje:this.mensaje,
         })
-    }, 
-},
-computed:{
- 
-},
-created(){
-}
-
+    document.getElementById("form"). reset();
+    },
+}, 
 });

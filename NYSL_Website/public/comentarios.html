@@ -18,7 +18,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase.js"></script>
+    
+        <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
     <script>
         var firebaseConfig = {
             apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
@@ -31,6 +34,9 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
+
+
+    
 </head>
 
 <body>
@@ -71,25 +77,25 @@
             <div class="row">
                 <div class="col-5">
                     <label for="mySelect">Match Chat</label>
-                    <select class="form-control col-8" id="mySelect" v-model="index" @click="conf()">
-                        <option value="1">U3 vs U4</option>
-                        <option value="2">U2 vs U4</option>
-                        <option value="3">U1 vs U6</option>
-                        <option value="4">U6 vs U4</option>
-                        <option value="5">U1 vs U4</option>
-                        <option value="6">U2 vs U5</option>
-                        <option value="7">U2 vs U6</option>
-                        <option value="8">U6 vs U1</option>
-                        <option value="9">U5 vs U6</option>
-                        <option value="10">U4 vs U5</option>
-                        <option value="11">U5 vs U1</option>
-                        <option value="12">U1 vs U3</option>
-                        <option value="13">U6 vs U3</option>
-                        <option value="14">U3 vs U1</option>
-                        <option value="15">U3 vs U5</option>
+                    <select class="form-control col-8" id="mySelect"  onchange="select()">
+                        <option value="Partido1">U3 vs U4</option>
+                        <option value="Partido2">U2 vs U4</option>
+                        <option value="Partido3">U1 vs U6</option>
+                        <option value="Partido4">U6 vs U4</option>
+                        <option value="Partido5">U1 vs U4</option>
+                        <option value="Partido6">U2 vs U5</option>
+                        <option value="Partido7">U2 vs U6</option>
+                        <option value="Partido8">U6 vs U1</option>
+                        <option value="Partido9">U5 vs U6</option>
+                        <option value="Partido10">U4 vs U5</option>
+                        <option value="Partido11">U5 vs U1</option>
+                        <option value="Partido12">U1 vs U3</option>
+                        <option value="Partido13">U6 vs U3</option>
+                        <option value="Partido14">U3 vs U1</option>
+                        <option value="Partido15">U3 vs U5</option>
 
                     </select>
-                    <form>
+                    <form id="form">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" v-model="name" placeholder="name">
@@ -104,13 +110,9 @@
                     </form>
                 </div>
                 <div class="col-6">
-                    <table>
-                        <tbody>
-                            <tr v-for="b in Mensajes">
-                                <td>
-                                    {{b.name}} : {{b.mensaje}}
-                                </td>
-                            </tr>
+                    <table class="table table-striped ">
+                        <tbody id="chat">
+                            
                         </tbody>
                     </table>
                 </div>
