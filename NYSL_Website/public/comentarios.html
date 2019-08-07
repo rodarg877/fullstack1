@@ -18,66 +18,37 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    
-        <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
-            authDomain: "nysl-1072c.firebaseapp.com",
-            databaseURL: "https://nysl-1072c.firebaseio.com",
-            projectId: "nysl-1072c",
-            storageBucket: "nysl-1072c.appspot.com",
-            messagingSenderId: "50195159331",
-            appId: "1:50195159331:web:b47a46a61b1ac244"
-        };
-        firebase.initializeApp(firebaseConfig);
-    </script>
 
-
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-database.js"></script>
     
-</head>
 
 <body>
-
-    <div id="login" class="form-group">
-        <h1>Login</h1>
-        <form>
-            <label for="Email">Email address</label>
-            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enteremail">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                else.</small>
-            <div class="form-group">
-                <label for="Pass">Password</label>
-                <input type="password" class="form-control" id="Pass" placeholder="Password">
-            </div>
-            <button type="login" onclick="log()" class="btn btn-primary">Login</button>
-            <button type="reggoogle" id="google" class="btn btn-primary">registro google</button>
-        </form>
-        <button id="btnreg" class="mt-4 btn btn-primary">Register</button>
-    </div>
-    <div id="register" class="form-group">
-        <h1>Register</h1>
-        <form>
-            <label for="Email">Email address</label>
-            <input type="email" class="form-control" id="Email2" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                else.</small>
-            <div class="form-group">
-                <label for="Pass">Password</label>
-                <input type="password" class="form-control" id="Pass2" placeholder="Password">
-            </div>
-            <button type="terminar" onclick="registro()" class="btn btn-primary">terminar registro</button>
-        </form>
-    </div>
-    <div id="app">
-        <div id="coments">
+    <div id="app1">
+            <nav class="navbar navbar-expand-lg navbar-light border border-dark mb-2">
+                <img src="css/images/person.svg" width="40" height="40" alt="user" class="icon" id="fotoUs" />
+                <div class="collapse container-fluid" id="sign">
+                        <div class="noLogueado" id="ingreso">
+                          <button id="ent" class="btn btn-danger btn-block mb-2" type="button" onclick="registrar()">
+                            Sign In with google
+                          </button>
+                        </div>
+                        <div class="logueado ">
+                                <button id="sal" class="btn btn-success btn-block mb-2" type="button" onclick="salir()">
+                                  Sign out
+                                </button>
+                              </div>
+                <div class="d-md-none">
+                    <h5><em>NYSL</em></h5>
+                </div>
+            </nav>
+            <div id="coments">
             <h1>Coments</h1>
             <div class="row">
                 <div class="col-5">
                     <label for="mySelect">Match Chat</label>
-                    <select class="form-control col-8" id="mySelect"  onchange="select()">
+                    <select class="form-control col-8" id="mySelect" onchange="select()">
                         <option value="Partido1">U3 vs U4</option>
                         <option value="Partido2">U2 vs U4</option>
                         <option value="Partido3">U1 vs U6</option>
@@ -93,36 +64,69 @@
                         <option value="Partido13">U6 vs U3</option>
                         <option value="Partido14">U3 vs U1</option>
                         <option value="Partido15">U3 vs U5</option>
-
                     </select>
                     <form id="form">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" v-model="name" placeholder="name">
+                            <input type="text" class="form-control" v-model="name" placeholder="name" />
                         </div>
                         <div class="form-group">
                             <label for="Mensaje">Menssage</label>
                             <textarea class="form-control" v-model="mensaje" id="exampleFormControlTextarea1"
                                 rows="3"></textarea>
                         </div>
-                        <button class="btn btn-success" id="enviar" @click="subirMensajes()"
-                            type="button">Enviar</button>
+                        <button class="btn btn-success" id="enviar" @click="subirMensajes()" type="button">
+                            Enviar
+                        </button>
                     </form>
                 </div>
                 <div class="col-6">
                     <table class="table table-striped ">
-                        <tbody id="chat">
-                            
-                        </tbody>
+                        <tbody id="chat"></tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <script src="vue2.js"></script>
+    <button type="button" class="btn btn-primary" id="atras" onclick="window.location.href='/index.html'"> 
+            <img src="css/images/atras.jfif" height="80px" width="80px "  alt="user" class="icon" />home
+               </button>
+    
+    <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+              // // The Firebase SDK is initialized and available here!
+              //
+              // firebase.auth().onAuthStateChanged(user => { });
+              // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+              // firebase.messaging().requestPermission().then(() => { });
+              // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+              //
+              // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+              try {
+                let app = firebase.app();
+                let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
+              } catch (e) {
+                console.error(e);
+              }
+            });
+          </script>
+          <script>
+                var firebaseConfig = {
+                    apiKey: "AIzaSyAWIX7MAHsv553hMSjyceUeFhKLyodJq0o",
+                    authDomain: "nysl-1072c.firebaseapp.com",
+                    databaseURL: "https://nysl-1072c.firebaseio.com",
+                    projectId: "nysl-1072c",
+                    storageBucket: "nysl-1072c.appspot.com",
+                    messagingSenderId: "50195159331",
+                    appId: "1:50195159331:web:b47a46a61b1ac244"
+                };
+                firebase.initializeApp(firebaseConfig);
+                const db = firebase.firestore();
+            </script>
+       
+          <script src="vue.js"></script>
+          <script src="vue2.js"></script>
 </body>
-
 
 </html>

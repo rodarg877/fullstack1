@@ -1,11 +1,16 @@
 $(document).ready(function () {
-    $("#register").hide();
-  
-    $("#btnreg").click(function () {
-      $("#register").show();
-      $("#login").hide();
+    $("#coments").hide();
     });
-  });
+  function salir() {
+    console.log("saliendo");
+    firebase.auth().signOut().then(function () {
+      console.log("salio");
+      // Sign-out successful.
+    }).catch(function (error) {
+      // An error happened.
+      console.log(error);
+    });
+  }
 
 function registro() {
   var Email2= document.getElementById("Email2").value;
@@ -22,16 +27,6 @@ function registro() {
       console.log(errorMensage);
     });
 };
-function log(){
-  var Email= document.getElementById("Email").value;
-  var Pass= document.getElementById("Pass").value;
-  firebase.auth().signInWithEmailAndPassword(Email,Pass).catch(function(error) {
-    // Handle Errors here.
-    var errorCode=  error.code;
-    var errorMenssage= error.message;
-    // ...
-  });
-};
 function observador(){
   firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -39,6 +34,8 @@ function observador(){
     $("#coments").show();
     $("#register").hide();
       $("#login").hide();
+      $("#ent").hide();
+      $("#sal").show();
     var displayName = user.displayName;
     var email = user.email;
     var emailVerified = user.emailVerified;
@@ -46,25 +43,27 @@ function observador(){
     var isAnonymous = user.isAnonymous;
     var uid = user.uid;
     var providerData = user.providerData;
-    alert("bienvenido" + email)
+    $("#fotoUs").attr("src",photoURL)
   } else {
     console.log("no existe usuario activo");
-    // ...
+    $("#fotoUs").attr("src","/css/images/person.svg")
+    $("#coments").hide();
+    $("#sal").hide();
+    $("#ent").show();
   }
 });
 };
 observador();
-function registroGoogle() {
+
+// acceder o registrar con google
+
+function registrar() {
   var provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider).then(function (result) {
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
       // The signed-in user info.
       var user = result.user;
-      // ...
-    })
-    .then(function () {
-      $("#coments").show();
     })
     .catch(function (error) {
       // Handle Errors here.
@@ -77,22 +76,18 @@ function registroGoogle() {
       // ...
     });
   };
- function reggoogle(){ firebase.auth().getRedirectResult().then(function(result) {
-    if (result.credential) {
-      // This gives you a Google Access Token.
-      var token = result.credential.accessToken;
-    }
-    var user = result.user;
-  });
-  
-  // Start a sign in process for an unauthenticated user.
-  var provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope('profile');
-  provider.addScope('email');
-  firebase.auth().signInWithRedirect(provider);
-};
 var e = "";
-var index = "";
+var index = app.data;
+firebase.database().ref('Mensajes').child(index).on('value',function (snapshot){
+  var html = '';
+  snapshot.forEach(function(e) {
+       element= e.val(); 
+       var name = element.name;
+       var mensaje= element.mensaje;
+        html += "<tr><td><b>"+ name  +": </b>"+ mensaje +"</td></tr>";
+    });
+    chat.innerHTML = html;
+  });
 function select(){
   e = document.getElementById("mySelect");
   index = e.options[e.selectedIndex].value;
@@ -108,8 +103,7 @@ function select(){
     chat.innerHTML = html;
   });
 }
-select();
-var app = new Vue({
+var app1 = new Vue({
     el: "#app",
     data: {
         mensaje:"",

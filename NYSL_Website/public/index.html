@@ -14,6 +14,7 @@
   <link rel="apple-touch-icon" href="css/images/logo.png" />
   <link href="simple-sidebar.css" rel="stylesheet" />
   <link rel="stylesheet" href="animate.css" />
+  <script src="jquery.js"></script>
   <title>Nyslapp</title>
 </head>
 
@@ -53,8 +54,6 @@
         <div class="list-group list-group-flush">
           <a id="index1" class="list-group-item list-group-item-action text-white bg-dark active">Index</a>
           <a id="contact1" class="list-group-item list-group-item-action text-white bg-dark">Contact</a>
-          <a href="registration.html"
-            class="list-group-item  list-group-item-action text-white bg-dark">Registration</a>
           <a id="rules1" class="list-group-item list-group-item-action text-white bg-dark">Rules</a>
           <a id="about1" class="list-group-item  list-group-item-action text-white bg-dark">About</a>
         </div>
@@ -135,14 +134,14 @@
               <tbody>
                 <tr class="estilos" v-for="(a, index) in DatosFiltrados">
                   <td class="text-center animated bounceInLeft delay-2s">
-                        <a href='#' @click="mostrarIndex(index)"><b>Date:</b> {{a.fecha}}</a>
+                        <a href='#divpar' @click="mostrarIndex(index)"><b>Date:</b> {{a.fecha}}</a>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
             <div  class=" estilos col-8 border  rounded border-dark">
-              <div class="row">
+              <div id="divpar" class="row">
                 <div v-if="DatosFiltrados.length" class="col-4 mt-2 ">
                   <p class="texto1">Equipo:{{DatosFiltrados[index].equipo1}}</p>
                   <img :class="" id="logos" :src="'css/images/' + DatosFiltrados[index].equipo1 + '.jpg'" />
@@ -203,7 +202,6 @@
             </tbody>
           </table>
         </div>
-      </div>
         <div id="contact" class="container">
           <p id="espacio2">
             Please email us at
@@ -601,6 +599,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
   <div class="container-fluid bg-light">

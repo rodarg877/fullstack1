@@ -77,7 +77,13 @@ iframe{
   height: auto;
   margin:auto;
 }
-
+#atras{
+  padding: 0px;
+  width: 80px;
+  height: 80px;
+  margin-left:50%; 
+  margin-right:50%; 
+}
 #carousel{
   height: 65vh;
   width: 100%;
