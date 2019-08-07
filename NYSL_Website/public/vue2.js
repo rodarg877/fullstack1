@@ -76,8 +76,8 @@ function registrar() {
       // ...
     });
   };
-var e = "";
-var index = app.data;
+
+var index = "Partido1";
 firebase.database().ref('Mensajes').child(index).on('value',function (snapshot){
   var html = '';
   snapshot.forEach(function(e) {
