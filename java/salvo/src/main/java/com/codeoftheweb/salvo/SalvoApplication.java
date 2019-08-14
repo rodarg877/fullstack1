@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @RestController
 class AppController {
 
@@ -20,8 +24,9 @@ public class SalvoApplication {
 		SpringApplication.run(SalvoApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner initData(PlayerRepository repository) {
+	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository) {
 		return (args) -> {
+
 		};
 	}
 

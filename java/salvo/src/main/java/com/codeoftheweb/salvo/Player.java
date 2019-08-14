@@ -2,11 +2,10 @@ package com.codeoftheweb.salvo;
 
 
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 @Entity
 public class Player {
 
@@ -14,41 +13,35 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String userName;
+
+    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
+    List<GamePlayer> gamePlayers = new ArrayList<GamePlayer>();
+
     public Player() { }
 
-    public Player(String first, String last, String email) {
-        this.firstName = first;
-        this.lastName = last;
-        this.email = email;
+    public Player(String userName) {
+        this.userName = userName;
+
     }
 
-    public String getFirstName() {
-        return firstName;
+    public long getId() {
+        return id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setUserName(String username) {
+        this.userName = userName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public String getEmail() {
-        return email;
+    public List<GamePlayer> getGamePlayers() {
+        return gamePlayers;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String toString() {
-        return firstName + " " + lastName;
+    public void setGamePlayers(List<GamePlayer> gamePlayers) {
+        this.gamePlayers = gamePlayers;
     }
 }
