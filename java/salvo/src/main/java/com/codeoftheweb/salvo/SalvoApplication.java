@@ -11,12 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@RestController
-class AppController {
-
-	@Autowired
-	private PlayerRepository PlayerRepository;
-};
+;
 @SpringBootApplication
 public class SalvoApplication {
 
@@ -26,7 +21,7 @@ public class SalvoApplication {
 	@Bean
 	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository) {
 		return (args) -> {
-
+playerRepository.save(new Player("j,bauer@ctu.gov"));
 		};
 	}
 
