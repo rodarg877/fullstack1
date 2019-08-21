@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+
 @Entity
 public class   Game {
 
@@ -14,7 +17,7 @@ public class   Game {
     private Date creationDate;
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
-    List<GamePlayer> gamePlayers = new ArrayList<GamePlayer>();
+    Set<GamePlayer> gamePlayers;
 
     public Game() {}
 
@@ -34,4 +37,11 @@ public class   Game {
         this.creationDate = creationDate;
     }
 
+    public Set<GamePlayer> getGamePlayers() {
+        return gamePlayers;
+    }
+
+    public void setGamePlayers(Set<GamePlayer> gamePlayers) {
+        this.gamePlayers = gamePlayers;
+    }
 }
