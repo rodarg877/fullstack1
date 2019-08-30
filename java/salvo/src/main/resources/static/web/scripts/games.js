@@ -17,7 +17,6 @@ $(function() {
   loadData();
 });
 function showData(data){
-console.log("se ejecuto show post");
 var list="";
       data.forEach(e => {
         list =list + "<li>" +new Date(e.created) + ' '+ e.gamePlayers.map(p => p.player.email).join(',') + "</li>";

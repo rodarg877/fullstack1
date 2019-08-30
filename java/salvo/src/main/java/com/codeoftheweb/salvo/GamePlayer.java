@@ -72,4 +72,12 @@ public class GamePlayer{
         dto.put("player", this.getPlayer().makePlayerDTO());
         return dto;
     }
+    @JsonIgnore
+    public Set<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(Set<Ship> ships) {
+        this.ships = ships;
+    }
 }
