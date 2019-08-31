@@ -18,6 +18,9 @@ public class GamePlayer{
     @OneToMany    (mappedBy = "gamePlayer", fetch = FetchType.EAGER)
     Set<Ship> ships;
 
+    @OneToMany    (mappedBy = "gamePlayer", fetch = FetchType.EAGER)
+    Set<Salvo> salvoes;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id")
     private Player player;
@@ -79,5 +82,14 @@ public class GamePlayer{
 
     public void setShips(Set<Ship> ships) {
         this.ships = ships;
+    }
+
+    @JsonIgnore
+    public Set<Salvo> getSalvoes() {
+        return salvoes;
+    }
+
+    public void setSalvoes(Set<Salvo> salvoes) {
+        this.salvoes = salvoes;
     }
 }

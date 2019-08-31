@@ -18,6 +18,11 @@ function loadData(){
                 shipPiece.shipLocation.forEach(function(location){
                     $('#'+location).addClass('ship-piece');
                 })
+                })
+            data.salvoes.forEach(function(salvoesf){
+                salvoesf.locations.forEach(function(locations){
+                $('#'+locations+"s").addClass('ship-piece');
+                })
             });
         })
         .fail(function( jqXHR, textStatus ) {

@@ -3,9 +3,16 @@
 }
 ​
 .ship-piece-hited{
-    background-color: darkmagenta;
+    background-color: red;
 }
 ​
 .salvo{
     background-color: crimson;
+}
+#salvoFireT{
+float:right;
+}
+#tableros{
+display: -webkit-flex;
+      -webkit-flex-direction: row;
 }
