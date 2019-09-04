@@ -92,4 +92,17 @@ public class GamePlayer{
     public void setSalvoes(Set<Salvo> salvoes) {
         this.salvoes = salvoes;
     }
+
+    public List<Map<String,Object>> getShipList(Set<Ship>ships){
+        return ships.stream().map(ship->ship.makeshipDTO()).collect(Collectors.toList());
+    }
+
+
+    public List<Map<String, Object>> getAllSalvos(Set<GamePlayer> gamePlayers){
+        return  gamePlayers
+                .stream()
+                .flatMap(gp -> gp.getSalvoes()
+                                 .stream()
+                                 .map(sal->sal.makeSalvoDTO())).collect(Collectors.toList());
+    }
 }

@@ -30,10 +30,12 @@ public class SalvoController {
          dto.put("id",partida.getId());
          dto.put("creationDate", partida.getGame().getCreationDate());
          dto.put("gamePlayers", partida.getGame().getAllGamePlayers(partida.getGame().getGamePlayers()));
-         dto.put("ships", partida.getShips());
-         dto.put("salvoes", partida.getSalvoes().stream().map(salvo -> salvo.makeSalvoDTO()));
+         dto.put("ships", partida.getShipList(partida.getShips()));
+         dto.put("salvos",partida.getAllSalvos(partida.getGame().getGamePlayers()) );
          return dto;
     }
+
+
 
 
 

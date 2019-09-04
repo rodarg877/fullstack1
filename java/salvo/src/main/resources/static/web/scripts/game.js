@@ -21,6 +21,7 @@ function loadData(){
                 })
             data.salvoes.forEach(function(salvoesf){
                 salvoesf.locations.forEach(function(locations){
+                if(locations== )
                 $('#'+locations+"s").addClass('ship-piece');
                 })
             });

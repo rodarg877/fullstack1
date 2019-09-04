@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 @Entity
 public class Ship {
         @Id
@@ -53,5 +56,16 @@ public class Ship {
     public GamePlayer getGamePlayer() {
         return gamePlayer;
     }
+
+
+
+    public Map<String,Object> makeshipDTO(){
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("Ship", this.getShip());
+        dto.put("shipLocation", this.getShipLocation());
+        return dto;
+    }
+
+
 
 }

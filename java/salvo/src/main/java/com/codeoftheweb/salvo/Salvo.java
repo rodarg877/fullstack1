@@ -14,6 +14,7 @@ public class Salvo {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
+
     private int turn;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -61,8 +62,10 @@ public class Salvo {
 
     public Map<String, Object> makeSalvoDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("player", this.getGamePlayer().getPlayer().getUserName());
         dto.put("turn",this.getTurn() );
         dto.put("locations", this.getSalvoLocation());
         return dto;
     }
+
 }
