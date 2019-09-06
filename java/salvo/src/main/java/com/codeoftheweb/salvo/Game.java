@@ -16,6 +16,8 @@ public class   Game {
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    Set<Score> score;
 
     public Game() {}
 
@@ -38,9 +40,14 @@ public class   Game {
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
     }
-
+    public Set<Score> getScore() {
+        return score;
+    }
     public void setGamePlayers(Set<GamePlayer> gamePlayers) {
         this.gamePlayers = gamePlayers;
+    }
+    public void setScore(Set<Score> score) {
+        this.score = score;
     }
     public Map<String, Object> makeGameDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();

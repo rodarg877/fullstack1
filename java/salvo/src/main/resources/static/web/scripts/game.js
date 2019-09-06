@@ -9,6 +9,7 @@ function loadData(){
     $.get('/api/game_view/'+getParameterByName('Gp'))
         .done(function(data) {
             let playerInfo;
+            var ShipLocations;
             if(data.gamePlayers[0].id == getParameterByName('Gp'))
                 playerInfo = [data.gamePlayers[0].player.email,data.gamePlayers[1].player.email];
             else
@@ -19,13 +20,22 @@ function loadData(){
                     $('#'+location).addClass('ship-piece');
                 })
                 })
-            data.salvoes.forEach(function(salvoesf){
-                salvoesf.locations.forEach(function(locations){
-                if(locations== )
-                $('#'+locations+"s").addClass('ship-piece');
-                })
+          var salvosP1 = data.salvos.filter(salvoesf => salvoesf.player== playerInfo[0]);
+          console.log(salvosP1);
+          salvosP1.map(sal=> sal.locations.map(loca=>$('#'+loca+"s").css('background-color', "red")) );
+          var salEnemy= data.salvos.filter(salvoesf => salvoesf.player!= playerInfo[0]);
+         salEnemy.forEach(function(salvos){
+            salvos.locations.forEach(function(loc){
+                data.ships.forEach(function(shipPiece){
+                    shipPiece.shipLocation.forEach(function(locship) {
+                        if(locship==loc){
+                            $('#'+loc).css('background-color', "yellow");
+                        }
+                    });
+                });
             });
-        })
+         });
+         })
         .fail(function( jqXHR, textStatus ) {
           alert( "Failed: " + textStatus );
         });
