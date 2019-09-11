@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -15,17 +17,17 @@ public class Score {
     private Double score;
     private Date finishDate;
 
-    @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "game_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "game_id")
     private Game game;
-    @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "player_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "player_id")
     private Player player;
 
     public Score() {
     }
 
-    public Score( Double score, Date finishDate, Game game, Player player) {
+    public Score(Double score, Date finishDate, Game game, Player player) {
         this.score = score;
         this.finishDate = finishDate;
         this.game = game;
@@ -66,5 +68,13 @@ public class Score {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public Map<String, Object> makeScoreDTO() {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("Player", this.getPlayer().getId());
+        dto.put("finishdate", this.getFinishDate().getTime());
+        dto.put("Score", this.getScore());
+        return dto;
     }
 }

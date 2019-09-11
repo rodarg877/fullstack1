@@ -56,8 +56,32 @@ public class Player {
     }
     public Map<String, Object> makePlayerDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
-        dto.put("id", this.getId());
-        dto.put("email", this.getUserName());
+        dto.put("id", getId());
+        dto.put("email", getUserName());
         return dto;
     }
+    private double getWin(){
+        return this.getScore().stream().filter(score->score.getScore()==1.0).count();
+    }
+    private double getLost(){
+        return this.getScore().stream().filter(score->score.getScore()==0.0).count();
+    }
+    private double getTie(){
+        return this.getScore().stream().filter(score->score.getScore()==0.5).count();
+    }
+    private double getTotalScore(){
+        return this.getWin()*1 +  this.getTie() * 0.5;
+
+    }
+    public Map<String, Object> makeScorePlayerDTO() {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("id", getId());
+        dto.put("email", getUserName());
+        dto.put("TotalScore",getTotalScore());
+        dto.put("win",getWin());
+        dto.put("Lost",getLost());
+        dto.put("tie",getTie());
+        return dto;
+    }
+
 }

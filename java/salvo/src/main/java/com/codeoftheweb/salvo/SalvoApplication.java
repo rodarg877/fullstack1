@@ -16,7 +16,7 @@ public class SalvoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository, SalvoRepository salvoRepository) {
+	public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository, ShipRepository shipRepository, SalvoRepository salvoRepository, ScoreRepository scoreRepository) {
 		return (args) -> {
 			Player p1 = new Player("j.bauer@ctu.gov");
 			Player p2 = new Player("c.obrian@ctu.gov");
@@ -346,6 +346,26 @@ public class SalvoApplication {
 			salvoRepository.save(salvo19);
 			salvoRepository.save(salvo20);
 			salvoRepository.save(salvo21);
+			Date datefinish = Date.from(date.toInstant().plusSeconds(1800));
+			Score score = new Score( 1.0,datefinish,g1,p1);
+			scoreRepository.save(score);
+			Score score2 = new Score( 0.0,datefinish,g1,p2);
+			scoreRepository.save(score2);
+			Date datefinish2 = Date.from(date2.toInstant().plusSeconds(1800));
+			Score score3 = new Score( 0.5,datefinish2,g2,p1);
+			scoreRepository.save(score3);
+			Score score4 = new Score( 0.5,datefinish2,g2,p2);
+			scoreRepository.save(score4);
+			Date datefinish3 = Date.from(date3.toInstant().plusSeconds(1800));
+			Score score5 = new Score( 1.0,datefinish3,g3,p2);
+			scoreRepository.save(score5);
+			Score score6 = new Score( 0.0,datefinish3,g3,p4);
+			scoreRepository.save(score6);
+			Date datefinish4 = Date.from(date3.toInstant().plusSeconds(1800));
+			Score score7 = new Score( 0.5,datefinish4,g4,p2);
+			scoreRepository.save(score7);
+			Score score8 = new Score( 0.5,datefinish4,g4,p1);
+			scoreRepository.save(score8);
 		};
 	}
 

@@ -2,7 +2,17 @@
 
 $(function() {
 
-  // load and display JSON sent by server for /players
+    function loadDatas(){
+              $.get('/api/leaderboard')
+                  .done(function(data) {
+data.forEach(function(e){
+                 $("table").append("<td>"+ e.email +"</td><td>"+ e.TotalScore +"</td>""</td><td>"+ e.win +"</td><td>"+ e.Lost +"</td><td>"+ e.tie +"</td>")
+});
+                  });
+                  .fail(function( jqXHR, textStatus ) {
+                             alert( "Failed: " + textStatus );
+                           });
+                  }
 
   function loadData() {
     $.get("/api/games")

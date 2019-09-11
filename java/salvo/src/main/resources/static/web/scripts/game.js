@@ -39,4 +39,5 @@ function loadData(){
         .fail(function( jqXHR, textStatus ) {
           alert( "Failed: " + textStatus );
         });
+
 };

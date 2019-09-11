@@ -32,11 +32,19 @@ public class SalvoController {
          dto.put("gamePlayers", partida.getGame().getAllGamePlayers(partida.getGame().getGamePlayers()));
          dto.put("ships", partida.getShipList(partida.getShips()));
          dto.put("salvos",partida.getAllSalvos(partida.getGame().getGamePlayers()) );
+
          return dto;
     }
 
-
-
+@Autowired
+    PlayerRepository playerRepository;
+    @RequestMapping("/leaderboard")
+public List<Map<String,Object>> leaderBoard(){
+        return playerRepository.findAll()
+                                .stream()
+                                .map(player -> player.makeScorePlayerDTO())
+                                .collect(Collectors.toList());
+    }
 
 
 }

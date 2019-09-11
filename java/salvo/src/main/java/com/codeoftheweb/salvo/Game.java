@@ -54,6 +54,7 @@ public class   Game {
         dto.put("id", this.getId());
         dto.put("created", this.getCreationDate().getTime());
         dto.put("gamePlayers",this.getAllGamePlayers(this.getGamePlayers()) );
+        dto.put("score", this.getScore().stream().map(score -> score.makeScoreDTO() ).collect(Collectors.toList()));
         return dto;
     }
     public List<Map<String, Object>>  getAllGamePlayers(Set<GamePlayer> gamePlayers){
