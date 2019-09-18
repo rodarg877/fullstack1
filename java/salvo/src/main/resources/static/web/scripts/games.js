@@ -3,12 +3,15 @@
 $(function() {
 
     function loadDatas(){
-              $.get('/api/leaderboard')
+              $.get("/api/leaderboard")
                   .done(function(data) {
+                data.sort(function(a, b){return b.TotalScore - a.TotalScore});
+                console.log(data);
 data.forEach(function(e){
-                 $("table").append("<td>"+ e.email +"</td><td>"+ e.TotalScore +"</td>""</td><td>"+ e.win +"</td><td>"+ e.Lost +"</td><td>"+ e.tie +"</td>")
+console.log(e);
+                 $("#table").append("<tr><td>"+ e.email +"</td><td>" + e.TotalScore + "</td><td>" + e.win + "</td><td>" + e.Lost + "</td><td>" + e.tie + "</td> </tr>")
 });
-                  });
+                  })
                   .fail(function( jqXHR, textStatus ) {
                              alert( "Failed: " + textStatus );
                            });
@@ -24,12 +27,5 @@ data.forEach(function(e){
       console.log( "Failed: " + textStatus );
     });
   }
-  loadData();
+  loadDatas();
 });
-function showData(data){
-var list="";
-      data.forEach(e => {
-        list =list + "<li>" +new Date(e.created) + ' '+ e.gamePlayers.map(p => p.player.email).join(',') + "</li>";
-      });
-      document.getElementById("juegos").innerHTML= list;
-      }
