@@ -2,6 +2,9 @@ package com.codeoftheweb.salvo;
 
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 
 import javax.persistence.*;
 import java.util.*;
@@ -90,6 +93,22 @@ public class Player {
         dto.put("Lost",getLost());
         dto.put("tie",getTie());
         return dto;
+    }
+    private boolean isGuest(Authentication authentication) {
+        return authentication == null || authentication instanceof AnonymousAuthenticationToken;
+    }
+    @Autowired
+    private PlayerRepository repo;
+    public Map<String, Object> getLogUser(Authentication authentication) {
+
+        if(isGuest(authentication)) {
+            Map<String,Object> ss =new LinkedHashMap<>();
+            ss.put("id","nn");
+            ss.put("name","nn");
+            return ss;
+        }else{
+            return repo.findByUserName(authentication.getName()).makePlayerDTO();
+        }
     }
 
 }

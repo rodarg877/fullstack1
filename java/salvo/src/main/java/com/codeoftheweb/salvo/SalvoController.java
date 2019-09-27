@@ -1,6 +1,9 @@
 package com.codeoftheweb.salvo;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +48,5 @@ public List<Map<String,Object>> leaderBoard(){
                                 .map(player -> player.makeScorePlayerDTO())
                                 .collect(Collectors.toList());
     }
-
 
 }
