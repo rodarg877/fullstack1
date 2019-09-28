@@ -424,11 +424,11 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/rest").denyAll();
 
 		http.formLogin()
-				 .usernameParameter("name")
-				.passwordParameter("pwd")
-				.loginPage("/app/login");
+				 .usernameParameter("username")
+				.passwordParameter("password")
+				.loginPage("/api/login");
 
-		http.logout().logoutUrl("/app/logout");
+		http.logout().logoutUrl("/api/logout");
 
 		// turn off checking for CSRF tokens
 		http.csrf().disable();
