@@ -1,5 +1,5 @@
 
-
+var flag;
 $(function() {
 
     function loadDatas(){
@@ -16,13 +16,17 @@ console.log(e);
                              alert( "Failed: " + textStatus );
                            });
                   }
-var flag = false;
+
   function loadData() {
     $.get("/api/games")
     .done(function(data) {
       if(data.player != "guest"){
       flag=true;}
-
+if(flag){
+$("#log").hide();
+}else{
+$("#logout").hide();
+}
     })
     .fail(function( jqXHR, textStatus ) {
       console.log( "Failed: " + textStatus );
@@ -31,11 +35,6 @@ var flag = false;
   loadDatas();
   loadData();
 });
-if(flag){
-$("#log").hide();
-}else{
-$("#logout").hide();
-}
 function login(){
     var user = document.getElementById("email").value
     var pwd = document.getElementById("pass").value
@@ -44,5 +43,6 @@ function login(){
     .fail(function() { alert("error al loguearse");location.reload();  })
 }
 function logout(){
-$.post("/api/logout").done(function() { console.log("logged out"); })
+$.post("/api/logout").done(function() { console.log("logged out");location.reload(); })
 }
+
