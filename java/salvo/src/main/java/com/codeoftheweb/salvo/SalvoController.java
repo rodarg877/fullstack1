@@ -64,8 +64,9 @@ public List<Map<String,Object>> leaderBoard(){
     private boolean isGuest(Authentication authentication) {
         return authentication == null || authentication instanceof AnonymousAuthenticationToken;
     }
+
     @Autowired PasswordEncoder passwordEncoder;
-    @RequestMapping (path = "player", method = RequestMethod.POST)
+    @RequestMapping (path = "/player", method = RequestMethod.POST)
 
     public ResponseEntity<Object> register(
         @RequestParam String email, @RequestParam String password){

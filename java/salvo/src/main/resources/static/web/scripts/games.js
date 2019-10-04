@@ -16,16 +16,33 @@ console.log(e);
                              alert( "Failed: " + textStatus );
                            });
                   }
-
+var flag = false;
   function loadData() {
     $.get("/api/games")
     .done(function(data) {
-      console.log(data)
-      showData(data);
+      if(data.player != "guest"){
+      flag=true;}
+
     })
     .fail(function( jqXHR, textStatus ) {
       console.log( "Failed: " + textStatus );
     });
   }
   loadDatas();
+  loadData();
 });
+if(flag){
+$("#log").hide();
+}else{
+$("#logout").hide();
+}
+function login(){
+    var user = document.getElementById("email").value
+    var pwd = document.getElementById("pass").value
+    $.post("/api/login", { username: user, password: pwd })
+    .done(function() { alert("logged in!");location.reload();  flag=true})
+    .fail(function() { alert("error al loguearse");location.reload();  })
+}
+function logout(){
+$.post("/api/logout").done(function() { console.log("logged out"); })
+}
