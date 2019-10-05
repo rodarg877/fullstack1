@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Games</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"crossorigin="anonymous"/>
+<link rel="stylesheet" href="Styles/games.css">
 </head>
-<body class="container">
-<h2> Salvo Games</h2>
-<div class="row">
-    <section class="col-6" >
+<body class="container-fluid">
+<h2>Salvo Games</h2>
+<div id="pop" class="popup">
+    <div class="popup-content">
+        <img src="Img/close.png" id="close" alt="close" class="close1" />
+        <form>
+            <div class="form-group">
+                <label style="color: black;">usuario</label>
+                <input id="namR" type="text" class="form-control" />
+            </div>
+            <div class=" form-group">
+                <label style="color: black;">Password</label>
+                <input id="pwdR" type="password" class="form-control" />
+            </div>
+            <button onclick="register()" type="button" class="btn btn-primary text-center">Register </button>
+        </form>
+    </div>
+</div>
+<form id="log">
+    <div class="form-inline">
+        <label for="email">Email address: </label>
+        <input type="email" class="form-control ml-2"  id="email" aria-describedby="emailHelp" placeholder="Enter email" />
+        <label class="ml-2" for="pass">Password :</label>
+        <input type="password" class="form-control ml-2" id="pass" placeholder="Password"/>
+        <button type="button" onclick="login()" class="btn btn-success ml-2">Login </button>
+        <button type="button" id="reg" class="btn btn-primary ml-2"> Register </button>
+    </div>
+</form>
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary"> Logout </button>
+<div class="row mt-4">
+    <section class="col-6">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -21,28 +48,11 @@
                 <th scope="col">Tied</th>
             </tr>
             </thead>
-            <tbody id="table">
-
-            </tbody>
+            <tbody id="table"></tbody>
         </table>
     </section>
 </div>
-<ol id="lista">
-</ol>
-<form id="log">
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-        <label for="pass">Password</label>
-        <input type="password" class="form-control" id="pass" placeholder="Password">
-    </div>
-    <button type="button" onclick="login()" class="btn btn-primary">Login</button>
-</form>
-<button type="button" id="logout" onclick="logout()" class="btn btn-primary">Logout</button>
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<ol id="lista"></ol>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

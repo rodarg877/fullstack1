@@ -1,5 +1,4 @@
 
-var flag;
 $(function() {
 
     function loadDatas(){
@@ -21,12 +20,11 @@ console.log(e);
     $.get("/api/games")
     .done(function(data) {
       if(data.player != "guest"){
-      flag=true;}
-if(flag){
-$("#log").hide();
-}else{
-$("#logout").hide();
-}
+    $("#log").hide();
+     }else{
+     $("#logout").hide();
+     }
+
     })
     .fail(function( jqXHR, textStatus ) {
       console.log( "Failed: " + textStatus );
@@ -39,10 +37,27 @@ function login(){
     var user = document.getElementById("email").value
     var pwd = document.getElementById("pass").value
     $.post("/api/login", { username: user, password: pwd })
-    .done(function() { alert("logged in!");location.reload();  flag=true})
-    .fail(function() { alert("error al loguearse");location.reload();  })
+    .done(function() { alert("logged in!");location.reload();})
+    .fail(function() { alert("error al loguearse");location.reload();})
 }
 function logout(){
-$.post("/api/logout").done(function() { console.log("logged out");location.reload(); })
+$.post("/api/logout").done(function() { console.log("logged out"); location.reload(); })
 }
+function register(){
+    let userR = document.getElementById("namR").value
+    let pwdR = document.getElementById("pwdR").value
+    $.post("/api/player", { email: userR, password: pwdR })
+    .done(function() {
+        $.post("/api/login", { username: userR, password: pwdR })
+        .done(function() { alert("register OK");location.reload();})
+     }) .fail(function( jqXHR, textStatus ) {
+                                    alert( "Failed: " + textStatus );
+                                  });
 
+}
+$("#reg").on("click", function () {
+    $("#pop").css("display", "flex");
+});
+$("#close").on("click", function () {
+    $("#pop").css("display", "none");
+});
