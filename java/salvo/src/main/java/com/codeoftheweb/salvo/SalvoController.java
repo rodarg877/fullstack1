@@ -23,13 +23,13 @@ public class SalvoController {
     private GameRepository gameRepository;
     @Autowired
     private PlayerRepository repo;
-    @RequestMapping("/games")
+    @RequestMapping(value = "/games")
     public Map<String, Object> getLogUser(Authentication authentication) {
         Map<String,Object> ss =new LinkedHashMap<>();
-        if(isGuest(authentication)) {
+        if(GameController.isGuest(authentication)) {
             ss.put("player", "guest");
         }else{
-            ss.put("player",repo.findByUserName(authentication.getName()).makePlayerDTO());
+            ss.put("player",repo.findByUserName(authentication.getName()).get().makePlayerDTO());
         }
         ss.put("games",getGames());
         return ss;
@@ -61,9 +61,6 @@ public List<Map<String,Object>> leaderBoard(){
                                 .map(player -> player.makeScorePlayerDTO())
                                 .collect(Collectors.toList());
     }
-    private boolean isGuest(Authentication authentication) {
-        return authentication == null || authentication instanceof AnonymousAuthenticationToken;
-    }
 
     @Autowired PasswordEncoder passwordEncoder;
     @RequestMapping (path = "/player", method = RequestMethod.POST)
@@ -73,10 +70,10 @@ public List<Map<String,Object>> leaderBoard(){
         if (email.isEmpty()||password.isEmpty()) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
         }
-        if (playerRepository.findByUserName(email)!= null) {
+        if (playerRepository.findByUserName(email).orElse(null)!= null) {
         return new ResponseEntity<>("Name alredy in use",HttpStatus.FORBIDDEN);
         }
-        playerRepository.save(new Player(email, passwordEncoder.encode(password)));
+        playerRepository.save(new  Player(email, passwordEncoder.encode(password)));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

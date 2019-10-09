@@ -14,7 +14,7 @@ public class GamePlayer{
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    private Date joinDate;
+    private Date joinDate= new Date();
     @OneToMany    (mappedBy = "gamePlayer", fetch = FetchType.EAGER)
     Set<Ship> ships;
 
@@ -31,8 +31,7 @@ public class GamePlayer{
 
     public GamePlayer(){}
 
-    public GamePlayer(Date joinDate, Player player, Game game) {
-        this.joinDate = joinDate;
+    public GamePlayer(Player player, Game game) {
         this.player = player;
         this.game = game;
     }

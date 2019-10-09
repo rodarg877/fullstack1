@@ -1,3 +1,8 @@
+$( document ).ready(function(){
+$('#errorSingup').hide()
+$('#gameCreatedSuccess').hide()
+});
+
 
 $(function() {
 
@@ -60,4 +65,21 @@ $("#reg").on("click", function () {
 });
 $("#close").on("click", function () {
     $("#pop").css("display", "none");
+});
+$('#createGame').click(function(event){
+    event.preventDefault();
+    $.post("/api/games")
+        .done(function(data){
+            console.log(data);
+            console.log("game creatd");
+          var gameViewUrl ="/web/game.html?gp="+ data.gpid;
+            $('gameCreatedSuccess').show("slow").delay(2000).hide("slow").delay(2000);
+            setTimeout(function(){
+            location.href=gameViewUrl;},3000);
+        })
+        .fail(function(data){
+            console.log("game creation failed");
+            $('#errorSingup').text(data.responseJson.error);
+            $('#errorSingup').show("slow").delay(4000).hide("slow");
+    })
 });

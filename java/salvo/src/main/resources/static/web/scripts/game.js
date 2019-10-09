@@ -6,11 +6,11 @@ function getParameterByName(name) {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 };
 function loadData(){
-    $.get('/api/game_view/'+getParameterByName('Gp'))
+    $.get('/api/game_view/'+getParameterByName('gp'))
         .done(function(data) {
             let playerInfo;
             var ShipLocations;
-            if(data.gamePlayers[0].id == getParameterByName('Gp'))
+            if(data.gamePlayers[0].id == getParameterByName('gp'))
                 playerInfo = [data.gamePlayers[0].player.email,data.gamePlayers[1].player.email];
             else
                 playerInfo = [data.gamePlayers[1].player.email,data.gamePlayers[0].player.email];

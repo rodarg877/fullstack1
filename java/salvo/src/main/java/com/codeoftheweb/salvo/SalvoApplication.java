@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @SpringBootApplication
@@ -49,17 +50,14 @@ public class SalvoApplication {
 			playerRepository.save(p3);
 			playerRepository.save(p4);
 			playerRepository.save(p5);
-			Date date =new Date();
-			Date date2 = Date.from(date.toInstant().plusSeconds(3600));
-			Date date3 = Date.from(date2.toInstant().plusSeconds(3600));
-			Game g1 = new Game(date);
-			Game g2 = new Game(date2);
-			Game g3 = new Game(date3);
-			Game g4 = new Game(date);
-			Game g5 = new Game(date);
-			Game g6 = new Game(date);
-			Game g7 = new Game(date);
-			Game g8 = new Game(date);
+			Game g1 = new Game();
+			Game g2 = new Game();
+			Game g3 = new Game();
+			Game g4 = new Game();
+			Game g5 = new Game();
+			Game g6 = new Game();
+			Game g7 = new Game();
+			Game g8 = new Game();
 			gameRepository.save(g1);
 			gameRepository.save(g2);
 			gameRepository.save(g3);
@@ -68,20 +66,20 @@ public class SalvoApplication {
 			gameRepository.save(g6);
 			gameRepository.save(g7);
 			gameRepository.save(g8);
-			GamePlayer gp1 = new GamePlayer(date, p1, g1);
-			GamePlayer gp2 = new GamePlayer(date, p2, g1);
-			GamePlayer gp3 = new GamePlayer(date, p1, g2);
-			GamePlayer gp4 = new GamePlayer(date, p2, g2);
-			GamePlayer gp5 = new GamePlayer(date, p2, g3);
-			GamePlayer gp6 = new GamePlayer(date, p4, g3);
-			GamePlayer gp7 = new GamePlayer(date, p2, g4);
-			GamePlayer gp8 = new GamePlayer(date, p1, g4);
-			GamePlayer gp9 = new GamePlayer(date, p4, g5);
-			GamePlayer gp10 = new GamePlayer(date, p1, g5);
-			GamePlayer gp11 = new GamePlayer(date, p3, g6);
-			GamePlayer gp12 = new GamePlayer(date, p4, g7);
-			GamePlayer gp13 = new GamePlayer(date, p3, g8);
-			GamePlayer gp14 = new GamePlayer(date, p4, g8);
+			GamePlayer gp1 = new GamePlayer( p1, g1);
+			GamePlayer gp2 = new GamePlayer( p2, g1);
+			GamePlayer gp3 = new GamePlayer( p1, g2);
+			GamePlayer gp4 = new GamePlayer( p2, g2);
+			GamePlayer gp5 = new GamePlayer( p2, g3);
+			GamePlayer gp6 = new GamePlayer( p4, g3);
+			GamePlayer gp7 = new GamePlayer( p2, g4);
+			GamePlayer gp8 = new GamePlayer( p1, g4);
+			GamePlayer gp9 = new GamePlayer( p4, g5);
+			GamePlayer gp10 = new GamePlayer( p1, g5);
+			GamePlayer gp11 = new GamePlayer( p3, g6);
+			GamePlayer gp12 = new GamePlayer( p4, g7);
+			GamePlayer gp13 = new GamePlayer( p3, g8);
+			GamePlayer gp14 = new GamePlayer( p4, g8);
 			gamePlayerRepository.save(gp1);
 			gamePlayerRepository.save(gp2);
 			gamePlayerRepository.save(gp3);
@@ -367,25 +365,21 @@ public class SalvoApplication {
 			salvoRepository.save(salvo19);
 			salvoRepository.save(salvo20);
 			salvoRepository.save(salvo21);
-			Date datefinish = Date.from(date.toInstant().plusSeconds(1800));
-			Score score = new Score( 1.0,datefinish,g1,p1);
+			Score score = new Score( 1.0,g1,p1);
 			scoreRepository.save(score);
-			Score score2 = new Score( 0.0,datefinish,g1,p2);
+			Score score2 = new Score( 0.0,g1,p2);
 			scoreRepository.save(score2);
-			Date datefinish2 = Date.from(date2.toInstant().plusSeconds(1800));
-			Score score3 = new Score( 0.5,datefinish2,g2,p1);
+			Score score3 = new Score( 0.5,g2,p1);
 			scoreRepository.save(score3);
-			Score score4 = new Score( 0.5,datefinish2,g2,p2);
+			Score score4 = new Score( 0.5,g2,p2);
 			scoreRepository.save(score4);
-			Date datefinish3 = Date.from(date3.toInstant().plusSeconds(1800));
-			Score score5 = new Score( 1.0,datefinish3,g3,p2);
+			Score score5 = new Score( 1.0,g3,p2);
 			scoreRepository.save(score5);
-			Score score6 = new Score( 0.0,datefinish3,g3,p4);
+			Score score6 = new Score( 0.0,g3,p4);
 			scoreRepository.save(score6);
-			Date datefinish4 = Date.from(date3.toInstant().plusSeconds(1800));
-			Score score7 = new Score( 0.5,datefinish4,g4,p2);
+			Score score7 = new Score( 0.5,g4,p2);
 			scoreRepository.save(score7);
-			Score score8 = new Score( 0.5,datefinish4,g4,p1);
+			Score score8 = new Score( 0.5,g4,p1);
 			scoreRepository.save(score8);
 		};
 	}
@@ -400,9 +394,9 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 	@Override
 	public void init(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(inputEmail-> {
-			Player player = (Player) playerRepository.findByUserName(inputEmail);
-			if (player != null) {
-				return new User(player.getUserName(), player.getPassword(),
+			Optional<Player> player =  playerRepository.findByUserName(inputEmail);
+			if (player.get() != null) {
+				return new User(player.get().getUserName(), player.get().getPassword(),
 						AuthorityUtils.createAuthorityList("USER"));
 			} else {
 				throw new UsernameNotFoundException("Unknown user: " + inputEmail);
