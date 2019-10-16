@@ -40,7 +40,7 @@ return new ResponseEntity<>(makeMap("gpid",gamePlayer.getId()),HttpStatus.CREATE
     public static boolean isGuest(Authentication authentication) {
         return authentication == null || authentication instanceof AnonymousAuthenticationToken;
     }
-    private  Map<String, Object>makeMap(String key, Object value){
+    public static  Map<String, Object>makeMap(String key, Object value){
         Map<String, Object>map=new HashMap<>();
         map.put(key,value);
         return map;

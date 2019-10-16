@@ -39,9 +39,24 @@ public class SalvoController {
     }
     @Autowired
     private GamePlayerRepository gamePlayerRepository;
-    @RequestMapping("/game_view/{id}")
-    public Map< String, Object> gameViewDto(@PathVariable Long id){
-        GamePlayer partida = gamePlayerRepository.getOne(id);
+    @RequestMapping("/game_view/{nn}")
+    public ResponseEntity<Map< String, Object>> getGameViewByGamePlayerID(@PathVariable Long nn, Authentication autentication){
+        if (GameController.isGuest(autentication)){
+            return new ResponseEntity<>(GameController.makeMap("error","usuario no logueado"),HttpStatus.UNAUTHORIZED);
+        }
+        Player player = playerRepository.findByUserName(autentication.getName()).orElse(null);
+        GamePlayer partida = gamePlayerRepository.findById(nn).orElse(null);
+        if (player == null){
+            return new ResponseEntity<>(GameController.makeMap("error","usuario no logueado"),HttpStatus.UNAUTHORIZED);
+        }
+        if (partida == null){
+            return new ResponseEntity<>(GameController.makeMap("error","usuario no logueado"),HttpStatus.UNAUTHORIZED);
+        }
+        if (partida.getPlayer().getId() != player.getId()){
+            return new ResponseEntity<>(GameController.makeMap("error","usuario no logueado"),HttpStatus.CONFLICT);
+        }
+
+
         Map <String, Object>  dto = new LinkedHashMap<String, Object>();
          dto.put("id",partida.getId());
          dto.put("creationDate", partida.getGame().getCreationDate());
@@ -49,7 +64,7 @@ public class SalvoController {
          dto.put("ships", partida.getShipList(partida.getShips()));
          dto.put("salvos",partida.getAllSalvos(partida.getGame().getGamePlayers()) );
 
-         return dto;
+         return new ResponseEntity<>(dto,HttpStatus.OK);
     }
 
 @Autowired
@@ -76,4 +91,28 @@ public List<Map<String,Object>> leaderBoard(){
         playerRepository.save(new  Player(email, passwordEncoder.encode(password)));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+    @Autowired
+    @RequestMapping(value = "/game/{nn}/players",method = RequestMethod.POST)
+    public ResponseEntity<Map< String, Object>> joinGame(@PathVariable Long nn, Authentication autentication){
+        if (GameController.isGuest(autentication)){
+            return new ResponseEntity<>(GameController.makeMap("error","usuario no logueado"),HttpStatus.UNAUTHORIZED);
+        }
+        Player player = playerRepository.findByUserName(autentication.getName()).orElse(null);
+        Game partida = gameRepository.getOne(nn);
+        if (partida == null){
+            return new ResponseEntity<>(GameController.makeMap("error","no such game"),HttpStatus.FORBIDDEN);
+        }
+        if (player == null){
+            return new ResponseEntity<>(GameController.makeMap("error","no such game"),HttpStatus.FORBIDDEN);
+        }
+        int gamePlayerCount= partida.getGamePlayers().size();
+
+        if (gamePlayerCount == 1){
+            GamePlayer gamePlayer= gamePlayerRepository.save(new GamePlayer(player,partida));
+            return new ResponseEntity<>(GameController.makeMap("gpid",gamePlayer.getId()),HttpStatus.CREATED);
+        }else{
+            return new  ResponseEntity<>(GameController.makeMap("error","Game is Full"),HttpStatus.OK);
+        }
+    }
+
 }
