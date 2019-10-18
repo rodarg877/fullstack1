@@ -24,6 +24,7 @@ console.log(e);
   function loadData() {
     $.get("/api/games")
     .done(function(data) {
+    cargarLista(data.games);
       if(data.player != "guest"){
     $("#log").hide();
      }else{
@@ -70,8 +71,6 @@ $('#createGame').click(function(event){
     event.preventDefault();
     $.post("/api/games")
         .done(function(data){
-            console.log(data);
-            console.log("game creatd");
           var gameViewUrl ="/web/game.html?gp="+ data.gpid;
             $('gameCreatedSuccess').show("slow").delay(2000).hide("slow").delay(2000);
             setTimeout(function(){
@@ -82,4 +81,24 @@ $('#createGame').click(function(event){
             $('#errorSingup').text(data.responseJson.error);
             $('#errorSingup').show("slow").delay(4000).hide("slow");
     })
-});
+})
+function cargarLista(obj){
+    var htmlList = "";
+    obj.forEach(e => {
+              htmlList +='<li>';
+              //htmlList +=new Date(e.creationDate).toLocaleString();
+              htmlList += ' ' + e.gamePlayers.map(function(p) { return p.player.email}).join(',');
+              htmlList +='<button   class="joinGame btn btn-primary" data-gameid="'+ e.id +'"> join game </button>'
+              htmlList +='</li>';
+        });
+    lista.innerHTML = htmlList;
+}
+    $('.joinGame').click(function(e){
+    e.preventDefault;
+    $.post("/api/game/"+$(this).data('gameid')+"/players").done(function(data){
+    var gameViewUrl ="/web/game.html?gp="+data.gpid ;
+    location.href=gameViewUrl;
+    console.log("entro");
+
+    })
+    })

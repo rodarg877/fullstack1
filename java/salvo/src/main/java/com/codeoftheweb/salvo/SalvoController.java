@@ -90,8 +90,7 @@ public List<Map<String,Object>> leaderBoard(){
         }
         playerRepository.save(new  Player(email, passwordEncoder.encode(password)));
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-    @Autowired
+    };
     @RequestMapping(value = "/game/{nn}/players",method = RequestMethod.POST)
     public ResponseEntity<Map< String, Object>> joinGame(@PathVariable Long nn, Authentication autentication){
         if (GameController.isGuest(autentication)){
