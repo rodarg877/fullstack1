@@ -64,6 +64,7 @@ public class Ship {
         return dto;
     }
 
-
-
+    public void setGamePlayer(GamePlayer gamePlayer) {
+        this.gamePlayer = gamePlayer;
+    }
 }

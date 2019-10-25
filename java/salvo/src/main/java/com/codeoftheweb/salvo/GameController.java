@@ -17,32 +17,32 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 
 public class GameController {
-    @Autowired
-    private PlayerRepository playerRepository;
-    @Autowired
-    private GameRepository gameRepository;
-    @Autowired
-    private GamePlayerRepository gamePlayerRepository;
+        @Autowired
+        private PlayerRepository playerRepository;
+        @Autowired
+        private GameRepository gameRepository;
+        @Autowired
+        private GamePlayerRepository gamePlayerRepository;
 
-    @RequestMapping(path= "/games", method = RequestMethod.POST)
-    public  ResponseEntity<Object> createGame(Authentication authentication){
-        if(isGuest(authentication)){
-            return new ResponseEntity<>("No esta autorizado", HttpStatus.UNAUTHORIZED);
+        @RequestMapping(path= "/games", method = RequestMethod.POST)
+        public  ResponseEntity<Object> createGame(Authentication authentication){
+            if(isGuest(authentication)){
+                return new ResponseEntity<>("No esta autorizado", HttpStatus.UNAUTHORIZED);
+            }
+            Player player = playerRepository.findByUserName(authentication.getName()).orElse(null);
+            if (player==null){
+                return new ResponseEntity<>("no esta autorizado", HttpStatus.UNAUTHORIZED);
+            }
+            Game game = gameRepository.save(new Game());
+            GamePlayer gamePlayer= gamePlayerRepository.save(new GamePlayer(player,game));
+    return new ResponseEntity<>(makeMap("gpid",gamePlayer.getId()),HttpStatus.CREATED);
         }
-        Player player = playerRepository.findByUserName(authentication.getName()).orElse(null);
-        if (player==null){
-            return new ResponseEntity<>("no esta autorizado", HttpStatus.UNAUTHORIZED);
+        public static boolean isGuest(Authentication authentication) {
+            return authentication == null || authentication instanceof AnonymousAuthenticationToken;
         }
-        Game game = gameRepository.save(new Game());
-        GamePlayer gamePlayer= gamePlayerRepository.save(new GamePlayer(player,game));
-return new ResponseEntity<>(makeMap("gpid",gamePlayer.getId()),HttpStatus.CREATED);
+        public static  Map<String, Object>makeMap(String key, Object value){
+            Map<String, Object>map=new HashMap<>();
+            map.put(key,value);
+            return map;
+        }
     }
-    public static boolean isGuest(Authentication authentication) {
-        return authentication == null || authentication instanceof AnonymousAuthenticationToken;
-    }
-    public static  Map<String, Object>makeMap(String key, Object value){
-        Map<String, Object>map=new HashMap<>();
-        map.put(key,value);
-        return map;
-    }
-}

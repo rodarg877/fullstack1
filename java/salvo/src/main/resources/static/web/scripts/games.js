@@ -90,8 +90,10 @@ function cargarLista(obj){
               if(e.gamePlayers.length>1){
                                       lleno = true;
                                       }
+              let playerAct;
               e.gamePlayers.map(function(p) {
                         if(p.player.email == obj.player.email){
+                        playerAct= p.id;
                             usAct=true;
                         }
                       });
@@ -100,7 +102,7 @@ function cargarLista(obj){
                     htmlList += '<button type="button" onclick="joinGame(this)" id="'+e.id +'"';
                     htmlList += ' class=" joinGame btn btn-primary m-2">Join Game </button>';
               }if(usAct && !(e.score.length>0)){
-                    htmlList += '<button type="button" onclick="reEnter(this)" id="'+e.id +'"';
+                    htmlList += '<button type="button" onclick="reEnter(this)" id="'+playerAct +'"';
                     htmlList += ' class="btn btn-primary m-2">Re-Enter Game </button>';
               }
               htmlList += ' ' + e.gamePlayers.map(function(p) { return p.player.email}).join(' VS ');

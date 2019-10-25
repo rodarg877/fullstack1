@@ -38,6 +38,19 @@ function loadData(){
          })
         .fail(function( jqXHR, textStatus ) {
           alert( "Failed: " + textStatus );
-        });
-
-};
+        })
+}
+function addShip(){
+        $.post({
+          url: "/api/games/players/"+getParameterByName('gp')+"/ship",
+          data: JSON.stringify({ "ship": "destroyer", "shipLocation": ["A1", "B1", "C1"]}),
+          dataType: "text",
+          contentType: "application/json"
+        })
+        .done(function (response, status, jqXHR) {
+          alert( "Ship added: " + response );
+        })
+        .fail(function (jqXHR, status, httpError) {
+          alert("Failed to add ship: " + textStatus + " " + httpError);
+        })
+        }
