@@ -16,3 +16,16 @@ float:right;
 display: -webkit-flex;
       -webkit-flex-direction: row;
 }
+body{
+    background-image: url(../Img/radar.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "ArcadeClassic";
+    font-stretch: expanded;
+    }
+    #playerInfo{
+        text-align: center;
+    }
+    td,th{
+        color: aliceblue;
+    };
