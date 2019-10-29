@@ -1,6 +1,7 @@
 package com.codeoftheweb.salvo;
 
 
+import jdk.javadoc.internal.doclets.toolkit.taglets.SeeTaglet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -128,7 +129,7 @@ public class SalvoController {
     ShipRepository shipRepository;
 
     @RequestMapping(value = "/games/players/{id}/ship", method = RequestMethod.POST)
-    public ResponseEntity<Map<String, Object>> addShip(@PathVariable Long id,Authentication authentication, @RequestBody Ship ship) {
+    public ResponseEntity<Map<String, Object>> addShip(@PathVariable Long id,Authentication authentication, @RequestBody Set<Ship> ships) {
         if (GameController.isGuest(authentication)) {
             return new ResponseEntity<>(GameController.makeMap("error","usuario no logueado"), HttpStatus.UNAUTHORIZED);
         }
@@ -140,8 +141,10 @@ public class SalvoController {
         if(!gamePlayer.getShips().isEmpty()){
             return new ResponseEntity<>(GameController.makeMap("error","barcos ya cargados"), HttpStatus.FORBIDDEN);
         }
-        ship.setGamePlayer(gamePlayer);
-        shipRepository.save(ship);
+        ships.stream().map(ship -> {
+            ship.setGamePlayer(gamePlayer);
+            return shipRepository.save(ship);
+        }).collect(Collectors.toSet());
         return new ResponseEntity<>(GameController.makeMap("Creado","Creado"), HttpStatus.CREATED);
     }
 }
