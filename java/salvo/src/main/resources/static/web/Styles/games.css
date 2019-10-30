@@ -14,8 +14,9 @@ h2{
 text-align: center;
 }
 #aaa{
+font-size:12px;
   background-image: url(../Img/fondo1.jpg);
-  font-family: "ArcadeClassic";
+  font-family: 'Press Start 2P', cursive;
   font-stretch: expanded;
   }
   .table{
@@ -40,9 +41,12 @@ text-align: center;
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 0px;
-  float: right;
 }
 #createGame{
   margin: 10px auto;
   display: block;
+}
+button{
+padding:0px;
+margin:0px;
 };

@@ -70,8 +70,8 @@ function logout() {
   });
 }
 function register() {
-  let userR = document.getElementById("namR").value;
-  let pwdR = document.getElementById("pwdR").value;
+  let userR = document.getElementById("email").value;
+  let pwdR = document.getElementById("pass").value;
   $.post("/api/player", { email: userR, password: pwdR })
     .done(function() {
       $.post("/api/login", { username: userR, password: pwdR }).done(
@@ -85,12 +85,6 @@ function register() {
       alert("Failed: " + textStatus);
     });
 }
-$("#reg").on("click", function() {
-  $("#pop").css("display", "flex");
-});
-$("#close").on("click", function() {
-  $("#pop").css("display", "none");
-});
 $("#createGame").click(function(event) {
   event.preventDefault();
   $.post("/api/games")
@@ -137,21 +131,21 @@ function cargarLista(obj) {
           return p.player.email;
         })
         .join(" VS ");
-        htmlList += "</div>"
+        htmlList += "<br><br></div>"
     if (!usAct && !lleno && !(e.score.length > 0)) {
       htmlList +=
         '<div class="col-4"><button  type="button" onclick="joinGame(this)" id="' + e.id + '"';
-      htmlList += ' class=" joinGame btn btn-primary ">Join Game </button></div>';
+      htmlList += ' class=" joinGame btn mb-2 btn-primary ">Join Game </button></div>';
     }
     if (usAct && !(e.score.length > 0)) {
       htmlList +=
-        '<div class="col-2"><button type="button" onclick="reEnter(this)" id="' + playerAct + '"';
+        '<div class="col-4"><button type="button" onclick="reEnter(this)" id="' + playerAct + '"';
       htmlList += ' class="btn btn-primary m-2">Re-Enter Game </button></div>';
     }
     htmlList += "</div></li>";
   });
   htmlList +='<button type="submit" id="createGame"  class="btn btn-primary"> created game </button>'
-  lista.innerHTML = htmlList;
+  lista.innerHTML ="<br>" +htmlList;
 }
 
 function joinGame(ele) {

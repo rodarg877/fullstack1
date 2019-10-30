@@ -20,7 +20,7 @@ body{
     background-image: url(../Img/radar.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: "ArcadeClassic";
+    font-family: 'Press Start 2P', cursive;
     font-stretch: expanded;
     }
     #playerInfo{
