@@ -11,9 +11,9 @@
   <!-- Person CSS -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="styles/game.css">
-  <link rel="stylesheet" href="styles/gridstack.scss"/>
-  <script src="scripts/gridstack.js"></script>
-  <script src="scripts/gridstack.jQueryUI.js"></script>
+  <link rel="stylesheet" href="dist/normalize.css" />
+  <link rel="stylesheet" href="dist/gridstack.css" />
+  <link rel="stylesheet" href="dist/gridstack-extra.css" />
 </head>
 
 <body class="bg-dark text-light container-fluid">
@@ -23,314 +23,17 @@
   <div class="row text-center">
     <h1 class="col-12">Game Board</h1>
   </div>
-  <div class="container-fluid row text-center">
+
     <div class="col-1">
     </div>
-    <section class="col-5">
-      <h2>Your ships</h2>
-      <table class="table table-bordered">
-        <thead>
-          <th></th>
-          <th id="th_0">1</th>
-          <th id="th_1">2</th>
-          <th id="th_2">3</th>
-          <th id="th_3">4</th>
-          <th id="th_4">5</th>
-          <th id="th_5">6</th>
-          <th id="th_6">7</th>
-          <th id="th_7">8</th>
-          <th id="th_8">9</th>
-          <th id="th_9">10</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="let">A</td>
-            <td id="A1"></td>
-            <td id="A2"></td>
-            <td id="A3"></td>
-            <td id="A4"></td>
-            <td id="A5"></td>
-            <td id="A6"></td>
-            <td id="A7"></td>
-            <td id="A8"></td>
-            <td id="A9"></td>
-            <td id="A10"></td>
-          </tr>
-          <tr>
-            <td class="let">B</td>
-            <td id="B1"></td>
-            <td id="B2"></td>
-            <td id="B3"></td>
-            <td id="B4"></td>
-            <td id="B5"></td>
-            <td id="B6"></td>
-            <td id="B7"></td>
-            <td id="B8"></td>
-            <td id="B9"></td>
-            <td id="B10"></td>
-          </tr>
-          <tr>
-            <td class="let">C</td>
-            <td id="C1"></td>
-            <td id="C2"></td>
-            <td id="C3"></td>
-            <td id="C4"></td>
-            <td id="C5"></td>
-            <td id="C6"></td>
-            <td id="C7"></td>
-            <td id="C8"></td>
-            <td id="C9"></td>
-            <td id="C10"></td>
-          </tr>
-          <tr>
-            <td class="let">D</td>
-            <td id="D1"></td>
-            <td id="D2"></td>
-            <td id="D3"></td>
-            <td id="D4"></td>
-            <td id="D5"></td>
-            <td id="D6"></td>
-            <td id="D7"></td>
-            <td id="D8"></td>
-            <td id="D9"></td>
-            <td id="D10"></td>
-          </tr>
-          <tr>
-            <td class="let">E</td>
-            <td id="E1"></td>
-            <td id="E2"></td>
-            <td id="E3"></td>
-            <td id="E4"></td>
-            <td id="E5"></td>
-            <td id="E6"></td>
-            <td id="E7"></td>
-            <td id="E8"></td>
-            <td id="E9"></td>
-            <td id="E10"></td>
-          </tr>
-          <tr>
-            <td class="let">F</td>
-            <td id="F1"></td>
-            <td id="F2"></td>
-            <td id="F3"></td>
-            <td id="F4"></td>
-            <td id="F5"></td>
-            <td id="F6"></td>
-            <td id="F7"></td>
-            <td id="F8"></td>
-            <td id="F9"></td>
-            <td id="F10"></td>
-          </tr>
-          <tr>
-            <td class="let">G</td>
-            <td id="G1"></td>
-            <td id="G2"></td>
-            <td id="G3"></td>
-            <td id="G4"></td>
-            <td id="G5"></td>
-            <td id="G6"></td>
-            <td id="G7"></td>
-            <td id="G8"></td>
-            <td id="G9"></td>
-            <td id="G10"></td>
-          </tr>
-          <tr>
-            <td class="let">H</td>
-            <td id="H"></td>
-            <td id="H2"></td>
-            <td id="H3"></td>
-            <td id="H4"></td>
-            <td id="H5"></td>
-            <td id="H6"></td>
-            <td id="H7"></td>
-            <td id="H8"></td>
-            <td id="H9"></td>
-            <td id="H10"></td>
-          </tr>
-          <tr>
-            <td class="let">I</td>
-            <td id="I1"></td>
-            <td id="I2"></td>
-            <td id="I3"></td>
-            <td id="I4"></td>
-            <td id="I5"></td>
-            <td id="I6"></td>
-            <td id="I7"></td>
-            <td id="I8"></td>
-            <td id="I9"></td>
-            <td id="I10"></td>
-          </tr>
-          <tr>
-            <td class="let">J</td>
-            <td id="J1"></td>
-            <td id="J2"></td>
-            <td id="J3"></td>
-            <td id="J4"></td>
-            <td id="J5"></td>
-            <td id="J6"></td>
-            <td id="J7"></td>
-            <td id="J8"></td>
-            <td id="J9"></td>
-            <td id="J10"></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+      <div class="grid-ships">
 
-    <section id="salvos" class="col-5">
-      <h2>Shots</h2>
-      <table class="table table-bordered">
-        <thead>
-          <th></th>
-          <th id="th_0s">1</th>
-          <th id="th_1s">2</th>
-          <th id="th_2s">3</th>
-          <th id="th_3s">4</th>
-          <th id="th_4s">5</th>
-          <th id="th_5s">6</th>
-          <th id="th_6s">7</th>
-          <th id="th_7s">8</th>
-          <th id="th_8s">9</th>
-          <th id="th_9s">10</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="let">A</td>
-            <td id="A1s"></td>
-            <td id="A2s"></td>
-            <td id="A3s"></td>
-            <td id="A4s"></td>
-            <td id="A5s"></td>
-            <td id="A6s"></td>
-            <td id="A7s"></td>
-            <td id="A8s"></td>
-            <td id="A9s"></td>
-            <td id="A10s"></td>
-          </tr>
-          <tr>
-            <td class="let">B</td>
-            <td id="B1s"></td>
-            <td id="B2s"></td>
-            <td id="B3s"></td>
-            <td id="B4s"></td>
-            <td id="B5s"></td>
-            <td id="B6s"></td>
-            <td id="B7s"></td>
-            <td id="B8s"></td>
-            <td id="B9s"></td>
-            <td id="B10s"></td>
-          </tr>
-          <tr>
-            <td class="let">C</td>
-            <td id="C1s"></td>
-            <td id="C2s"></td>
-            <td id="C3s"></td>
-            <td id="C4s"></td>
-            <td id="C5s"></td>
-            <td id="C6s"></td>
-            <td id="C7s"></td>
-            <td id="C8s"></td>
-            <td id="C9s"></td>
-            <td id="C10s"></td>
-          </tr>
-          <tr>
-            <td class="let">D</td>
-            <td id="D1s"></td>
-            <td id="D2s"></td>
-            <td id="D3s"></td>
-            <td id="D4s"></td>
-            <td id="D5s"></td>
-            <td id="D6s"></td>
-            <td id="D7s"></td>
-            <td id="D8s"></td>
-            <td id="D9s"></td>
-            <td id="D10s"></td>
-          </tr>
-          <tr>
-            <td class="let">E</td>
-            <td id="E1s"></td>
-            <td id="E2s"></td>
-            <td id="E3s"></td>
-            <td id="E4s"></td>
-            <td id="E5s"></td>
-            <td id="E6s"></td>
-            <td id="E7s"></td>
-            <td id="E8s"></td>
-            <td id="E9s"></td>
-            <td id="E10s"></td>
-          </tr>
-          <tr>
-            <td class="let">F</td>
-            <td id="F1s"></td>
-            <td id="F2s"></td>
-            <td id="F3s"></td>
-            <td id="F4s"></td>
-            <td id="F5s"></td>
-            <td id="F6s"></td>
-            <td id="F7s"></td>
-            <td id="F8s"></td>
-            <td id="F9s"></td>
-            <td id="F10s"></td>
-          </tr>
-          <tr>
-            <td class="let">G</td>
-            <td id="G1s"></td>
-            <td id="G2s"></td>
-            <td id="G3s"></td>
-            <td id="G4s"></td>
-            <td id="G5s"></td>
-            <td id="G6s"></td>
-            <td id="G7s"></td>
-            <td id="G8s"></td>
-            <td id="G9s"></td>
-            <td id="G10s"></td>
-          </tr>
-          <tr>
-            <td class="let">H</td>
-            <td id="H1s"></td>
-            <td id="H2s"></td>
-            <td id="H3s"></td>
-            <td id="H4s"></td>
-            <td id="H5s"></td>
-            <td id="H6s"></td>
-            <td id="H7s"></td>
-            <td id="H8s"></td>
-            <td id="H9s"></td>
-            <td id="H10s"></td>
-          </tr>
-          <tr>
-            <td class="let">I</td>
-            <td id="I1s"></td>
-            <td id="I2s"></td>
-            <td id="I3s"></td>
-            <td id="I4s"></td>
-            <td id="I5s"></td>
-            <td id="I6s"></td>
-            <td id="I7s"></td>
-            <td id="I8s"></td>
-            <td id="I9s"></td>
-            <td id="I10s"></td>
-          </tr>
-          <tr>
-            <td class="let">J</td>
-            <td id="J1s"></td>
-            <td id="J2s"></td>
-            <td id="J3s"></td>
-            <td id="J4s"></td>
-            <td id="J5s"></td>
-            <td id="J6s"></td>
-            <td id="J7s"></td>
-            <td id="J8s"></td>
-            <td id="J9s"></td>
-            <td id="J10s"></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+        <div id="grid" class="grid-stack grid-stack-10">
+        </div>
+      </div>
+  <small id="alert-text"></small>
     <div class="col-1">
     </div>
-
-  </div>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
@@ -340,7 +43,13 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
+  <script src="dist/lodash.min.js"></script>
+  <script src="dist/jquery-ui.min.js"></script>
+  <script src="dist/gridstack.js"></script>
+  <script src="dist/gridstack.jQueryUI.js"></script>
+  <script src="dist/jquery.ui.touch-punch.min.js"></script>
   <script src="scripts/game.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 
 </html>
