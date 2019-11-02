@@ -2,6 +2,7 @@
 all the functionalities are explained in the gridstack github
 https://github.com/gridstack/gridstack.js/tree/develop/doc
 */
+var positions;
 $(() => loadGrid())
 //Función principal que dispara el frame gridstack.js y carga la matriz con los barcos
 const loadGrid = function () {
@@ -64,7 +65,6 @@ const loadGrid = function () {
 
     listenBusyCells('ships')
     $('.grid-stack').on('change', () => listenBusyCells('ships'))
-    
 }
 
 
@@ -243,4 +243,42 @@ const listenBusyCells = function(id){
             }
         }
     }
-};
+}
+function obtenerPosicion(){
+var carrier1 = new Object();
+carrier1["id"]= $("#carrier").attr('id');
+carrier1["x"]= $("#carrier").attr('data-gs-x');
+carrier1["y"] = $("#carrier").attr('data-gs-y');
+carrier1 ["width"]= $("#carrier").attr('data-gs-width');
+carrier1 ["height"] = $("#carrier").attr('data-gs-height');
+
+var patrol_boat1 = new Object();
+patrol_boat1["id"]= $("#patrol_boat").attr('id');
+patrol_boat1["x"]= $("#patrol_boat").attr('data-gs-x');
+patrol_boat1["y"] = $("#patrol_boat").attr('data-gs-y');
+patrol_boat1 ["width"]= $("#patrol_boat").attr('data-gs-width');
+patrol_boat1 ["height"] = $("#patrol_boat").attr('data-gs-height');
+
+var battleship1 = new Object();
+battleship1["id"]= $("#battleship").attr('id');
+battleship1["x"]= $("#battleship").attr('data-gs-x');
+battleship1["y"] = $("#battleship").attr('data-gs-y');
+battleship1 ["width"]= $("#battleship").attr('data-gs-width');
+battleship1 ["height"] = $("#battleship").attr('data-gs-height');
+destroyer
+var destroyer1 = new Object();
+destroyer1["id"]= $("#destroyer").attr('id');
+destroyer1["x"]= $("#destroyer").attr('data-gs-x');
+destroyer1["y"] = $("#destroyer").attr('data-gs-y');
+destroyer1 ["width"]= $("#destroyer").attr('data-gs-width');
+destroyer1 ["height"] = $("#destroyer").attr('data-gs-height');
+
+var submarine1 = new Object();
+submarine1["id"]= $("#submarine").attr('id');
+submarine1["x"]= $("#submarine").attr('data-gs-x');
+submarine1["y"] = $("#submarine").attr('data-gs-y');
+submarine1 ["width"]= $("#submarine").attr('data-gs-width');
+submarine1 ["height"] = $("#submarine").attr('data-gs-height');
+
+    }
+    obtenerPosicion();
