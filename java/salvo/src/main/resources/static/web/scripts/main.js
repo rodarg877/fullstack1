@@ -244,41 +244,28 @@ const listenBusyCells = function(id){
         }
     }
 }
-function obtenerPosicion(){
+function obtenerPosicion(ship){
 var carrier1 = new Object();
-carrier1["id"]= $("#carrier").attr('id');
-carrier1["x"]= $("#carrier").attr('data-gs-x');
-carrier1["y"] = $("#carrier").attr('data-gs-y');
-carrier1 ["width"]= $("#carrier").attr('data-gs-width');
-carrier1 ["height"] = $("#carrier").attr('data-gs-height');
+carrier1["name"]= $("#"+ship).attr('id');
+carrier1["x"]= $("#"+ship).attr('data-gs-x');
+carrier1["y"] = $("#"+ship).attr('data-gs-y');
+carrier1 ["width"]= $("#"+ship).attr('data-gs-width');
+carrier1 ["height"] = $("#"+ship).attr('data-gs-height');
+carrier1["positions"]=[];
+if(carrier1.height  == 1){
+for(i=1; i<=carrier1.width; i++){
+carrier1.positions.push(String.fromCharCode(parseInt(carrier1.y)+65) + (parseInt(carrier1.x)+i))
+}
+}else{
+for(i=0; i<carrier1.height; i++){
+carrier1.positions.push(String.fromCharCode(parseInt(carrier1.y)+65+i) + (parseInt(carrier1.x)+1))
+}
+}
+var objShip = new Object();
+objShip["ship"]= carrier1.name;
+objShip["shipLocation"]= carrier1.positions;
 
-var patrol_boat1 = new Object();
-patrol_boat1["id"]= $("#patrol_boat").attr('id');
-patrol_boat1["x"]= $("#patrol_boat").attr('data-gs-x');
-patrol_boat1["y"] = $("#patrol_boat").attr('data-gs-y');
-patrol_boat1 ["width"]= $("#patrol_boat").attr('data-gs-width');
-patrol_boat1 ["height"] = $("#patrol_boat").attr('data-gs-height');
-
-var battleship1 = new Object();
-battleship1["id"]= $("#battleship").attr('id');
-battleship1["x"]= $("#battleship").attr('data-gs-x');
-battleship1["y"] = $("#battleship").attr('data-gs-y');
-battleship1 ["width"]= $("#battleship").attr('data-gs-width');
-battleship1 ["height"] = $("#battleship").attr('data-gs-height');
-destroyer
-var destroyer1 = new Object();
-destroyer1["id"]= $("#destroyer").attr('id');
-destroyer1["x"]= $("#destroyer").attr('data-gs-x');
-destroyer1["y"] = $("#destroyer").attr('data-gs-y');
-destroyer1 ["width"]= $("#destroyer").attr('data-gs-width');
-destroyer1 ["height"] = $("#destroyer").attr('data-gs-height');
-
-var submarine1 = new Object();
-submarine1["id"]= $("#submarine").attr('id');
-submarine1["x"]= $("#submarine").attr('data-gs-x');
-submarine1["y"] = $("#submarine").attr('data-gs-y');
-submarine1 ["width"]= $("#submarine").attr('data-gs-width');
-submarine1 ["height"] = $("#submarine").attr('data-gs-height');
+return objShip;
 
     }
-    obtenerPosicion();
+

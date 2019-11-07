@@ -41,9 +41,15 @@ function loadData(){
         })
 }
 function addShip(){
+        var carrier = obtenerPosicion("carrier")
+        var patrol = obtenerPosicion("patrol_boat")
+        var battleship = obtenerPosicion("battleship")
+        var submarine = obtenerPosicion("submarine")
+        var destroyer = obtenerPosicion("destroyer")
+        console.log(carrier);
         $.post({
           url: "/api/games/players/"+getParameterByName('gp')+"/ship",
-          data: JSON.stringify({ "ship": "destroyer", "shipLocation": ["A1", "B1", "C1"]}),
+          data: JSON.stringify([carrier,patrol,battleship, submarine,destroyer]),
           dataType: "text",
           contentType: "application/json"
         })
@@ -51,6 +57,6 @@ function addShip(){
           alert( "Ship added: " + response );
         })
         .fail(function (jqXHR, status, httpError) {
-          alert("Failed to add ship: " + textStatus + " " + httpError);
+          alert("Failed to add ship: " + status + " " + httpError);
         })
-        }
+}
