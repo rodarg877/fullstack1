@@ -41,6 +41,7 @@ function loadData(){
         })
 }
 function addShip(){
+
         var carrier = obtenerPosicion("carrier")
         var patrol = obtenerPosicion("patrol_boat")
         var battleship = obtenerPosicion("battleship")
@@ -54,6 +55,7 @@ function addShip(){
           contentType: "application/json"
         })
         .done(function (response, status, jqXHR) {
+        
           alert( "Ship added: " + response );
         })
         .fail(function (jqXHR, status, httpError) {

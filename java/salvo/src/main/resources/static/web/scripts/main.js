@@ -1,4 +1,4 @@
-/* Metodos propios de gridstack: 
+/* Metodos propios de gridstack:
 all the functionalities are explained in the gridstack github
 https://github.com/gridstack/gridstack.js/tree/develop/doc
 */
@@ -34,7 +34,7 @@ const loadGrid = function () {
 
     grid = $('#grid').data('gridstack');
 
-    //Aqui se inicializan los widgets(nuestros barcos) en la matriz 
+    //Aqui se inicializan los widgets(nuestros barcos) en la matriz
     //.addWidget(elemento,pos x, pos y, ancho, alto) **
     grid.addWidget($('<div id="patrol_boat"><div class="grid-stack-item-content patrol_boatHorizontal"></div><div/>'),
         0, 1, 2, 1);
@@ -51,7 +51,7 @@ const loadGrid = function () {
     grid.addWidget($('<div id="destroyer"><div class="grid-stack-item-content destroyerHorizontal"></div><div/>'),
         7, 8, 3, 1);
 
-    
+
     //createGrid construye la estructura de la matriz
     createGrid(11, $(".grid-ships"), 'ships')
 
@@ -75,7 +75,7 @@ size:refiere al tamaño de nuestra grilla (siempre sera una matriz
 element: es la tag que contendra nuestra matriz, para este ejemplo
         sera el primer div de nuestro body
 id: sera como lo llamamos, en este caso ship ???)
-*/    
+*/
 const createGrid = function(size, element, id){
     // definimos un nuevo elemento: <div></div>
     let wrapper = document.createElement('DIV')
@@ -112,13 +112,13 @@ const createGrid = function(size, element, id){
                 cell.id = `${id}${i - 1}${ j - 1}`
             }
             //aqui entran las celdas cabecera de cada fila
-            if(j===0 && i > 0){        
+            if(j===0 && i > 0){
                 // textNode: <span></span>
                 let textNode = document.createElement('SPAN')
-                /*String.fromCharCode(): método estático que devuelve 
+                /*String.fromCharCode(): método estático que devuelve
                 una cadena creada mediante el uso de una secuencia de
                 valores Unicode especificada. 64 == @ pero al entrar
-                cuando i sea mayor a cero, su primer valor devuelto 
+                cuando i sea mayor a cero, su primer valor devuelto
                 sera "A" (A==65)
                 <span>A</span>*/
                 textNode.innerText = String.fromCharCode(i+64)
@@ -150,7 +150,7 @@ const createGrid = function(size, element, id){
 /*manejador de evento para rotar los barcos, el mismo se ejecuta al hacer click
 sobre un barco
 function(tipoDeBarco, celda)*/
-const rotateShips = function(shipType, cells){
+var rotateShips = function(shipType, cells){
 
         $(`#${shipType}`).click(function(){
             document.getElementById("alert-text").innerHTML = `Rotaste: ${shipType}`
@@ -163,19 +163,19 @@ const rotateShips = function(shipType, cells){
         .children es una propiedad de sólo lectura que retorna una HTMLCollection "viva"
         de los elementos hijos de un elemento.
         https://developer.mozilla.org/es/docs/Web/API/ParentNode/children
-        El método .hasClass() devuelve verdadero si la clase existe como tal en el 
+        El método .hasClass() devuelve verdadero si la clase existe como tal en el
         elemento/tag incluso si tal elemento posee mas de una clase.
         https://api.jquery.com/hasClass/
         Consultamos si el barco que queremos girar esta en horizontal
         children consulta por el elemento contenido en "this"(tag que lanza el evento)
         ej:
-        <div id="carrier" data-gs-x="0" data-gs-y="3" data-gs-width="5" 
-        data-gs-height="1" class="grid-stack-item ui-draggable ui-resizable 
+        <div id="carrier" data-gs-x="0" data-gs-y="3" data-gs-width="5"
+        data-gs-height="1" class="grid-stack-item ui-draggable ui-resizable
         ui-resizable-autohide ui-resizable-disabled">
             <div class="grid-stack-item-content carrierHorizontal ui-draggable-handle">
             </div>
             <div></div>
-            <div class="ui-resizable-handle ui-resizable-se ui-icon 
+            <div class="ui-resizable-handle ui-resizable-se ui-icon
             ui-icon-gripsmall-diagonal-se" style="z-index: 90; display: none;">
             </div>
         </div>
@@ -206,7 +206,7 @@ const rotateShips = function(shipType, cells){
             }else{
             		document.getElementById("alert-text").innerHTML = "A ship is blocking the way!"
             }
-            
+
         //Este bloque se ejecuta si el barco que queremos girar esta en vertical
         }else{
 
@@ -228,10 +228,9 @@ const rotateShips = function(shipType, cells){
     });
 
 }
-
 //Bucle que consulta por todas las celdas para ver si estan ocupadas o no
 const listenBusyCells = function(id){
-    /* id vendria a ser ships. Recordar el id de las celdas del tablero se arma uniendo 
+    /* id vendria a ser ships. Recordar el id de las celdas del tablero se arma uniendo
     la palabra ships + fila + columna contando desde 0. Asi la primer celda tendra id
     ships00 */
     for(let i = 0; i < 10; i++){
