@@ -1,41 +1,29 @@
-/* Metodos propios de gridstack:
-all the functionalities are explained in the gridstack github
-https://github.com/gridstack/gridstack.js/tree/develop/doc
-*/
+function general(){
 var positions;
+var isStatic;
+if(Ships.length>1){
+isStatic=false;
+}
 $(() => loadGrid())
-//Función principal que dispara el frame gridstack.js y carga la matriz con los barcos
-const loadGrid = function () {
+
+var loadGrid;
+if(isStatic){
+ loadGrid = function () {
     var options = {
-        //matriz 10 x 10
+
         width: 10,
         height: 10,
-        //espacio entre las celdas (widgets)
         verticalMargin: 0,
-        //altura de las celdas
         cellHeight: 45,
-        //inhabilita la posibilidad de modificar el tamaño
         disableResize: true,
-        //floating widgets
 		float: true,
-        //removeTimeout: tiempo en milisegundos antes de que el widget sea removido
-        //mientras se arrastra fuera de la matriz (default: 2000)
-        // removeTimeout:100,
-        //permite al widget ocupar mas de una columna
-        //sirve para no inhabilitar el movimiento en pantallas pequeñas
         disableOneColumnMode: true,
-        // en falso permite arrastrar a los widget, true lo deniega
         staticGrid: false,
-        //para animaciones
         animate: true
     }
-    //inicializacion de la matriz
     $('.grid-stack').gridstack(options);
-
     grid = $('#grid').data('gridstack');
 
-    //Aqui se inicializan los widgets(nuestros barcos) en la matriz
-    //.addWidget(elemento,pos x, pos y, ancho, alto) **
     grid.addWidget($('<div id="patrol_boat"><div class="grid-stack-item-content patrol_boatHorizontal"></div><div/>'),
         0, 1, 2, 1);
 
@@ -52,12 +40,8 @@ const loadGrid = function () {
         7, 8, 3, 1);
 
 
-    //createGrid construye la estructura de la matriz
     createGrid(11, $(".grid-ships"), 'ships')
 
-    //Inicializo los listenener para rotar los barcos, el numero del segundo rgumento
-    //representa la cantidad de celdas que ocupa tal barco
-    rotateShips("carrier", 5)
     rotateShips("battleship", 4)
     rotateShips("submarine",3)
     rotateShips("destroyer", 3)
@@ -68,134 +52,156 @@ const loadGrid = function () {
 }
 
 
-//createGrid construye la estructura de la matriz
-/*
-size:refiere al tamaño de nuestra grilla (siempre sera una matriz
-     de n*n, osea cuadrada)
-element: es la tag que contendra nuestra matriz, para este ejemplo
-        sera el primer div de nuestro body
-id: sera como lo llamamos, en este caso ship ???)
-*/
 const createGrid = function(size, element, id){
-    // definimos un nuevo elemento: <div></div>
     let wrapper = document.createElement('DIV')
-
-    // le agregamos la clase grid-wrapper: <div class="grid-wrapper"></div>
     wrapper.classList.add('grid-wrapper')
 
-    //vamos armando la tabla fila por fila
     for(let i = 0; i < size; i++){
-        //row: <div></div>
         let row = document.createElement('DIV')
-        //row: <div class="grid-row"></div>
         row.classList.add('grid-row')
-        //row: <div id="ship-grid-row0" class="grid-wrapper"></div>
         row.id =`${id}-grid-row${i}`
-        /*
-        wrapper:
-                <div class="grid-wrapper">
-                    <div id="ship-grid-row-0" class="grid-row">
 
-                    </div>
-                </div>
-        */
         wrapper.appendChild(row)
 
         for(let j = 0; j < size; j++){
-            //cell: <div></div>
             let cell = document.createElement('DIV')
-            //cell: <div class="grid-cell"></div>
             cell.classList.add('grid-cell')
-            //aqui entran mis celdas que ocuparan los barcos
             if(i > 0 && j > 0){
-                //cell: <div class="grid-cell" id="ships00"></div>
                 cell.id = `${id}${i - 1}${ j - 1}`
             }
-            //aqui entran las celdas cabecera de cada fila
             if(j===0 && i > 0){
-                // textNode: <span></span>
                 let textNode = document.createElement('SPAN')
-                /*String.fromCharCode(): método estático que devuelve
-                una cadena creada mediante el uso de una secuencia de
-                valores Unicode especificada. 64 == @ pero al entrar
-                cuando i sea mayor a cero, su primer valor devuelto
-                sera "A" (A==65)
-                <span>A</span>*/
                 textNode.innerText = String.fromCharCode(i+64)
-                //cell: <div class="grid-cell" id="ships00"></div>
                 cell.appendChild(textNode)
             }
-            // aqui entran las celdas cabecera de cada columna
             if(i === 0 && j > 0){
-                // textNode: <span>A</span>
                 let textNode = document.createElement('SPAN')
-                // 1
                 textNode.innerText = j
-                //<span>1</span>
                 cell.appendChild(textNode)
             }
-            /*
-            row:
-                <div id="ship-grid-row0" class="grid-row">
-                    <div class="grid-cell"></div>
-                </div>
-            */
             row.appendChild(cell)
         }
     }
 
     element.append(wrapper)
 }
+}else{
+loadGrid=function () {
+             var options = {
 
-/*manejador de evento para rotar los barcos, el mismo se ejecuta al hacer click
-sobre un barco
-function(tipoDeBarco, celda)*/
+                 width: 10,
+                 height: 10,
+                 verticalMargin: 0,
+                 cellHeight: 45,
+                 disableResize: true,
+         		float: true,
+                 disableOneColumnMode: true,
+                 staticGrid: true,
+                 animate: true
+             }
+             $('.grid-stack').gridstack(options);
+             grid = $('#grid').data('gridstack');
+                var patrol= Ships.filter(ship=>ship.Ship == "patrol_boat");
+                var carrier= Ships.filter(ship=>ship.Ship == "carrier");
+                var battleship= Ships.filter(ship=>ship.Ship == "battleship");
+                var submarine = Ships.filter(ship=>ship.Ship == "submarine");
+                var destroyer = Ships.filter(ship=>ship.Ship == "destroyer");
+patrol[0].shipLocation.sort();
+carrier[0].shipLocation.sort();
+battleship[0].shipLocation.sort();
+submarine[0].shipLocation.sort();
+destroyer[0].shipLocation.sort();
+console.log(patrol)
+
+                function Horizontal(ship){
+                if(ship[0].shipLocation[0][0]== ship[0].shipLocation[1][0]){
+                return ship[0].shipLocation.length;
+                }else{
+                return 1
+                }
+                }
+                function Vertical(ship){
+                if(ship[0].shipLocation[0][1]== ship[0].shipLocation[1][1]){
+                                return ship[0].shipLocation.length;
+                                }else{
+                                return 1;
+                                }
+                }
+
+             grid.addWidget($('<div id="patrol_boat"><div class="grid-stack-item-content patrol_boatHorizontal"></div><div/>'),
+                (patrol[0].shipLocation[0].charAt(1)-1) , (patrol[0].shipLocation[0].charCodeAt(0)-65), Horizontal(patrol), Vertical(patrol));
+
+             grid.addWidget($('<div id="carrier"><div class="grid-stack-item-content carrierHorizontal"></div><div/>'),
+                 (carrier[0].shipLocation[0].charAt(1)-1) , (carrier[0].shipLocation[0].charCodeAt(0)-65), Horizontal(carrier), Vertical(carrier));
+
+             grid.addWidget($('<div id="battleship"><div class="grid-stack-item-content battleshipHorizontal"></div><div/>'),
+                 (battleship[0].shipLocation[0].charAt(1)-1) , (battleship[0].shipLocation[0].charCodeAt(0)-65), Horizontal(battleship), Vertical(battleship));
+
+             grid.addWidget($('<div id="submarine"><div class="grid-stack-item-content submarineVertical"></div><div/>'),
+                 (submarine[0].shipLocation[0].charAt(1)-1), (submarine[0].shipLocation[0].charCodeAt(0)-65), Horizontal(submarine), Vertical(submarine));
+
+             grid.addWidget($('<div id="destroyer"><div class="grid-stack-item-content destroyerHorizontal"></div><div/>'),
+                 (destroyer[0].shipLocation[0].charAt(1)-1) , (destroyer[0].shipLocation[0].charCodeAt(0)-65), Horizontal(destroyer), Vertical(destroyer));
+
+
+             createGrid(11, $(".grid-ships"), 'ships')
+
+
+             listenBusyCells('ships')
+             $('.grid-stack').on('change', () => listenBusyCells('ships'))
+         }
+
+
+         const createGrid = function(size, element, id){
+             let wrapper = document.createElement('DIV')
+             wrapper.classList.add('grid-wrapper')
+
+             for(let i = 0; i < size; i++){
+                 let row = document.createElement('DIV')
+                 row.classList.add('grid-row')
+                 row.id =`${id}-grid-row${i}`
+
+                 wrapper.appendChild(row)
+
+                 for(let j = 0; j < size; j++){
+                     let cell = document.createElement('DIV')
+                     cell.classList.add('grid-cell')
+                     if(i > 0 && j > 0){
+                         cell.id = `${id}${i - 1}${ j - 1}`
+                     }
+                     if(j===0 && i > 0){
+                         let textNode = document.createElement('SPAN')
+                         textNode.innerText = String.fromCharCode(i+64)
+                         cell.appendChild(textNode)
+                     }
+                     if(i === 0 && j > 0){
+                         let textNode = document.createElement('SPAN')
+                         textNode.innerText = j
+                         cell.appendChild(textNode)
+                     }
+                     row.appendChild(cell)
+                 }
+             }
+
+             element.append(wrapper)
+         }
+         }
+         }
 var rotateShips = function(shipType, cells){
 
         $(`#${shipType}`).click(function(){
             document.getElementById("alert-text").innerHTML = `Rotaste: ${shipType}`
             console.log($(this))
-            //Establecemos nuevos atributos para el widget/barco que giramos
             let x = +($(this).attr('data-gs-x'))
             let y = +($(this).attr('data-gs-y'))
-        /*
-        this hace referencia al elemento que dispara el evento (osea $(`#${shipType}`))
-        .children es una propiedad de sólo lectura que retorna una HTMLCollection "viva"
-        de los elementos hijos de un elemento.
-        https://developer.mozilla.org/es/docs/Web/API/ParentNode/children
-        El método .hasClass() devuelve verdadero si la clase existe como tal en el
-        elemento/tag incluso si tal elemento posee mas de una clase.
-        https://api.jquery.com/hasClass/
-        Consultamos si el barco que queremos girar esta en horizontal
-        children consulta por el elemento contenido en "this"(tag que lanza el evento)
-        ej:
-        <div id="carrier" data-gs-x="0" data-gs-y="3" data-gs-width="5"
-        data-gs-height="1" class="grid-stack-item ui-draggable ui-resizable
-        ui-resizable-autohide ui-resizable-disabled">
-            <div class="grid-stack-item-content carrierHorizontal ui-draggable-handle">
-            </div>
-            <div></div>
-            <div class="ui-resizable-handle ui-resizable-se ui-icon
-            ui-icon-gripsmall-diagonal-se" style="z-index: 90; display: none;">
-            </div>
-        </div>
-        */
+
         if($(this).children().hasClass(`${shipType}Horizontal`)){
-            // grid.isAreaEmpty revisa si un array esta vacio**
-            // grid.isAreaEmpty(fila, columna, ancho, alto)
         	if(grid.isAreaEmpty(x,y+1,1,cells) || y + cells < 10){
 	            if(y + cells - 1 < 10){
-                    // grid.resize modifica el tamaño de un array(barco en este caso)**
-                    // grid.resize(elemento, ancho, alto)
 	                grid.resize($(this),1,cells);
 	                $(this).children().removeClass(`${shipType}Horizontal`);
 	                $(this).children().addClass(`${shipType}Vertical`);
 	            } else{
-                        /* grid.update(elemento, fila, columna, ancho, alto)**
-                        este metodo actualiza la posicion/tamaño del widget(barco)
-                        ya que rotare el barco a vertical, no me interesa el ancho sino
-                        el alto
-                        */
 	            		grid.update($(this), null, 10 - cells)
 	                	grid.resize($(this),1,cells);
 	                	$(this).children().removeClass(`${shipType}Horizontal`);
@@ -207,7 +213,6 @@ var rotateShips = function(shipType, cells){
             		document.getElementById("alert-text").innerHTML = "A ship is blocking the way!"
             }
 
-        //Este bloque se ejecuta si el barco que queremos girar esta en vertical
         }else{
 
             if(x + cells - 1  < 10){
@@ -215,9 +220,6 @@ var rotateShips = function(shipType, cells){
                 $(this).children().addClass(`${shipType}Horizontal`);
                 $(this).children().removeClass(`${shipType}Vertical`);
             } else{
-                /*en esta ocasion para el update me interesa el ancho y no el alto
-                ya que estoy rotando a horizontal, por estoel tercer argumento no lo
-                declaro (que es lo mismo que poner null o undefined)*/
                 grid.update($(this), 10 - cells)
                 grid.resize($(this),cells,1);
                 $(this).children().addClass(`${shipType}Horizontal`);
@@ -228,11 +230,7 @@ var rotateShips = function(shipType, cells){
     });
 
 }
-//Bucle que consulta por todas las celdas para ver si estan ocupadas o no
 const listenBusyCells = function(id){
-    /* id vendria a ser ships. Recordar el id de las celdas del tablero se arma uniendo
-    la palabra ships + fila + columna contando desde 0. Asi la primer celda tendra id
-    ships00 */
     for(let i = 0; i < 10; i++){
         for(let j = 0; j < 10; j++){
             if(!grid.isAreaEmpty(i,j)){

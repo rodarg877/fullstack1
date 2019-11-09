@@ -1,6 +1,7 @@
 $(function() {
     loadData();
 });
+var Ships=[];
 function getParameterByName(name) {
     var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
@@ -15,11 +16,7 @@ function loadData(){
             else
                 playerInfo = [data.gamePlayers[1].player.email,data.gamePlayers[0].player.email];
             $('#playerInfo').text(playerInfo[0] + '(you) vs ' + playerInfo[1]);
-            data.ships.forEach(function(shipPiece){
-                shipPiece.shipLocation.forEach(function(location){
-                    $('#'+location).addClass('ship-piece');
-                })
-                })
+            Ships=data.ships;
           var salvosP1 = data.salvos.filter(salvoesf => salvoesf.player== playerInfo[0]);
           console.log(salvosP1);
           salvosP1.map(sal=> sal.locations.map(loca=>$('#'+loca+"s").css('background-color', "red")) );
@@ -35,6 +32,7 @@ function loadData(){
                 });
             });
          });
+         general();
          })
         .fail(function( jqXHR, textStatus ) {
           alert( "Failed: " + textStatus );
@@ -47,7 +45,6 @@ function addShip(){
         var battleship = obtenerPosicion("battleship")
         var submarine = obtenerPosicion("submarine")
         var destroyer = obtenerPosicion("destroyer")
-        console.log(carrier);
         $.post({
           url: "/api/games/players/"+getParameterByName('gp')+"/ship",
           data: JSON.stringify([carrier,patrol,battleship, submarine,destroyer]),
@@ -55,7 +52,7 @@ function addShip(){
           contentType: "application/json"
         })
         .done(function (response, status, jqXHR) {
-        
+        location.reload();
           alert( "Ship added: " + response );
         })
         .fail(function (jqXHR, status, httpError) {
