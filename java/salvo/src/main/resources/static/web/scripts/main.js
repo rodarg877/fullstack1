@@ -3,10 +3,45 @@ var positions;
 var isStatic;
 if(Ships.length>1){
 isStatic=false;
+}else{
+isStatic=true
 }
 $(() => loadGrid())
 
 var loadGrid;
+const createGrid = function(size, element, id){
+    let wrapper = document.createElement('DIV')
+    wrapper.classList.add('grid-wrapper')
+
+    for(let i = 0; i < size; i++){
+        let row = document.createElement('DIV')
+        row.classList.add('grid-row')
+        row.id =`${id}-grid-row${i}`
+
+        wrapper.appendChild(row)
+
+        for(let j = 0; j < size; j++){
+            let cell = document.createElement('DIV')
+            cell.classList.add('grid-cell')
+            if(i > 0 && j > 0){
+                cell.id = `${id}${i - 1}${ j - 1}`
+            }
+            if(j===0 && i > 0){
+                let textNode = document.createElement('SPAN')
+                textNode.innerText = String.fromCharCode(i+64)
+                cell.appendChild(textNode)
+            }
+            if(i === 0 && j > 0){
+                let textNode = document.createElement('SPAN')
+                textNode.innerText = j
+                cell.appendChild(textNode)
+            }
+            row.appendChild(cell)
+        }
+    }
+
+    element.append(wrapper)
+}
 if(isStatic){
  loadGrid = function () {
     var options = {
@@ -49,41 +84,7 @@ if(isStatic){
 
     listenBusyCells('ships')
     $('.grid-stack').on('change', () => listenBusyCells('ships'))
-}
 
-
-const createGrid = function(size, element, id){
-    let wrapper = document.createElement('DIV')
-    wrapper.classList.add('grid-wrapper')
-
-    for(let i = 0; i < size; i++){
-        let row = document.createElement('DIV')
-        row.classList.add('grid-row')
-        row.id =`${id}-grid-row${i}`
-
-        wrapper.appendChild(row)
-
-        for(let j = 0; j < size; j++){
-            let cell = document.createElement('DIV')
-            cell.classList.add('grid-cell')
-            if(i > 0 && j > 0){
-                cell.id = `${id}${i - 1}${ j - 1}`
-            }
-            if(j===0 && i > 0){
-                let textNode = document.createElement('SPAN')
-                textNode.innerText = String.fromCharCode(i+64)
-                cell.appendChild(textNode)
-            }
-            if(i === 0 && j > 0){
-                let textNode = document.createElement('SPAN')
-                textNode.innerText = j
-                cell.appendChild(textNode)
-            }
-            row.appendChild(cell)
-        }
-    }
-
-    element.append(wrapper)
 }
 }else{
 loadGrid=function () {
@@ -111,7 +112,6 @@ carrier[0].shipLocation.sort();
 battleship[0].shipLocation.sort();
 submarine[0].shipLocation.sort();
 destroyer[0].shipLocation.sort();
-console.log(patrol)
 
                 function Horizontal(ship){
                 if(ship[0].shipLocation[0][0]== ship[0].shipLocation[1][0]){
@@ -129,19 +129,19 @@ console.log(patrol)
                 }
 
              grid.addWidget($('<div id="patrol_boat"><div class="grid-stack-item-content patrol_boatHorizontal"></div><div/>'),
-                (patrol[0].shipLocation[0].charAt(1)-1) , (patrol[0].shipLocation[0].charCodeAt(0)-65), Horizontal(patrol), Vertical(patrol));
+                (patrol[0].shipLocation[0].substring(1)-1) , (patrol[0].shipLocation[0].charCodeAt(0)-65), Horizontal(patrol), Vertical(patrol));
 
              grid.addWidget($('<div id="carrier"><div class="grid-stack-item-content carrierHorizontal"></div><div/>'),
-                 (carrier[0].shipLocation[0].charAt(1)-1) , (carrier[0].shipLocation[0].charCodeAt(0)-65), Horizontal(carrier), Vertical(carrier));
+                 (carrier[0].shipLocation[0].substring(1)-1) , (carrier[0].shipLocation[0].charCodeAt(0)-65), Horizontal(carrier), Vertical(carrier));
 
              grid.addWidget($('<div id="battleship"><div class="grid-stack-item-content battleshipHorizontal"></div><div/>'),
-                 (battleship[0].shipLocation[0].charAt(1)-1) , (battleship[0].shipLocation[0].charCodeAt(0)-65), Horizontal(battleship), Vertical(battleship));
+                 (battleship[0].shipLocation[0].substring(1)-1) , (battleship[0].shipLocation[0].charCodeAt(0)-65), Horizontal(battleship), Vertical(battleship));
 
              grid.addWidget($('<div id="submarine"><div class="grid-stack-item-content submarineVertical"></div><div/>'),
-                 (submarine[0].shipLocation[0].charAt(1)-1), (submarine[0].shipLocation[0].charCodeAt(0)-65), Horizontal(submarine), Vertical(submarine));
+                 (submarine[0].shipLocation[0].substring(1)-1), (submarine[0].shipLocation[0].charCodeAt(0)-65), Horizontal(submarine), Vertical(submarine));
 
              grid.addWidget($('<div id="destroyer"><div class="grid-stack-item-content destroyerHorizontal"></div><div/>'),
-                 (destroyer[0].shipLocation[0].charAt(1)-1) , (destroyer[0].shipLocation[0].charCodeAt(0)-65), Horizontal(destroyer), Vertical(destroyer));
+                 (destroyer[0].shipLocation[0].substring(1)-1) , (destroyer[0].shipLocation[0].charCodeAt(0)-65), Horizontal(destroyer), Vertical(destroyer));
 
 
              createGrid(11, $(".grid-ships"), 'ships')
@@ -150,41 +150,7 @@ console.log(patrol)
              listenBusyCells('ships')
              $('.grid-stack').on('change', () => listenBusyCells('ships'))
          }
-
-
-         const createGrid = function(size, element, id){
-             let wrapper = document.createElement('DIV')
-             wrapper.classList.add('grid-wrapper')
-
-             for(let i = 0; i < size; i++){
-                 let row = document.createElement('DIV')
-                 row.classList.add('grid-row')
-                 row.id =`${id}-grid-row${i}`
-
-                 wrapper.appendChild(row)
-
-                 for(let j = 0; j < size; j++){
-                     let cell = document.createElement('DIV')
-                     cell.classList.add('grid-cell')
-                     if(i > 0 && j > 0){
-                         cell.id = `${id}${i - 1}${ j - 1}`
-                     }
-                     if(j===0 && i > 0){
-                         let textNode = document.createElement('SPAN')
-                         textNode.innerText = String.fromCharCode(i+64)
-                         cell.appendChild(textNode)
-                     }
-                     if(i === 0 && j > 0){
-                         let textNode = document.createElement('SPAN')
-                         textNode.innerText = j
-                         cell.appendChild(textNode)
-                     }
-                     row.appendChild(cell)
-                 }
-             }
-
-             element.append(wrapper)
-         }
+         createGrid(11, $(".grid-salvoes"), 'salvoes')
          }
          }
 var rotateShips = function(shipType, cells){
@@ -261,8 +227,6 @@ carrier1.positions.push(String.fromCharCode(parseInt(carrier1.y)+65+i) + (parseI
 var objShip = new Object();
 objShip["ship"]= carrier1.name;
 objShip["shipLocation"]= carrier1.positions;
-
 return objShip;
-
     }
 

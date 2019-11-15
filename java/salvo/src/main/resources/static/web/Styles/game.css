@@ -1,21 +1,4 @@
-.ship-piece{
-    background-color: mediumpurple;
-}
-​
-.ship-piece-hited{
-    background-color: red;
-}
-​
-.salvo{
-    background-color: crimson;
-}
-#salvoFireT{
-float:right;
-}
-#tableros{
-display: -webkit-flex;
-      -webkit-flex-direction: row;
-}
+
 body{
     background-image: url(../Img/radar.jpg);
     background-repeat: no-repeat;
@@ -102,13 +85,18 @@ body{
 
     .grid-ships{
         background-size: cover;
-        border: 2px solid rgb(128,128,128);
-        border-radius: 10px;
         height: 495px;
         width: 495px;
         margin: auto;
         margin-top: 10vh
     }
+    .grid-salvoes{
+            background-size: cover;
+            height: 495px;
+            width: 495px;
+            margin: auto;
+            margin-top: 10vh
+        }
 
     #grid{
         margin: 45px 0 0 45px;

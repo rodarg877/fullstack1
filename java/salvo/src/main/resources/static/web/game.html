@@ -17,23 +17,27 @@
 </head>
 
 <body class="bg-dark text-light container-fluid">
-  <div class="">
     <h2 id="playerInfo"></h2>
-  </div>
   <div class="row text-center">
     <h1 class="col-12">Game Board</h1>
   </div>
-
-    <div class="col-1">
-    </div>
-      <div class="grid-ships">
-
+  <div class="row text-center">
+      <div class="grid-ships col-5 ml-3">
+        <h2 class="text-center">Ships</h2>
         <div id="grid" class="grid-stack grid-stack-10">
         </div>
-      </div>
-  <small id="alert-text"></small>
-    <div class="col-1">
+        <div>
+        <button onclick="addship()"  class="btn btn-primary"> Submit Ships</button>
+        </div>
+        </div>
+
+  <div class="col-5 grid-salvoes ml-3">
+    <h2 class="text-center">Salvoes</h2>
+    <div id="grid2" class="grid-stack grid-stack-10 ">
     </div>
+  </div>
+  </div>
+  <small id="alert-text"></small>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>

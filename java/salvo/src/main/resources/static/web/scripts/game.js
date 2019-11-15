@@ -9,14 +9,16 @@ function getParameterByName(name) {
 function loadData(){
     $.get('/api/game_view/'+getParameterByName('gp'))
         .done(function(data) {
+        console.log(data)
             let playerInfo;
             var ShipLocations;
-            if(data.gamePlayers[0].id == getParameterByName('gp'))
+            if(data.gamePlayers[0].id == getParameterByName('gp')){
                 playerInfo = [data.gamePlayers[0].player.email,data.gamePlayers[1].player.email];
-            else
+           } else{
                 playerInfo = [data.gamePlayers[1].player.email,data.gamePlayers[0].player.email];
             $('#playerInfo').text(playerInfo[0] + '(you) vs ' + playerInfo[1]);
-            Ships=data.ships;
+           }
+           Ships=data.ships;
           var salvosP1 = data.salvos.filter(salvoesf => salvoesf.player== playerInfo[0]);
           console.log(salvosP1);
           salvosP1.map(sal=> sal.locations.map(loca=>$('#'+loca+"s").css('background-color', "red")) );
