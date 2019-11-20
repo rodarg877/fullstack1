@@ -67,7 +67,11 @@ body{
         background-position: center;
         width: 45px !important;
     }
-
+    .salvo{
+        background-image: url('../Img/ships/aa.jpg');
+        background-size: 150% 100%;
+        background-position: center;
+    }
     .patrol_boatHorizontal{
         background-image: url('../Img/ships/patrol_boat.png');
         background-size: 100% 150%;
@@ -99,6 +103,12 @@ body{
         }
 
     #grid{
+        margin: 45px 0 0 45px;
+        position: absolute;
+        width: 450px;
+
+    }
+    #grid2{
         margin: 45px 0 0 45px;
         position: absolute;
         width: 450px;
