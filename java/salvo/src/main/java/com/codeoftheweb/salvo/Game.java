@@ -57,4 +57,7 @@ public class   Game {
     public List<Map<String, Object>>  getAllGamePlayers(Set<GamePlayer> gamePlayers){
       return  gamePlayers.stream().map(gamePlayer -> gamePlayer.makeGamePlayerDTO()).collect(Collectors.toList());
     }
+    public GamePlayer getOppo(long id){
+        return this.gamePlayers.stream().filter(gp-> gp.getId()!=id).findFirst().get();
+    }
 }

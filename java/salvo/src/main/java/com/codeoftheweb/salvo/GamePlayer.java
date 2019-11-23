@@ -104,4 +104,24 @@ public class GamePlayer{
                                  .stream()
                                  .map(sal->sal.makeSalvoDTO())).collect(Collectors.toList());
     }
+    public Map<String, Object> getHits(Set<GamePlayer> gamePlayers, Player player) {
+        Map<String, Object> hits = new LinkedHashMap<String, Object>();
+        List<Map<String, Object>> self =new ArrayList<>();
+        List<Map<String, Object>> oppo =new ArrayList<>();
+
+        List<Map<String, Object>> inu = gamePlayers.stream().flatMap(GP -> GP.getSalvoes().stream()
+                .map(Sal -> {
+                            if (Sal.getGamePlayer().getPlayer().getUserName() == player.getUserName()){
+                                oppo.add(Sal.makeSalvoDTO());
+                                return Sal.makeSalvoDTO();
+                            }else{
+                                self.add(Sal.makeSalvoDTO());
+                                return Sal.makeSalvoDTO();
+                            }
+                        }
+                )).collect(Collectors.toList());
+        hits.put("opponent", oppo );
+        hits.put("self", self);
+        return hits;
+    }
 }

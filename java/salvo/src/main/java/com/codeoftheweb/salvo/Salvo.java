@@ -51,6 +51,10 @@ public class Salvo {
         this.turn = turn;
     }
 
+    public void setGamePlayer(GamePlayer gamePlayer) {
+        this.gamePlayer = gamePlayer;
+    }
+
     public void setSalvoLocation(Set<String> salvoLocation) {
         this.salvoLocation = salvoLocation;
     }

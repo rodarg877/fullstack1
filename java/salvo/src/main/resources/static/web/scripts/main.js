@@ -165,6 +165,7 @@ imgPosition(carrier)
 			listenBusyCells('ships')
 			$('.grid-stack').on('change', () => listenBusyCells('ships'))
 		}
+
 		loadGrid2 = function () {
 			var options2 = {
 
@@ -179,18 +180,21 @@ imgPosition(carrier)
 				animate: true
 			}
 			$('.grid-stack').gridstack(options2);
-			grid = $('#grid2').data('gridstack');
+			grid2 = $('#grid2').data('gridstack');
 
-			grid.addWidget($('<div id="salvo0"><div class="grid-stack-item-content salvo"></div><div/>'),
+			grid2.addWidget($('<div id="salvo0"><div class="grid-stack-item-content salvo"></div><div/>'),
 				0, 1, 1, 1);
-			grid.addWidget($('<div id="salvo1"><div class="grid-stack-item-content salvo"></div><div/>'),
+			grid2.addWidget($('<div id="salvo1"><div class="grid-stack-item-content salvo"></div><div/>'),
 				0, 2, 1, 1);
-			grid.addWidget($('<div id="salvo2"><div class="grid-stack-item-content salvo"></div><div/>'),
+			grid2.addWidget($('<div id="salvo2"><div class="grid-stack-item-content salvo"></div><div/>'),
 				0, 3, 1, 1);
+			grid2.addWidget($('<div id="salvo3"><div class="grid-stack-item-content salvo"></div><div/>'),
+                0, 4, 1, 1);
+             grid2.addWidget($('<div id="salvo4"><div class="grid-stack-item-content salvo"></div><div/>'),
+                0, 5, 1, 1);
 			createGrid(11, $(".grid-salvoes"), 'salvoes')
 			
-			listenBusyCells('salvoes')
-			$('.grid-stack').on('change', () => listenBusyCells('salvoes'))
+
 		}
 	}
 }

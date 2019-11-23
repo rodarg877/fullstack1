@@ -189,7 +189,6 @@ function showSelf(gamePlayerData) {
 		$('#OpponentPlayerName').addClass('waitingPlayer');
 	}
 
-    console.log(gamePlayerData.id);
 	let DateCreated = new Date(gamePlayerData.creationDate);
 	DateCreated = DateCreated.getMonth() + 1 + "/" + DateCreated.getDate() + " " + DateCreated.getHours() + ":" + DateCreated.getMinutes();
 	$('#gamePlayerDetails').html('<span class="labelGame">Game ID: </span><span class="labelGameBig">' + gamePlayerData.id + '</span><span class="labelGame"> Created: </span><span class="labelGameBig">' + DateCreated + '</span>');
@@ -201,9 +200,9 @@ function showSelf(gamePlayerData) {
 		let firstCellID;
 		firstCellID = "#p1_" + ship.shipLocation[0];
 		if (ship.shipLocation[0].substring(1) === ship.shipLocation[1].substring(1)) {
-			$(firstCellID).html('<img class="shipsImgOnSelfGridVer" src="img/' + ship.type + 'ver.png">');
+			$(firstCellID).html('<img class="shipsImgOnSelfGridVer" src="img/' + ship.Ship + 'ver.png">');
 		} else {
-			$(firstCellID).html('<img class="shipsImgOnSelfGridHor" src="img/' + ship.type + 'hor.png">');
+			$(firstCellID).html('<img class="shipsImgOnSelfGridHor" src="img/' + ship.Ship+ 'hor.png">');
 		}
 		// console.log(ship.type);
 		ship.shipLocation.forEach(function (location) {
@@ -339,7 +338,7 @@ function makeSalvoJSON() {
 		salvoPositions.push(salvo5cellID);
 	}
 
-	salvoJSON = JSON.stringify({locations: salvoPositions});
+	salvoJSON = JSON.stringify({salvoLocation: salvoPositions});
 	console.log(salvoJSON);
 }
 
@@ -367,6 +366,7 @@ function makeGameRecordTable(hitsArray, gameRecordTableId) {
 				shipsAfloat--;
 			}
 		}
+
 		if (playTurn.damages.battleshipHits > 0) {
 			hitsReport += "Battleship " + addDamagesIcons(playTurn.damages.battleshipHits, "hit") + " ";
 			if (playTurn.damages.battleship === 4) {
@@ -399,13 +399,17 @@ function makeGameRecordTable(hitsArray, gameRecordTableId) {
 				shipsAfloat--;
 			}
 		}
+
 		if (playTurn.missed > 0) {
 			hitsReport += "Missed shots " + addDamagesIcons(playTurn.missed, "missed") + " ";
 		}
+
 		if (hitsReport === "") {
 			hitsReport = "All salvoes missed! No damages!"
 		}
+
 		$('<tr><td class="textCenter">' + playTurn.turn + '</td><td>' + hitsReport + '</td></tr>').prependTo(tableId);
+
 	});
 	*/
 	$('#shipsLeftSelfCount').text(shipsAfloat);
@@ -435,3 +439,8 @@ function getTurn(gamePlayerData) {
 	}
 	return turn;
 }
+
+
+
+
+
