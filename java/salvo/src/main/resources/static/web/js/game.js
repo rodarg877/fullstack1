@@ -25,7 +25,7 @@ function refreshGameView(){
 	$.ajax({
 		url: gpUrl, type: 'GET', success: function (data) {
 			gamePlayerData = data;
-			$('#gameStateBlock').html('<span class="gameStateLabel">TURN: </span><span class="gameStateLabelBig">' + /*getTurn(gamePlayerData) +*/ '</span><span class="gameStateLabel"> ACTION REQUIRED: </span><span class="gameStateLabelBig">' + "gamePlayerData.gameState" + '</span>');
+			$('#gameStateBlock').html('<span class="gameStateLabel">TURN: </span><span class="gameStateLabelBig">' + /*getTurn(gamePlayerData) +*/ '</span><span class="gameStateLabel"> ACTION REQUIRED: </span><span class="gameStateLabelBig">' + gamePlayerData.gameState + '</span>');
 
 			console.log("waitState: " + waitState);
 
@@ -225,11 +225,13 @@ function showSelf(gamePlayerData) {
 				cellID = "#p1_" + location;
 				if ($(cellID).hasClass("shipCell")) {
 					$(cellID).addClass("hitCell");
+					$(cellID).removeClass("droppable");
 
 					//          console.log("Opponent Hits Ship on " + location);
 				} else {
 					$(cellID).addClass("salvoCellSelf");
 					$(cellID).text(salvo.turn);
+					$(cellID).removeClass("droppable");
 					//          console.log("Opponent salvo on " + location);
 				}
 			}
@@ -355,7 +357,7 @@ function makeGameRecordTable(hitsArray, gameRecordTableId) {
 		playerTag = "#";
 	}
 
-    /*
+
 	hitsArray.forEach(function (playTurn) {
 		let hitsReport = "";
 		if (playTurn.damages.carrierHits > 0) {
@@ -411,7 +413,7 @@ function makeGameRecordTable(hitsArray, gameRecordTableId) {
 		$('<tr><td class="textCenter">' + playTurn.turn + '</td><td>' + hitsReport + '</td></tr>').prependTo(tableId);
 
 	});
-	*/
+
 	$('#shipsLeftSelfCount').text(shipsAfloat);
 }
 

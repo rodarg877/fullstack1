@@ -37,6 +37,53 @@ public class GameController {
             GamePlayer gamePlayer= gamePlayerRepository.save(new GamePlayer(player,game));
     return new ResponseEntity<>(makeMap("gpid",gamePlayer.getId()),HttpStatus.CREATED);
         }
+    @Autowired
+    ShipRepository shipRepository;
+
+    @RequestMapping(value = "/games/players/{id}/ships", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, Object>> addShip(@PathVariable Long id,Authentication authentication, @RequestBody Set<Ship> ships) {
+        if (GameController.isGuest(authentication)) {
+            return new ResponseEntity<>(makeMap("error","usuario no logueado"), HttpStatus.UNAUTHORIZED);
+        }
+        GamePlayer gamePlayer = gamePlayerRepository.findById(id).orElse(null);
+        Player player = playerRepository.findByUserName(authentication.getName()).orElse(null);
+        if (gamePlayer.getPlayer().getId() != player.getId()) {
+            return new ResponseEntity<>(makeMap("error","usuario incorrecto"), HttpStatus.UNAUTHORIZED);
+        }
+        if(!gamePlayer.getShips().isEmpty()){
+            return new ResponseEntity<>(makeMap("error","barcos ya cargados"), HttpStatus.FORBIDDEN);
+        }
+        ships.stream().map(ship -> {
+            ship.setGamePlayer(gamePlayer);
+            return shipRepository.save(ship);
+        }).collect(Collectors.toSet());
+        return new ResponseEntity<>(makeMap("Creado","Creado"), HttpStatus.CREATED);
+    }
+    @Autowired
+    SalvoRepository salvoRepository;
+
+    @RequestMapping(value = "/games/players/{id}/salvoes", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, Object>> addShip(@PathVariable Long id,Authentication authentication, @RequestBody Salvo salvos) {
+        if (GameController.isGuest(authentication)) {
+            return new ResponseEntity<>(makeMap("error","usuario no logueado"), HttpStatus.UNAUTHORIZED);
+        }
+        GamePlayer gamePlayer = gamePlayerRepository.findById(id).orElse(null);
+        Player player = playerRepository.findByUserName(authentication.getName()).orElse(null);
+        if (gamePlayer.getPlayer().getId() != player.getId()) {
+            return new ResponseEntity<>(makeMap("error","usuario incorrecto"), HttpStatus.UNAUTHORIZED);
+        }
+        if (gamePlayer.getSalvoes().isEmpty()){
+            salvos.setTurn(1);
+        }
+        if (gamePlayer.getSalvoes().size() <= gamePlayer.getGame().getOppo(id).getSalvoes().size()){
+            salvos.setTurn(gamePlayer.getSalvoes().size()+1);
+        } else {
+            return new ResponseEntity<>(makeMap("Espere a que finalice el turno", ""), HttpStatus.UNAUTHORIZED);
+        }
+        salvos.setGamePlayer(gamePlayer);
+        salvoRepository.save(salvos);
+        return new ResponseEntity<>(makeMap("Salvos guardados",""), HttpStatus.CREATED);
+    }
         public static boolean isGuest(Authentication authentication) {
             return authentication == null || authentication instanceof AnonymousAuthenticationToken;
         }

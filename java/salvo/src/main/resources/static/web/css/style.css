@@ -1,6 +1,9 @@
 body {
-    background: url(../img/back2.jpg);
-    font-family: 'Dosis', sans-serif;
+      background-image: url(../Img/radar.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: 'Press Start 2P', cursive;
+        font-stretch: expanded;
 }
 
 .bannerTitle {
@@ -46,6 +49,7 @@ body {
     text-transform: uppercase;
     font-weight: 600;
     margin: 0;
+    color: white;
 }
 
 .shipPoslabel {
@@ -106,29 +110,31 @@ body {
 }
 
 #currentPlayerName {
-
+color:white;
 }
-
+#OpponentPlayerName{
+color:white;
+}
 .shipCell {
     /*background-color: yellowgreen;*/
 }
 
 .salvoCell {
-    background-image: url(../img/target.png);
+    background-image: url(../Img/target.png);
     background-size: cover;
     /* background-color: #87cefa00; */
     color: white;
 }
 
 .salvoCellSelf {
-    background-image: url(../img/targetself.png);
+    background-image: url(../Img/targetself.png);
     background-size: cover;
     /* background-color: #87cefa00; */
     color: #888888;
 }
 
 .hitCell {
-    background-image: url(../img/hit3.gif);
+    background-image: url(../Img/hit3.gif);
     background-size: cover;
 }
 
@@ -142,6 +148,7 @@ body {
 
 #gamePlayerDetails {
     text-align: center;
+    font-size: 40%;
 }
 
 .textCenter {
