@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Entity
-public class Salvo {
+public class    Salvo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")

@@ -215,7 +215,7 @@ function showSelf(gamePlayerData) {
 		//  console.log("Turn: " + salvo.turn);
 		salvo.locations.forEach(function (location) {
 			var cellID;
-			if (salvo.player == youID) {
+			if (salvos.player == youID) {
 				cellID = "#" + location;
 				$(cellID).addClass("salvoCell");
 

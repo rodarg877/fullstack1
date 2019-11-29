@@ -137,44 +137,42 @@ public class GamePlayer{
                 long submarineHitsInTurn = 0;
                 long destroyerHitsInTurn = 0;
                 long patrolboatHitsInTurn = 0;
-                long missedShots = salvo.getSalvoLocation().size();
+                long missedShots = 0;
 
                 Map<String, Object> hitsMapPerTurn = new LinkedHashMap<>();
                 Map<String, Object> damagesPerTurn = new LinkedHashMap<>();
 
                 List<String> salvoLocationsList = new ArrayList<>();
-                List<String> hitCellsList = new ArrayList<>();
+                List<String> hitCellsList = new ArrayList<String>();
 
                 for (String salvoShot : salvo.getSalvoLocation()) {
                     if (carrierLocation.contains(salvoShot)) {
                         carrierDamage++;
                         carrierHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
                     }
                     if (battleshipLocation.contains(salvoShot)) {
                         battleshipDamage++;
                         battleshipHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
                     }
                     if (submarineLocation.contains(salvoShot)) {
                         submarineDamage++;
                         submarineHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
                     }
                     if (destroyerLocation.contains(salvoShot)) {
                         destroyerDamage++;
                         destroyerHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
                     }
                     if (patrolboatLocation.contains(salvoShot)) {
                         patrolboatDamage++;
                         patrolboatHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
+                    }else{
+                        hitCellsList.add(salvoShot);
+                        missedShots++;
                     }
                 }
                 damagesPerTurn.put("carrierHits", carrierHitsInTurn);
