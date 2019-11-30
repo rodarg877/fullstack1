@@ -137,7 +137,7 @@ public class GamePlayer{
                 long submarineHitsInTurn = 0;
                 long destroyerHitsInTurn = 0;
                 long patrolboatHitsInTurn = 0;
-                long missedShots = 0;
+                long missedShots = salvo.getSalvoLocation().size();
 
                 Map<String, Object> hitsMapPerTurn = new LinkedHashMap<>();
                 Map<String, Object> damagesPerTurn = new LinkedHashMap<>();
@@ -150,29 +150,31 @@ public class GamePlayer{
                         carrierDamage++;
                         carrierHitsInTurn++;
                         hitCellsList.add(salvoShot);
+                        missedShots--;
                     }
                     if (battleshipLocation.contains(salvoShot)) {
                         battleshipDamage++;
                         battleshipHitsInTurn++;
                         hitCellsList.add(salvoShot);
+                        missedShots--;
                     }
                     if (submarineLocation.contains(salvoShot)) {
                         submarineDamage++;
                         submarineHitsInTurn++;
                         hitCellsList.add(salvoShot);
+                        missedShots--;
                     }
                     if (destroyerLocation.contains(salvoShot)) {
                         destroyerDamage++;
                         destroyerHitsInTurn++;
                         hitCellsList.add(salvoShot);
+                        missedShots--;
                     }
                     if (patrolboatLocation.contains(salvoShot)) {
                         patrolboatDamage++;
                         patrolboatHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                    }else{
-                        hitCellsList.add(salvoShot);
-                        missedShots++;
+                        missedShots--;
                     }
                 }
                 damagesPerTurn.put("carrierHits", carrierHitsInTurn);
@@ -203,7 +205,7 @@ public class GamePlayer{
                 .orElse(new GamePlayer());
     }
 
-    private Set<String>  getLocatiosShip(String type, GamePlayer gamePlayer){
-        return  gamePlayer.getShips().size()  ==  0 ? new HashSet<>() : gamePlayer.getShips().stream().filter(ship -> ship.getShip().equals(ship)).findFirst().get().getShipLocation();
+    private Set<String>  getLocatiosShip(String ship, GamePlayer gamePlayer){
+        return  gamePlayer.getShips().size()  ==  0 ? new HashSet<>() : gamePlayer.getShips().stream().filter(ships -> ships.getShip().equals(ship)).findFirst().get().getShipLocation();
     }
 }

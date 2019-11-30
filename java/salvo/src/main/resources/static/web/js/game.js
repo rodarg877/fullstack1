@@ -211,37 +211,32 @@ function showSelf(gamePlayerData) {
 			//     console.log(location);
 		});
 	});
-	gamePlayerData.hits.self.forEach(function (salvo) {
+	gamePlayerData.hits.opponent.forEach(function (salvo) {
 		//  console.log("Turn: " + salvo.turn);
-		salvo.locations.forEach(function (location) {
-			var cellID;
-			if (salvos.player == youID) {
-				cellID = "#" + location;
-				$(cellID).addClass("salvoCell");
+		gamePlayerData.salvos.forEach(function(salvo1){
+		salvo1.locations.forEach(function (location1){
+		var cellID;
+        			if (!salvo.locations.includes(location1)) {
+        				cellID = "#" + location1;
+        				$(cellID).addClass("salvoCell");
+                        $(cellID).removeClass("droppable");
+        				$(cellID).text(salvo.turn);
+        				$(cellID).addClass("salvoCellSelf");
+                        $(cellID).text(salvo.turn);
+        			} else {
+        				cellID = "#" + location1;
+        					$(cellID).addClass(" hitCell");
+        					$(cellID).removeClass("droppable");
 
-				//        console.log("Your salvo on " + location);
-				$(cellID).text(salvo.turn);
-			} else {
-				cellID = "#p1_" + location;
-				if ($(cellID).hasClass("shipCell")) {
-					$(cellID).addClass("hitCell");
-					$(cellID).removeClass("droppable");
-
-					//          console.log("Opponent Hits Ship on " + location);
-				} else {
-					$(cellID).addClass("salvoCellSelf");
-					$(cellID).text(salvo.turn);
-					$(cellID).removeClass("droppable");
-					//          console.log("Opponent salvo on " + location);
-				}
-			}
-
+        					//          console.log("Opponent Hits Ship on " + location);
+        				}
+		});
 		});
 	});
 
-	gamePlayerData.hits.opponent.forEach(function (playTurn) {
+	gamePlayerData.hits.self.forEach(function (playTurn) {
 		playTurn.locations.forEach(function (hitCell) {
-			cellID = "#" + hitCell;
+			cellID = "#p1_" + hitCell;
 			$(cellID).addClass("hitCell");
 		});
 	});
