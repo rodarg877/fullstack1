@@ -33,9 +33,7 @@ function postShipLocations(postUrl) {
 				function () {
 					$('#placingShipsBoard').hide("slow");
 					refreshGameView();
-
 				}, 4000);
-
 		})
 		.fail(function (response) {
 			console.log(response);

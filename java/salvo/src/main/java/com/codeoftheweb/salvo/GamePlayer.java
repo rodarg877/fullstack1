@@ -189,6 +189,7 @@ public class GamePlayer{
 
                 hitsMapPerTurn.put("turn", salvo.getTurn());
                 hitsMapPerTurn.put("locations", hitCellsList);
+                hitsMapPerTurn.put("missedLocations", missedLocations);
                 hitsMapPerTurn.put("damages", damagesPerTurn);
                 hitsMapPerTurn.put("missed", missedShots);
                 hits.add(hitsMapPerTurn);
