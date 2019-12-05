@@ -213,32 +213,29 @@ function showSelf(gamePlayerData) {
 	});
 	gamePlayerData.hits.opponent.forEach(function (salvo) {
 		//  console.log("Turn: " + salvo.turn);
-		gamePlayerData.salvos.forEach(function(salvo1){
-		salvo1.locations.forEach(function (location1){
-		var cellID;
-        			if (!salvo.locations.includes(location1)) {
-        				cellID = "#" + location1;
-        				$(cellID).addClass("salvoCell");
-                        $(cellID).removeClass("droppable");
-        				$(cellID).text(salvo.turn);
-        				$(cellID).addClass("salvoCellSelf");
-                        $(cellID).text(salvo.turn);
-        			} else {
-        				cellID = "#" + location1;
-        					$(cellID).addClass(" hitCell");
-        					$(cellID).removeClass("droppable");
 
-        					//          console.log("Opponent Hits Ship on " + location);
-        				}
+		salvo.locations.forEach(function (location1){
+		var cellID;
+        				cellID = "#" + location1;
+                        $(cellID).removeClass("droppable");
+        				$(cellID).addClass("hitCell");
+
+		});
+		salvo.missedLocations.forEach(function(location){
+		                        cellID = "#" + location1;
+                                $(cellID).removeClass("droppable");
+                				$(cellID).text(salvo.turn);
+                				$(cellID).addClass("salvoCellSelf");
+                                $(cellID).text(salvo.turn);
 		});
 		});
-	});
 
 	gamePlayerData.hits.self.forEach(function (playTurn) {
 		playTurn.locations.forEach(function (hitCell) {
 			cellID = "#p1_" + hitCell;
 			$(cellID).addClass("hitCell");
 		});
+
 	});
 }
 

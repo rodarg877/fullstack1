@@ -137,12 +137,12 @@ public class GamePlayer{
                 long submarineHitsInTurn = 0;
                 long destroyerHitsInTurn = 0;
                 long patrolboatHitsInTurn = 0;
-                long missedShots = salvo.getSalvoLocation().size();
+                long missedShots = 0;
 
                 Map<String, Object> hitsMapPerTurn = new LinkedHashMap<>();
                 Map<String, Object> damagesPerTurn = new LinkedHashMap<>();
 
-                List<String> salvoLocationsList = new ArrayList<>();
+                List<String> missedLocations = new ArrayList<>();
                 List<String> hitCellsList = new ArrayList<String>();
 
                 for (String salvoShot : salvo.getSalvoLocation()) {
@@ -150,31 +150,30 @@ public class GamePlayer{
                         carrierDamage++;
                         carrierHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
                     }
-                    if (battleshipLocation.contains(salvoShot)) {
+                    else if (battleshipLocation.contains(salvoShot)) {
                         battleshipDamage++;
                         battleshipHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
                     }
-                    if (submarineLocation.contains(salvoShot)) {
+                    else if (submarineLocation.contains(salvoShot)) {
                         submarineDamage++;
                         submarineHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
                     }
-                    if (destroyerLocation.contains(salvoShot)) {
+                     else if (destroyerLocation.contains(salvoShot)) {
                         destroyerDamage++;
                         destroyerHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
                     }
-                    if (patrolboatLocation.contains(salvoShot)) {
+                    else if (patrolboatLocation.contains(salvoShot)) {
                         patrolboatDamage++;
                         patrolboatHitsInTurn++;
                         hitCellsList.add(salvoShot);
-                        missedShots--;
+                    }
+                    else{
+                      missedLocations.add(salvoShot);
+                      missedShots++;
                     }
                 }
                 damagesPerTurn.put("carrierHits", carrierHitsInTurn);
