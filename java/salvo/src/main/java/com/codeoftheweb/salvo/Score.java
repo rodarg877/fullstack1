@@ -27,10 +27,11 @@ public class Score {
     public Score() {
     }
 
-    public Score(Double score, Game game, Player player) {
+    public Score(Double score, Game game, Player player,Date finishDate) {
         this.score = score;
         this.game = game;
         this.player = player;
+        this.finishDate=finishDate;
     }
 
     public long getId() {

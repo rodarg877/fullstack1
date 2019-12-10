@@ -23,7 +23,8 @@ public class GameController {
         private GameRepository gameRepository;
         @Autowired
         private GamePlayerRepository gamePlayerRepository;
-
+        @Autowired
+        ShipRepository shipRepository;
         @RequestMapping(path= "/games", method = RequestMethod.POST)
         public  ResponseEntity<Object> createGame(Authentication authentication){
             if(isGuest(authentication)){
@@ -37,9 +38,6 @@ public class GameController {
             GamePlayer gamePlayer= gamePlayerRepository.save(new GamePlayer(player,game));
     return new ResponseEntity<>(makeMap("gpid",gamePlayer.getId()),HttpStatus.CREATED);
         }
-    @Autowired
-    ShipRepository shipRepository;
-
     @RequestMapping(value = "/games/players/{id}/ships", method = RequestMethod.POST)
     public ResponseEntity<Map<String, Object>> addShip(@PathVariable Long id,Authentication authentication, @RequestBody Set<Ship> ships) {
         if (GameController.isGuest(authentication)) {

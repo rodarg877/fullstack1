@@ -365,22 +365,7 @@ public class SalvoApplication {
 			salvoRepository.save(salvo19);
 			salvoRepository.save(salvo20);
 			salvoRepository.save(salvo21);
-			Score score = new Score( 1.0,g1,p1);
-			scoreRepository.save(score);
-			Score score2 = new Score( 0.0,g1,p2);
-			scoreRepository.save(score2);
-			Score score3 = new Score( 0.5,g2,p1);
-			scoreRepository.save(score3);
-			Score score4 = new Score( 0.5,g2,p2);
-			scoreRepository.save(score4);
-			Score score5 = new Score( 1.0,g3,p2);
-			scoreRepository.save(score5);
-			Score score6 = new Score( 0.0,g3,p4);
-			scoreRepository.save(score6);
-			Score score7 = new Score( 0.5,g4,p2);
-			scoreRepository.save(score7);
-			Score score8 = new Score( 0.5,g4,p1);
-			scoreRepository.save(score8);
+
 		};
 	}
 

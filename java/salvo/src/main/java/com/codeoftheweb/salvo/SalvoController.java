@@ -5,17 +5,13 @@ package com.codeoftheweb.salvo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitterReturnValueHandler;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import com.codeoftheweb.salvo.*;
 
 @RestController
 @RequestMapping("/api")
@@ -43,6 +39,12 @@ public class SalvoController {
 
     @Autowired
     private GamePlayerRepository gamePlayerRepository;
+    @Autowired
+    PlayerRepository playerRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     @RequestMapping("/game_view/{nn}")
     public ResponseEntity<Map<String, Object>> getGameViewByGamePlayerID(@PathVariable Long nn, Authentication autentication) {
@@ -60,7 +62,7 @@ public class SalvoController {
         if (partida.getPlayer().getId() != player.getId()) {
             return new ResponseEntity<>(GameController.makeMap("error", "usuario no logueado"), HttpStatus.CONFLICT);
         }
-
+        GameState gameState = partida.getGameState();
 
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("id", partida.getId());
@@ -68,14 +70,30 @@ public class SalvoController {
         dto.put("gamePlayers", partida.getGame().getAllGamePlayers(partida.getGame().getGamePlayers()));
         dto.put("ships", partida.getShipList(partida.getShips()));
         dto.put("salvos", partida.getAllSalvos(partida.getGame().getGamePlayers()));
-        dto.put("gameState","PLAY");
+        dto.put("gameState",gameState);
         dto.put("hits", partida.getHits());
+
+
+        Set<Score> scores = partida.getGame().getScore();
+        int scoreQuantity = scores.size();
+
+        if (gameState == GameState.WON && scoreQuantity < 2 && player != scores.stream().filter(score -> score.getPlayer() == player)) {
+            Score score = new Score(1.0, partida.getGame(),player, new Date());
+            scoreRepository.save(score);
+        }
+        if (gameState == GameState.TIE && scoreQuantity < 2 && player != scores.stream().filter(score -> score.getPlayer() == player)) {
+            Score score = new Score(0.5, partida.getGame(),player, new Date());
+            scoreRepository.save(score);
+        }
+        if (gameState == GameState.LOST && scoreQuantity < 2 && player != scores.stream().filter(score -> score.getPlayer() == player)) {
+            Score score = new Score(0.0, partida.getGame(),player, new Date());
+            scoreRepository.save(score);
+        }
 
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @Autowired
-    PlayerRepository playerRepository;
+
 
     @RequestMapping("/leaderboard")
     public List<Map<String, Object>> leaderBoard() {
@@ -85,8 +103,7 @@ public class SalvoController {
                 .collect(Collectors.toList());
     }
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+
 
     @RequestMapping(path = "/player", method = RequestMethod.POST)
 

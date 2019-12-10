@@ -10,9 +10,7 @@ $(function() {
         data.sort(function(a, b) {
           return b.TotalScore - a.TotalScore;
         });
-        console.log(data);
         data.forEach(function(e) {
-          console.log(e);
           $("#table").append(
             "<tr><td>" +
               e.email +
@@ -85,29 +83,18 @@ function register() {
       alert("Failed: " + textStatus);
     });
 }
-$("#createGame").click(function(event) {
-  event.preventDefault();
+function createdGame() {
+console.log("juego creado");
   $.post("/api/games")
     .done(function(data) {
+    console.log("juego creado");
       var gameViewUrl = "/web/game.html?gp=" + data.gpid;
-      $("gameCreatedSuccess")
-        .show("slow")
-        .delay(2000)
-        .hide("slow")
-        .delay(2000);
-      setTimeout(function() {
         location.href = gameViewUrl;
-      }, 3000);
     })
     .fail(function(data) {
       console.log("game creation failed");
-      $("#errorSingup").text(data.responseJson.error);
-      $("#errorSingup")
-        .show("slow")
-        .delay(4000)
-        .hide("slow");
     });
-});
+};
 function cargarLista(obj) {
   var htmlList = "";
   obj.games.forEach(e => {
@@ -152,7 +139,6 @@ function joinGame(ele) {
   let url = "/api/game/" + ele.id + "/players";
   $.post(url)
     .done(function(data) {
-      console.log(data);
       console.log("game joined");
       gameViewUrl = "/web/game.html?gp=" + data.gpid;
       $("#gameJoinedSuccess")

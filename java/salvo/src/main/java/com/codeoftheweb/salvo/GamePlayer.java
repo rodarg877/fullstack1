@@ -1,7 +1,7 @@
 package com.codeoftheweb.salvo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-
+import com.codeoftheweb.salvo.GameState;
 import javax.persistence.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -208,4 +208,61 @@ public class GamePlayer{
     private Set<String>  getLocatiosShip(String ship, GamePlayer gamePlayer){
         return  gamePlayer.getShips().size()  ==  0 ? new HashSet<>() : gamePlayer.getShips().stream().filter(ships -> ships.getShip().equals(ship)).findFirst().get().getShipLocation();
     }
+    public GameState getGameState() {
+        int shipsQuantity = this.getShips().size();
+        int gamePlayersQuantity = this.getGame().getGamePlayers().size();
+
+        if (shipsQuantity == 0) {
+            return GameState.PLACESHIPS;
+        }
+        if (gamePlayersQuantity == 1) {
+            return GameState.WAITINGFOROPP;
+        }
+        if (gamePlayersQuantity == 2) {
+
+            GamePlayer opponentGp = this.getOpponent();
+            int opponentSalvosQuantity = opponentGp.getSalvoes().size();
+            int salvosQuantity = this.getSalvoes().size();
+
+            if ((salvosQuantity == opponentSalvosQuantity) && (getIfAllSunk(opponentGp, this)) && (!getIfAllSunk(this, opponentGp))) {
+                return GameState.WON;
+            }
+            if ((salvosQuantity == opponentSalvosQuantity) && (getIfAllSunk(opponentGp, this)) && (getIfAllSunk(this, opponentGp))) {
+                return GameState.TIE;
+            }
+            if ((salvosQuantity == opponentSalvosQuantity) && (!getIfAllSunk(opponentGp, this)) && (getIfAllSunk(this, opponentGp))) {
+                return GameState.LOST;
+            }
+
+            if ((salvosQuantity == opponentSalvosQuantity) && (this.getId() < opponentGp.getId())) {
+                return GameState.PLAY;
+            }
+            if (salvosQuantity < opponentSalvosQuantity) {
+                return GameState.PLAY;
+            }
+            if ((salvosQuantity == opponentSalvosQuantity) && (this.getId() > opponentGp.getId())) {
+                return GameState.WAIT;
+            }
+            if (salvosQuantity > opponentSalvosQuantity) {
+                return GameState.WAIT;
+            }
+
+        }
+
+        return GameState.UNDEFINED;
+    }
+
+    private Boolean getIfAllSunk(GamePlayer self, GamePlayer opponent) {
+
+        if (!opponent.getShips().isEmpty() && !self.getSalvoes().isEmpty()) {
+            return opponent.getSalvoes()
+                    .stream().flatMap(salvo -> salvo.getSalvoLocation().stream())
+                    .collect(Collectors.toList())
+                    .containsAll(self.getShips().stream().flatMap(ship -> ship.getShipLocation().stream())
+                            .collect(Collectors.toList()));
+        }
+        return false;
+    }
+
 }
+
