@@ -131,7 +131,7 @@ function cargarLista(obj) {
     }
     htmlList += "</div></li>";
   });
-  htmlList +='<button type="submit" id="createGame"  class="btn btn-primary"> created game </button>'
+  htmlList +='<button id="createGame" onclick="createdGame()" class="btn btn-primary"> created game </button>'
   lista.innerHTML ="<br>" +htmlList;
 }
 
