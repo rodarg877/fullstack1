@@ -141,13 +141,9 @@ function joinGame(ele) {
     .done(function(data) {
       console.log("game joined");
       gameViewUrl = "/web/game.html?gp=" + data.gpid;
-      $("#gameJoinedSuccess")
-        .show("slow")
-        .delay(2000)
-        .hide("slow");
       setTimeout(function() {
         location.href = gameViewUrl;
-      }, 3000);
+      }, 1000);
     })
     .fail(function(data) {
       console.log("game join failed");
@@ -156,11 +152,7 @@ function joinGame(ele) {
 
 function reEnter(ele) {
   gameViewUrl = "/web/game.html?gp=" + ele.id;
-  $("#gameJoinedSuccess")
-    .show("slow")
-    .delay(2000)
-    .hide("slow");
   setTimeout(function() {
     location.href = gameViewUrl;
-  }, 3000);
+  }, 1000);
 }
